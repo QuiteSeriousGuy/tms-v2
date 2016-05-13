@@ -264,12 +264,6 @@ footer {
   position: relative;
   margin-top: 20px;
 }
-.footpad {
-  padding-top: 30px;
-}
-st-hover {
-
-}
 @media (min-width: 768px) {
   .navbar-nav > li > a {
     padding-top: 27px;
