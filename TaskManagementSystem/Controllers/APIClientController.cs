@@ -77,7 +77,7 @@ namespace TaskManagementSystem.Controllers
                 newItem.CompanyName = item.CompanyName != null ? item.CompanyName : "00000";
                 newItem.CompanyAddress = item.CompanyAddress != null ? item.CompanyAddress : "00000";
                 newItem.ContactNumber = item.ContactNumber != null ? item.ContactNumber : "00000";
-                newItem.DateAccepted = Convert.ToDateTime(item.DateAccepted);
+                newItem.DateAccepted = null;
                 newItem.IsLocked = false;
 
                 //ALLOW NULL
@@ -96,12 +96,13 @@ namespace TaskManagementSystem.Controllers
         // ==============
         // UPDATE Item
         // ==============
+        [HttpPost]
         [Route("api/client/update/{id}")]
-        public HttpResponseMessage Put(String id, Models.MstClient item)
+        public HttpResponseMessage update(String id, Models.MstClient item)
         {
             try
             {
-                var identityUserId = User.Identity.GetUserId();
+                //var identityUserId = User.Identity.GetUserId();
                 //var mstUserId = (from d in db.MstUsers where "" + d.Id == identityUserId select d.Id).SingleOrDefault();
                 var date = DateTime.Now;
 
@@ -112,10 +113,11 @@ namespace TaskManagementSystem.Controllers
                 {
                     var updateItem = items.FirstOrDefault();
 
+                    updateItem.Id = itemId;
                     updateItem.CompanyName = item.CompanyName;
                     updateItem.CompanyAddress = item.CompanyAddress;
                     updateItem.ContactNumber = item.ContactNumber;
-                    updateItem.DateAccepted = Convert.ToDateTime(item.DateAccepted);
+                    updateItem.DateAccepted = null;
                     updateItem.IsLocked = true;
 
                     //updateItem.UpdateUserId = 123;

@@ -26,7 +26,13 @@ namespace TaskManagementSystem.Controllers
         {
             return View();
         }
-       
+
+        [Authorize]
+        public ActionResult Client()
+        {
+            return View();
+        }
+
 
     }
 

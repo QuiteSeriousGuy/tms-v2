@@ -197,6 +197,13 @@
                 show: true,
                 backdrop: 'static'
             });
+
+            $('.requiredField').each(function () {
+                $(this).css({
+                    "border": "",
+                });
+            });
+
             document.getElementById("productCode").value = "";
             document.getElementById("productDescription").value = "";
             document.getElementById("productId").value = 0;
@@ -211,6 +218,12 @@
             $('#addProduct').modal({
                 show: true,
                 backdrop: 'static'
+            });
+
+            $('.requiredField').each(function () {
+                $(this).css({
+                    "border": "",
+                });
             });
 
             document.getElementById("productCode").value = productList.currentItem.ProductCode;
