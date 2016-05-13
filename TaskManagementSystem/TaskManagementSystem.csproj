@@ -211,6 +211,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APIProductController.cs" />
     <Compile Include="Controllers\APIStaffController.cs" />
+    <Compile Include="Controllers\APIUserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SoftwareController.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MstProduct.cs" />
     <Compile Include="Models\MstStaff.cs" />
+    <Compile Include="Models\MstUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
