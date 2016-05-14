@@ -192,7 +192,6 @@ h6 {
   font-family: "Oswald";
   font-size: 16px;
   letter-spacing: 1px;
-  border-radius: 40px;
   padding: 8px 30px;
   margin-bottom: 5px;
   -webkit-transition: color 0.3s, background-color 0.3s, border-color 0.3s;
@@ -316,14 +315,6 @@ h6 {
 }
 .section-title.st-center:before {
   margin: auto;
-}
-.section-title:before {
-  content: "";
-  display: block;
-  width: 150px;
-  height: 51px;
-  background-image: url(../images/title-top.png);
-  background-repeat: no-repeat;
 }
 .bottom-line {
   margin-bottom: 20px;
