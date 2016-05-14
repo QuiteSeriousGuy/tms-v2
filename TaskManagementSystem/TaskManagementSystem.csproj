@@ -209,6 +209,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\APIClientController.cs" />
     <Compile Include="Controllers\APIProductController.cs" />
     <Compile Include="Controllers\APIStaffController.cs" />
     <Compile Include="Controllers\APIUserController.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MstClient.cs" />
     <Compile Include="Models\MstProduct.cs" />
     <Compile Include="Models\MstStaff.cs" />
     <Compile Include="Models\MstUser.cs" />
@@ -395,6 +397,7 @@
     <Content Include="Views\Shared\NavBar.cshtml" />
     <Content Include="Views\Software\Staff.cshtml" />
     <Content Include="Views\Shared\NavBarD.cshtml" />
+    <Content Include="Views\Software\Client.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
