@@ -8,6 +8,10 @@
  * -------------------------------------------------------------------
  * This theme under "Attribution-NonCommercial CC BY-NC". You can't remove footer credit link.
  */
+html {
+    position: relative;
+    min-height: 100%;
+}
 body {
   font-family: "Open Sans";
   color: #808080;
@@ -17,6 +21,7 @@ body {
   word-spacing: 2px;
   height: 100%;
   -webkit-font-smoothing: antialiased;
+  margin-bottom: 100px;
 }
 p {
   margin-bottom: 26px;
@@ -259,13 +264,14 @@ h6 {
 }
 footer {
   background-image: url(../images/hero-img9.jpg);
-  background-position: top center;
-  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #000;
-  position: relative;
   margin-top: 20px;
+  bottom: 0;
+  margin-bottom: 0 !important;
+  position: absolute;
+  width: 100%;
 }
 @media (min-width: 768px) {
   .navbar-nav > li > a {
