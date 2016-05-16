@@ -45,20 +45,16 @@ namespace TaskManagementSystem.Controllers
             var isLocked = true;
 
             var user = from d in db.mstUsers
-                        select new Models.MstUser
-                        {
-                            StaffId = d.StaffId,
-                            Username = d.Username,
-                            Password = d.Password,
-                            Designation = d.Designation,
-                            IsLocked = isLocked
-
-
-                        };
+                          select new Models.MstUser
+                          {
+                              StaffId = d.StaffId,
+                              Username = d.Username,
+                              IsLocked = isLocked
+                          };
 
             return user.ToList();
         }
 
-        
+
     }
 }

@@ -11,6 +11,7 @@ namespace TaskManagementSystem.Models
         [Key]
         public Int32 Id { get; set; }
         public String StaffName { get; set; }
+        public String Username { get; set; }
         public String ContactNumber { get; set; }
         public Boolean IsLocked { get; set; }
     }

@@ -14,5 +14,6 @@ namespace TaskManagementSystem.Models
         public String Password { get; set; }
         public Int32? Designation { get; set; }
         public Boolean IsLocked { get; set; }
+        public String StaffName { get; set; }
     }
 }
