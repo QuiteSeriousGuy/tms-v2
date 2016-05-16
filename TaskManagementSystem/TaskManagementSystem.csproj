@@ -398,6 +398,7 @@
     <Content Include="Views\Software\Staff.cshtml" />
     <Content Include="Views\Shared\NavBarD.cshtml" />
     <Content Include="Views\Software\Client.cshtml" />
+    <Content Include="Views\Software\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
