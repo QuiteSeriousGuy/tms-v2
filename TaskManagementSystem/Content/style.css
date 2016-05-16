@@ -6,6 +6,7 @@ body {
   line-height: 26px;
   word-spacing: 2px;
   -webkit-font-smoothing: antialiased;
+  overflow: hidden;
 }
 p {
   margin-bottom: 26px;
