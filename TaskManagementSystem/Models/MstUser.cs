@@ -9,6 +9,7 @@ namespace TaskManagementSystem.Models
     public class MstUser
     {
         [Key]
+        public Int32 Id { get; set; }
         public Int32 StaffId { get; set; }
         public String Username { get; set; }
         public String Password { get; set; }

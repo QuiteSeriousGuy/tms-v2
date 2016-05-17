@@ -22,7 +22,6 @@ body {
   height: 100%;
   -webkit-font-smoothing: antialiased;
   margin-bottom: 100px;
-  overflow: hidden;
 }
 p {
   margin-bottom: 26px;

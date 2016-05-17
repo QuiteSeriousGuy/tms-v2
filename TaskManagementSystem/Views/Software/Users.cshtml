@@ -101,7 +101,6 @@
     <!-- Modal -->
     <div class="modal fade" id="addUser" role="dialog">
         <div class="modal-dialog modal-lg">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -113,29 +112,34 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <!--Username-->
                                     <label for="barCode" class="col-sm-4 control-label">Username</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control requiredField" id="contactNumber">
+                                        <input type="hidden" class="form-control requiredField" id="userId">
+                                        <input type="text" class="form-control requiredField" id="userName">
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <!--Password-->
                                     <label for="barCode" class="col-sm-4 control-label">Password</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control requiredField" id="contactNumber">
+                                        <input type="text" class="form-control requiredField" id="password">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <!--Staff Name-->
                                     <label for="sel1" class="col-sm-4 control-label">Staff Name</label>
                                     <div class="col-sm-8">
-                                        <div id="cboStaffNameDiv"></div>
+                                        <div class="requiredField" id="cboStaffNameDiv"></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="sel1" class="col-sm-4 control-label">Designation</label>
+                                    <!--Designation-->
+                                    <label for="designation" class="col-sm-4 control-label">Designation</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" id="sel1">
+                                        <select class="form-control" id="designation">
                                             <option>Administrator</option>
                                             <option>User</option>
                                         </select>
@@ -144,7 +148,7 @@
                             </div>
                         </div>
 
-                      
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -198,8 +202,9 @@
                             userList.push({
                                 EditId: "<button class='btn btn-primary btn-xs btn-block' id='userEditButton' onClick='cmdUserEditButton_OnClick()'><i class='fa fa-pencil'></i> Edit</button>",
                                 DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='userDeleteButton' onclick='cmdSUserDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
-                                StaffId: results[i]["StaffId"],
                                 Username: results[i]["Username"],
+                                Password: results[i]["Password"],
+                                StaffName: results[i]["StaffName"],
                                 IsLocked: results[i]["IsLocked"]
 
                             });
@@ -242,6 +247,10 @@
             return staffList;
         }
 
+        // =============================
+        // Combo Box Wijmo
+        // =============================
+
         function cboStaffName(staffList) {
             var staffCollection = new wijmo.collections.CollectionView(staffList);
             var staffList = new Array();
@@ -256,6 +265,9 @@
                 isEditable: false
             });
 
+            cboBoxStaffName.onSelectedIndexChanged = function () {
+                console.log(staffCollection.items[this.selectedIndex].Id); //ibutang sa input
+            }
         }
 
         // ===================
@@ -275,11 +287,14 @@
 
             getStaffName();
 
-            document.getElementById("userName").value = "";
-            document.getElementById("contactNumber").value = "";
             document.getElementById("userId").value = 0;
+            document.getElementById("userName").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("cboStaffNameDiv").value = "";
+            document.getElementById("designation").value = "";
             document.getElementById("btnIdAddUser").innerHTML = "Add"
 
+            console.log(cboBoxStaffName.selectedItem["Id"]);
         }
 
         // ===================
@@ -297,8 +312,9 @@
                 });
             });
 
-            document.getElementById("userName").value = userList.currentItem.UserName;
-            document.getElementById("contactNumber").value = userList.currentItem.ContactNumber;
+            document.getElementById("userName").value = userList.currentItem.Username;
+            document.getElementById("password").value = userList.currentItem.Password;
+            document.getElementById("cboStaffNameDiv").value = userList.currentItem.Password;
             document.getElementById("userId").value = userList.currentItem.Id;
             document.getElementById("btnIdAddUser").innerHTML = "Update"
         }
@@ -341,266 +357,268 @@
             return isValid;
         }
 
-            // =====================
+        // =====================
         // User Add/Update Button
-            // =====================
+        // =====================
         function cmdAddUser() {
-                var userObject = new Object();
-                userObject.UserName = document.getElementById("userName").value;
-                userObject.ContactNumber = document.getElementById("contactNumber").value;
+            var userObject = new Object();
+            // userObject.StaffId = cboBoxStaffName.selectedItem["Id"];
+            userObject.UserName = document.getElementById("userName").value;
+            userObject.ContactNumber = document.getElementById("contactNumber").value;
 
-                var data = JSON.stringify(userObject);
+            var data = JSON.stringify(userObject);
 
-                var userId = document.getElementById("userId").value;
-                if (userEntryValidation() == false) {
-                    toastr.error("Fill out form");
+            var userId = document.getElementById("userId").value;
+            if (userEntryValidation() == false) {
+                toastr.error("Fill out form");
 
-                } else {
-                    if (userId > 0) { //Update
-                        var itemdata = data;
-                        $('.dis').prop('disabled', true);
-                        $.ajax({
-                            url: '/api/user/update/' + userId,
-                            type: 'PUT',
-                            dataType: 'json',
-                            data: itemdata,
-                            contentType: "application/json;charset=utf-8",
-                            cache: false,
-                            statusCode: {
-                                200: function () {
-                                    toastr.success("Update Sucess");
-                                    $('#addUser').modal('hide');
-                                    //$('#addUser').remove();
-                                    refresh();
-                                },
-                                404: function () {
-                                    toastr.error("Edit Failed");
-                                },
-                                400: function () {
-                                    toastr.error("Edit Failed");
-                                }
+            } else {
+                if (userId > 0) { //Update
+                    var itemdata = data;
+                    $('.dis').prop('disabled', true);
+                    $.ajax({
+                        url: '/api/user/update/' + userId,
+                        type: 'PUT',
+                        dataType: 'json',
+                        data: itemdata,
+                        contentType: "application/json;charset=utf-8",
+                        cache: false,
+                        statusCode: {
+                            200: function () {
+                                toastr.success("Update Sucess");
+                                $('#addUser').modal('hide');
+                                //$('#addUser').remove();
+                                refresh();
+                            },
+                            404: function () {
+                                toastr.error("Edit Failed");
+                            },
+                            400: function () {
+                                toastr.error("Edit Failed");
                             }
-                        });
+                        }
+                    });
 
-                    } else { //Add
-                        $.ajax({
-                            url: '/api/user/add/',
-                            type: 'POST',
-                            data: data,
-                            contentType: "application/json;charset=utf-8",
-                            cache: false,
-                            statusCode: {
-                                200: function () {
-                                    $('#addUser').modal('hide');
-                                    toastr.success("Saved");
-                                    refresh();
+                } else { //Add
+                    $.ajax({
+                        url: '/api/user/add/',
+                        type: 'POST',
+                        data: data,
+                        contentType: "application/json;charset=utf-8",
+                        cache: false,
+                        statusCode: {
+                            200: function () {
+                                $('#addUser').modal('hide');
+                                toastr.success("Saved");
+                                refresh();
 
-                                },
-                                400: function () {
-                                    alert("Error");
-                                },
-                            }
-                        });
-                    }
+                            },
+                            400: function () {
+                                alert("Error");
+                            },
+                        }
+                    });
                 }
             }
+        }
 
-            // =====================
+        // =====================
         // User delete Button
-            // =====================
+        // =====================
         function cmdUserDeleteButton_OnClick() {
-                var id = userList.currentItem.Id;
+            var id = userList.currentItem.Id;
 
-                console.log(typeof id + id);
+            console.log(typeof id + id);
 
-                $('#deleteUserConfirm').modal({
-                    show: true,
-                    backdrop: 'static'
-                });
-                $("#cmdConfirmDeleteUser").prop("disabled", false);
-                $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
-            }
-            // Company Confirm Delete Button
+            $('#deleteUserConfirm').modal({
+                show: true,
+                backdrop: 'static'
+            });
+            $("#cmdConfirmDeleteUser").prop("disabled", false);
+            $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
+
+        }
+        // Company Confirm Delete Button
         function cmdUserConfirmDeleteButton_OnClick() {
             $("#cmdConfirmDeleteUser").prop("disabled", true);
-                $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
+            $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
 
-                //====================
-                var id = userList.currentItem.Id;
+            //====================
+            var id = userList.currentItem.Id;
 
-                $.ajax({
-                    url: '/api/user/delete/' + id,
-                    type: "DELETE",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    statusCode: {
-                        200: function () {
-                            $("#cmdConfirmDeleteUser").prop("disabled", true);
-                            $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
-                            $('#deleteUserConfirm').modal('hide');
-                            toastr.success("Successfully Deleted");
-                            refresh();
-                        },
-                        404: function () {
-                            toastr.error("Request Not Found");
-                            $('#deleteUserConfirm').modal('hide');
-                            $("#cmdConfirmDeleteUser").prop("disabled", false);
-                            $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
-                        },
-                        400: function () {
-                            toastr.error("Can't be deleted");
-                            $('#deleteUserConfirm').modal('hide');
-                            $("#cmdConfirmDeleteUser").prop("disabled", false);
-                            $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
-                        }
+            $.ajax({
+                url: '/api/user/delete/' + id,
+                type: "DELETE",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                statusCode: {
+                    200: function () {
+                        $("#cmdConfirmDeleteUser").prop("disabled", true);
+                        $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
+                        $('#deleteUserConfirm').modal('hide');
+                        toastr.success("Successfully Deleted");
+                        refresh();
+                    },
+                    404: function () {
+                        toastr.error("Request Not Found");
+                        $('#deleteUserConfirm').modal('hide');
+                        $("#cmdConfirmDeleteUser").prop("disabled", false);
+                        $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
+                    },
+                    400: function () {
+                        toastr.error("Can't be deleted");
+                        $('#deleteUserConfirm').modal('hide');
+                        $("#cmdConfirmDeleteUser").prop("disabled", false);
+                        $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
                     }
-                });
-            }
+                }
+            });
+        }
 
 
 
-            //============
-            // On Page Load
-            // ============
+        //============
+        // On Page Load
+        // ============
         $(document).ready(function () {
             cboBoxStaffName = new wijmo.input.ComboBox('#cboStaffNameDiv');
 
-                //localStorage.setUser("lastId", results[results.length - 1]["ItemCode"]);
-                userList = new wijmo.collections.CollectionView(getUserMasterList());
-                userList.canFilter = true;
-                userList.pageSize = 15;
+            //localStorage.setUser("lastId", results[results.length - 1]["ItemCode"]);
+            userList = new wijmo.collections.CollectionView(getUserMasterList());
+            userList.canFilter = true;
+            userList.pageSize = 15;
 
-                //Filter
-                var filterText = '';
-                $('#InputFilter').keydown(function () {
-                    filterText = this.value.toLowerCase();
-                    userList.refresh();
-                });
-                userList.filter = function (item) {
-                    return !filterText
-                    || (item.UserName.toLowerCase().indexOf(filterText) > -1)
-                    || (item.ContactNumber.toLowerCase().indexOf(filterText) > -1)
-                }
-                userList.collectionChanged.addHandler(function (sender, args) {
-                    updateNavigateButtonsCollection();
-
-                });
-                userList.currentChanged.addHandler(function (sender, args) {
-                    updateNavigateButtonsCollection();
-                });
-
-                userList.collectionChanged.addHandler(function (sender, args) {
-                    updateNavigateButtonsCollection();
-                });
-
-                //Flex Grid
-                userGrid = new wijmo.grid.FlexGrid('#userCollectionGrid');
-                userGrid.initialize({
-                    columns: [
-
-
-                    {
-                        "header": "Edit",
-                        "binding": "EditId",
-                        "width": 70,
-                        "align": "center",
-                        "isContentHtml": true
-                    },
-                    {
-                        "header": "Delete",
-                        "binding": "DeleteId",
-                        "width": 90,
-                        "align": "center",
-                        "isContentHtml": true
-
-                    },
-                    {
-                        "header": "Username",
-                        "binding": "Username",
-                        "align": "center",
-                        "allowSorting": true,
-                        "width": "2.5*"
-                    },
-                    {
-                        "header": "Staff Name",
-                        "binding": "",
-                        "align": "center",
-                        "allowSorting": true,
-                        "width": "4*"
-                    },
-                    {
-                        "header": "L",
-                        "binding": "IsLocked",
-                        "align": "center",
-                        "allowSorting": true,
-                        "width": "1.5*"
-                    }],
-                    autoGenerateColumns: false,
-                    itemsSource: userList,
-                    isReadOnly: true,
-                    autoSizeMode: wijmo.grid.AutoSizeMode.Both,
-                    allowDragging: wijmo.grid.AllowDragging.None,
-                    selectionMode: wijmo.grid.SelectionMode.Row
-                });
-
-                userGrid.trackChanges = true;
-
-                // Navigation button
-                btnFirstPageGrid = document.getElementById('btnMoveToFirstPageGrid');
-                btnPreviousPageGrid = document.getElementById('btnMoveToPreviousPageGrid');
-                btnNextPageGrid = document.getElementById('btnMoveToNextPageGrid');
-                btnLastPageGrid = document.getElementById('btnMoveToLastPageGrid');
-                btnCurrentPageGrid = document.getElementById('btnCurrentPageGrid');
-
+            //Filter
+            var filterText = '';
+            $('#InputFilter').keydown(function () {
+                filterText = this.value.toLowerCase();
+                userList.refresh();
+            });
+            userList.filter = function (item) {
+                return !filterText
+                || (item.UserName.toLowerCase().indexOf(filterText) > -1)
+                || (item.ContactNumber.toLowerCase().indexOf(filterText) > -1)
+            }
+            userList.collectionChanged.addHandler(function (sender, args) {
                 updateNavigateButtonsCollection();
 
-                btnFirstPageGrid.addEventListener('click', function () {
-                    userList.moveToFirstPage();
-                    updateNavigateButtonsCollection();
-                });
-                btnPreviousPageGrid.addEventListener('click', function () {
-                    userList.moveToPreviousPage();
-                    updateNavigateButtonsCollection();
-                });
-                btnNextPageGrid.addEventListener('click', function () {
-                    userList.moveToNextPage();
-                    updateNavigateButtonsCollection();
-                });
-                btnLastPageGrid.addEventListener('click', function () {
-                    userList.moveToLastPage();
-                    updateNavigateButtonsCollection();
-                });
-
+            });
+            userList.currentChanged.addHandler(function (sender, args) {
+                updateNavigateButtonsCollection();
             });
 
-            // ==================
-            // Navigation Buttons
-            // ==================
-            function updateNavigateButtonsCollection() {
-                if (userList.pageSize <= 0) {
-                    document.getElementById('navigationPageGrid').style.display = 'none';
-                    return;
-                }
-                document.getElementById('navigationPageGrid').style.display = 'block';
-                if (userList.pageIndex === 0) {
-                    btnFirstPageGrid.setAttribute('disabled', 'disabled');
-                    btnPreviousPageGrid.setAttribute('disabled', 'disabled');
-                    btnNextPageGrid.removeAttribute('disabled');
-                    btnLastPageGrid.removeAttribute('disabled');
-                } else if (userList.pageIndex === (userList.pageCount - 1)) {
-                    btnFirstPageGrid.removeAttribute('disabled');
-                    btnPreviousPageGrid.removeAttribute('disabled');
-                    btnLastPageGrid.setAttribute('disabled', 'disabled');
-                    btnNextPageGrid.setAttribute('disabled', 'disabled');
-                } else {
-                    btnFirstPageGrid.removeAttribute('disabled');
-                    btnPreviousPageGrid.removeAttribute('disabled');
-                    btnNextPageGrid.removeAttribute('disabled');
-                    btnLastPageGrid.removeAttribute('disabled');
-                }
-                btnCurrentPageGrid.innerHTML = (userList.pageIndex + 1) + ' / ' + userList.pageCount;
+            userList.collectionChanged.addHandler(function (sender, args) {
+                updateNavigateButtonsCollection();
+            });
 
+            //Flex Grid
+            userGrid = new wijmo.grid.FlexGrid('#userCollectionGrid');
+            userGrid.initialize({
+                columns: [
+
+
+                {
+                    "header": "Edit",
+                    "binding": "EditId",
+                    "width": 70,
+                    "align": "center",
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Delete",
+                    "binding": "DeleteId",
+                    "width": 90,
+                    "align": "center",
+                    "isContentHtml": true
+
+                },
+                {
+                    "header": "Username",
+                    "binding": "Username",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": "2.5*"
+                },
+                {
+                    "header": "Staff Name",
+                    "binding": "StaffName",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": "4*"
+                },
+                {
+                    "header": "L",
+                    "binding": "IsLocked",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": "1.5*"
+                }],
+                autoGenerateColumns: false,
+                itemsSource: userList,
+                isReadOnly: true,
+                autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+                allowDragging: wijmo.grid.AllowDragging.None,
+                selectionMode: wijmo.grid.SelectionMode.Row
+            });
+
+            userGrid.trackChanges = true;
+
+            // Navigation button
+            btnFirstPageGrid = document.getElementById('btnMoveToFirstPageGrid');
+            btnPreviousPageGrid = document.getElementById('btnMoveToPreviousPageGrid');
+            btnNextPageGrid = document.getElementById('btnMoveToNextPageGrid');
+            btnLastPageGrid = document.getElementById('btnMoveToLastPageGrid');
+            btnCurrentPageGrid = document.getElementById('btnCurrentPageGrid');
+
+            updateNavigateButtonsCollection();
+
+            btnFirstPageGrid.addEventListener('click', function () {
+                userList.moveToFirstPage();
+                updateNavigateButtonsCollection();
+            });
+            btnPreviousPageGrid.addEventListener('click', function () {
+                userList.moveToPreviousPage();
+                updateNavigateButtonsCollection();
+            });
+            btnNextPageGrid.addEventListener('click', function () {
+                userList.moveToNextPage();
+                updateNavigateButtonsCollection();
+            });
+            btnLastPageGrid.addEventListener('click', function () {
+                userList.moveToLastPage();
+                updateNavigateButtonsCollection();
+            });
+
+        });
+
+        // ==================
+        // Navigation Buttons
+        // ==================
+        function updateNavigateButtonsCollection() {
+            if (userList.pageSize <= 0) {
+                document.getElementById('navigationPageGrid').style.display = 'none';
+                return;
             }
+            document.getElementById('navigationPageGrid').style.display = 'block';
+            if (userList.pageIndex === 0) {
+                btnFirstPageGrid.setAttribute('disabled', 'disabled');
+                btnPreviousPageGrid.setAttribute('disabled', 'disabled');
+                btnNextPageGrid.removeAttribute('disabled');
+                btnLastPageGrid.removeAttribute('disabled');
+            } else if (userList.pageIndex === (userList.pageCount - 1)) {
+                btnFirstPageGrid.removeAttribute('disabled');
+                btnPreviousPageGrid.removeAttribute('disabled');
+                btnLastPageGrid.setAttribute('disabled', 'disabled');
+                btnNextPageGrid.setAttribute('disabled', 'disabled');
+            } else {
+                btnFirstPageGrid.removeAttribute('disabled');
+                btnPreviousPageGrid.removeAttribute('disabled');
+                btnNextPageGrid.removeAttribute('disabled');
+                btnLastPageGrid.removeAttribute('disabled');
+            }
+            btnCurrentPageGrid.innerHTML = (userList.pageIndex + 1) + ' / ' + userList.pageCount;
+
+        }
 
     </script>
 </div>
