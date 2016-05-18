@@ -52,6 +52,7 @@ namespace TaskManagementSystem.Controllers
                               StaffId = d.StaffId,
                               StaffName = d.mstStaff.StaffName,
                               Password = d.Password,
+                              Designation = d.Designation,
                               Username = d.Username,
                               IsLocked = isLocked
                           };
@@ -75,8 +76,9 @@ namespace TaskManagementSystem.Controllers
 
                 newItem.Username = item.Username != null ? item.Username : "00000";
                 newItem.Password = item.Password != null ? item.Password : "00000";
-                //newItem.StaffId = item.StaffId != null ? item.StaffId : "00000";
-                newItem.IsLocked = isLocked != null ? isLocked : false;
+                newItem.Designation = item.Designation;
+                newItem.StaffId = item.StaffId;
+                newItem.IsLocked = true;
 
                 //ALLOW NULL
 
@@ -86,6 +88,80 @@ namespace TaskManagementSystem.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        // ==============
+        // UPDATE Item
+        // ==============
+        [Route("api/staff/update/{id}")]
+        public HttpResponseMessage Put(String id, Models.MstStaff item)
+        {
+            try
+            {
+                var isLocked = true;
+                var identityUserId = User.Identity.GetUserId();
+                //var mstUserId = (from d in db.MstUsers where "" + d.Id == identityUserId select d.Id).SingleOrDefault();
+                var date = DateTime.Now;
+
+                var itemId = Convert.ToInt32(id);
+                var items = from d in db.mstStaffs where d.Id == itemId select d;
+
+                if (items.Any())
+                {
+                    var updateItem = items.FirstOrDefault();
+
+                    updateItem.StaffName = item.StaffName;
+                    updateItem.ContactNumber = item.ContactNumber;
+                    updateItem.IsLocked = isLocked;
+
+                    //updateItem.UpdateUserId = 123;
+                    //updateItem.UpdateDateTime = date;
+                    //updateItem.IsLocked = isLocked;
+
+                    db.SubmitChanges();
+
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+        // ==============
+        // DELETE Item
+        // ==============
+        [Route("api/user/delete/{id}")]
+        public HttpResponseMessage Delete(String id)
+        {
+
+            try
+            {
+                var userId = Convert.ToInt32(id);
+                var users = from d in db.mstUsers where d.Id == userId select d;
+
+                if (users.Any())
+                {
+                    db.mstUsers.DeleteOnSubmit(users.First());
+                    db.SubmitChanges();
+
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+
+            }
+            catch
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }

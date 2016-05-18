@@ -123,7 +123,7 @@
                                     <!--Password-->
                                     <label for="barCode" class="col-sm-4 control-label">Password</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control requiredField" id="password">
+                                        <input type="password" class="form-control requiredField" id="password">
                                     </div>
                                 </div>
                             </div>
@@ -132,17 +132,19 @@
                                     <!--Staff Name-->
                                     <label for="sel1" class="col-sm-4 control-label">Staff Name</label>
                                     <div class="col-sm-8">
-                                        <div class="requiredField" id="cboStaffNameDiv"></div>
+                                        <div class="" id="cboStaffNameDiv"></div>
+                                        <input type="hidden" class="form-control requiredField" id="staffId">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <!--Designation-->
                                     <label for="designation" class="col-sm-4 control-label">Designation</label>
                                     <div class="col-sm-8">
-                                        <select class="form-control" id="designation">
+                                        <div class="" id="cboDesignationDiv"></div>
+                                        @*<select class="form-control" id="designation">
                                             <option>Administrator</option>
                                             <option>User</option>
-                                        </select>
+                                        </select>*@
                                     </div>
                                 </div>
                             </div>
@@ -178,8 +180,10 @@
         var btnCurrentPageGrid;
         var userList;
         var staffList;
+        var designationList;
 
         var cboBoxStaffName;
+        var cboDesignation;
 
         // =============================
         // Get UserMasterList Data
@@ -205,6 +209,8 @@
                                 Username: results[i]["Username"],
                                 Password: results[i]["Password"],
                                 StaffName: results[i]["StaffName"],
+                                StaffId: results[i]["StaffName"],
+                                Designation: results[i]["Designation"],
                                 IsLocked: results[i]["IsLocked"]
 
                             });
@@ -248,7 +254,7 @@
         }
 
         // =============================
-        // Combo Box Wijmo
+        // Combo Box Wijmo - Staff Name
         // =============================
 
         function cboStaffName(staffList) {
@@ -266,7 +272,36 @@
             });
 
             cboBoxStaffName.onSelectedIndexChanged = function () {
-                console.log(staffCollection.items[this.selectedIndex].Id); //ibutang sa input
+                document.getElementById("staffId").value = staffCollection.items[this.selectedIndex].Id 
+            }
+        }
+
+        // ==================================
+        // Combo Box Wijmo - Designation Name
+        // ==================================
+
+        function cboDesignation() {
+            var des = new Array();
+            des.push({
+                "header": "Admin",
+                "value": "1"
+            });
+
+            des.push({
+                "header": "User",
+                "value": "2"
+            });
+
+
+            cboDesignation = new wijmo.input.ComboBox('#cboDesignationDiv', {
+                placeholder: "Select Staff",
+                displayMemberPath: "header",
+                selectedValuePath: "value",
+                itemsSource: des,
+                isEditable: false
+            });
+            cboDesignation.onSelectedIndexChanged = function () {
+                document.getElementById("designationId").value = cboDesignation.selectedValue
             }
         }
 
@@ -291,10 +326,8 @@
             document.getElementById("userName").value = "";
             document.getElementById("password").value = "";
             document.getElementById("cboStaffNameDiv").value = "";
-            document.getElementById("designation").value = "";
+            document.getElementById("staffId").value = ""; 
             document.getElementById("btnIdAddUser").innerHTML = "Add"
-
-            console.log(cboBoxStaffName.selectedItem["Id"]);
         }
 
         // ===================
@@ -312,10 +345,16 @@
                 });
             });
 
+            document.getElementById("userId").value = 1;
+
             document.getElementById("userName").value = userList.currentItem.Username;
             document.getElementById("password").value = userList.currentItem.Password;
             document.getElementById("cboStaffNameDiv").value = userList.currentItem.Password;
-            document.getElementById("userId").value = userList.currentItem.Id;
+            //document.getElementById("userId").value = userList.currentItem.Id;
+            document.getElementById("staffId").value = userList.currentItem.StaffId;
+            cboStaffName.selectedValue = userList.currentItem.StaffName;
+            cboDesignation.selectedValue = userList.currentItem.Designation;
+
             document.getElementById("btnIdAddUser").innerHTML = "Update"
         }
 
@@ -363,10 +402,14 @@
         function cmdAddUser() {
             var userObject = new Object();
             // userObject.StaffId = cboBoxStaffName.selectedItem["Id"];
-            userObject.UserName = document.getElementById("userName").value;
-            userObject.ContactNumber = document.getElementById("contactNumber").value;
-
+            
+            userObject.Username = document.getElementById("userName").value;
+            userObject.Password = document.getElementById("password").value;
+            userObject.StaffId = document.getElementById("staffId").value;
+            userObject.Designation = cboDesignation.selectedValue;//document.getElementById("designationId").value;
+           
             var data = JSON.stringify(userObject);
+            //var data = userObject;
 
             var userId = document.getElementById("userId").value;
             if (userEntryValidation() == false) {
@@ -414,7 +457,7 @@
 
                             },
                             400: function () {
-                                alert("Error");
+                                alert("Add Error");
                             },
                         }
                     });
@@ -427,8 +470,6 @@
         // =====================
         function cmdUserDeleteButton_OnClick() {
             var id = userList.currentItem.Id;
-
-            console.log(typeof id + id);
 
             $('#deleteUserConfirm').modal({
                 show: true,
@@ -482,6 +523,7 @@
         // ============
         $(document).ready(function () {
             cboBoxStaffName = new wijmo.input.ComboBox('#cboStaffNameDiv');
+            cboDesignation();
 
             //localStorage.setUser("lastId", results[results.length - 1]["ItemCode"]);
             userList = new wijmo.collections.CollectionView(getUserMasterList());

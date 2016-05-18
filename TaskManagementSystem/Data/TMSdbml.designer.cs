@@ -39,21 +39,21 @@ namespace TaskManagementSystem.Data
     partial void InsertmstProduct(mstProduct instance);
     partial void UpdatemstProduct(mstProduct instance);
     partial void DeletemstProduct(mstProduct instance);
-    partial void InsertmstStaff(mstStaff instance);
-    partial void UpdatemstStaff(mstStaff instance);
-    partial void DeletemstStaff(mstStaff instance);
-    partial void InsertmstUser(mstUser instance);
-    partial void UpdatemstUser(mstUser instance);
-    partial void DeletemstUser(mstUser instance);
-    partial void InsertmstUserForm(mstUserForm instance);
-    partial void UpdatemstUserForm(mstUserForm instance);
-    partial void DeletemstUserForm(mstUserForm instance);
     partial void InsertsysForm(sysForm instance);
     partial void UpdatesysForm(sysForm instance);
     partial void DeletesysForm(sysForm instance);
     partial void InserttrnTask(trnTask instance);
     partial void UpdatetrnTask(trnTask instance);
     partial void DeletetrnTask(trnTask instance);
+    partial void InsertmstUser(mstUser instance);
+    partial void UpdatemstUser(mstUser instance);
+    partial void DeletemstUser(mstUser instance);
+    partial void InsertmstStaff(mstStaff instance);
+    partial void UpdatemstStaff(mstStaff instance);
+    partial void DeletemstStaff(mstStaff instance);
+    partial void InsertmstUserForm(mstUserForm instance);
+    partial void UpdatemstUserForm(mstUserForm instance);
+    partial void DeletemstUserForm(mstUserForm instance);
     #endregion
 		
 		public TMSdbmlDataContext() : 
@@ -110,30 +110,6 @@ namespace TaskManagementSystem.Data
 			}
 		}
 		
-		public System.Data.Linq.Table<mstStaff> mstStaffs
-		{
-			get
-			{
-				return this.GetTable<mstStaff>();
-			}
-		}
-		
-		public System.Data.Linq.Table<mstUser> mstUsers
-		{
-			get
-			{
-				return this.GetTable<mstUser>();
-			}
-		}
-		
-		public System.Data.Linq.Table<mstUserForm> mstUserForms
-		{
-			get
-			{
-				return this.GetTable<mstUserForm>();
-			}
-		}
-		
 		public System.Data.Linq.Table<sysForm> sysForms
 		{
 			get
@@ -147,6 +123,30 @@ namespace TaskManagementSystem.Data
 			get
 			{
 				return this.GetTable<trnTask>();
+			}
+		}
+		
+		public System.Data.Linq.Table<mstUser> mstUsers
+		{
+			get
+			{
+				return this.GetTable<mstUser>();
+			}
+		}
+		
+		public System.Data.Linq.Table<mstStaff> mstStaffs
+		{
+			get
+			{
+				return this.GetTable<mstStaff>();
+			}
+		}
+		
+		public System.Data.Linq.Table<mstUserForm> mstUserForms
+		{
+			get
+			{
+				return this.GetTable<mstUserForm>();
 			}
 		}
 	}
@@ -713,675 +713,6 @@ namespace TaskManagementSystem.Data
 					this._IsLocked = value;
 					this.SendPropertyChanged("IsLocked");
 					this.OnIsLockedChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.mstStaff")]
-	public partial class mstStaff : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _StaffName;
-		
-		private string _ContactNumber;
-		
-		private bool _IsLocked;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnStaffNameChanging(string value);
-    partial void OnStaffNameChanged();
-    partial void OnContactNumberChanging(string value);
-    partial void OnContactNumberChanged();
-    partial void OnIsLockedChanging(bool value);
-    partial void OnIsLockedChanged();
-    #endregion
-		
-		public mstStaff()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string StaffName
-		{
-			get
-			{
-				return this._StaffName;
-			}
-			set
-			{
-				if ((this._StaffName != value))
-				{
-					this.OnStaffNameChanging(value);
-					this.SendPropertyChanging();
-					this._StaffName = value;
-					this.SendPropertyChanged("StaffName");
-					this.OnStaffNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactNumber", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ContactNumber
-		{
-			get
-			{
-				return this._ContactNumber;
-			}
-			set
-			{
-				if ((this._ContactNumber != value))
-				{
-					this.OnContactNumberChanging(value);
-					this.SendPropertyChanging();
-					this._ContactNumber = value;
-					this.SendPropertyChanged("ContactNumber");
-					this.OnContactNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLocked", DbType="Bit NOT NULL")]
-		public bool IsLocked
-		{
-			get
-			{
-				return this._IsLocked;
-			}
-			set
-			{
-				if ((this._IsLocked != value))
-				{
-					this.OnIsLockedChanging(value);
-					this.SendPropertyChanging();
-					this._IsLocked = value;
-					this.SendPropertyChanged("IsLocked");
-					this.OnIsLockedChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.mstUser")]
-	public partial class mstUser : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _StaffId;
-		
-		private string _Username;
-		
-		private string _Password;
-		
-		private System.Nullable<int> _Designation;
-		
-		private bool _IsLocked;
-		
-		private EntitySet<mstUserForm> _mstUserForms;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnStaffIdChanging(int value);
-    partial void OnStaffIdChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnDesignationChanging(System.Nullable<int> value);
-    partial void OnDesignationChanged();
-    partial void OnIsLockedChanging(bool value);
-    partial void OnIsLockedChanged();
-    #endregion
-		
-		public mstUser()
-		{
-			this._mstUserForms = new EntitySet<mstUserForm>(new Action<mstUserForm>(this.attach_mstUserForms), new Action<mstUserForm>(this.detach_mstUserForms));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int StaffId
-		{
-			get
-			{
-				return this._StaffId;
-			}
-			set
-			{
-				if ((this._StaffId != value))
-				{
-					this.OnStaffIdChanging(value);
-					this.SendPropertyChanging();
-					this._StaffId = value;
-					this.SendPropertyChanged("StaffId");
-					this.OnStaffIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NVarChar(255) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Designation", DbType="Int")]
-		public System.Nullable<int> Designation
-		{
-			get
-			{
-				return this._Designation;
-			}
-			set
-			{
-				if ((this._Designation != value))
-				{
-					this.OnDesignationChanging(value);
-					this.SendPropertyChanging();
-					this._Designation = value;
-					this.SendPropertyChanged("Designation");
-					this.OnDesignationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLocked", DbType="Bit NOT NULL")]
-		public bool IsLocked
-		{
-			get
-			{
-				return this._IsLocked;
-			}
-			set
-			{
-				if ((this._IsLocked != value))
-				{
-					this.OnIsLockedChanging(value);
-					this.SendPropertyChanging();
-					this._IsLocked = value;
-					this.SendPropertyChanged("IsLocked");
-					this.OnIsLockedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="mstUser_mstUserForm", Storage="_mstUserForms", ThisKey="StaffId,Username", OtherKey="StaffId,Username")]
-		public EntitySet<mstUserForm> mstUserForms
-		{
-			get
-			{
-				return this._mstUserForms;
-			}
-			set
-			{
-				this._mstUserForms.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_mstUserForms(mstUserForm entity)
-		{
-			this.SendPropertyChanging();
-			entity.mstUser = this;
-		}
-		
-		private void detach_mstUserForms(mstUserForm entity)
-		{
-			this.SendPropertyChanging();
-			entity.mstUser = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.mstUserForms")]
-	public partial class mstUserForm : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _StaffId;
-		
-		private string _Username;
-		
-		private int _FormId;
-		
-		private bool _CanAdd;
-		
-		private bool _CanSave;
-		
-		private bool _CanEdit;
-		
-		private bool _CanDelete;
-		
-		private bool _CanView;
-		
-		private bool _CanPreview;
-		
-		private bool _CanPrint;
-		
-		private EntityRef<mstUser> _mstUser;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnStaffIdChanging(int value);
-    partial void OnStaffIdChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnFormIdChanging(int value);
-    partial void OnFormIdChanged();
-    partial void OnCanAddChanging(bool value);
-    partial void OnCanAddChanged();
-    partial void OnCanSaveChanging(bool value);
-    partial void OnCanSaveChanged();
-    partial void OnCanEditChanging(bool value);
-    partial void OnCanEditChanged();
-    partial void OnCanDeleteChanging(bool value);
-    partial void OnCanDeleteChanged();
-    partial void OnCanViewChanging(bool value);
-    partial void OnCanViewChanged();
-    partial void OnCanPreviewChanging(bool value);
-    partial void OnCanPreviewChanged();
-    partial void OnCanPrintChanging(bool value);
-    partial void OnCanPrintChanged();
-    #endregion
-		
-		public mstUserForm()
-		{
-			this._mstUser = default(EntityRef<mstUser>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffId", DbType="Int NOT NULL")]
-		public int StaffId
-		{
-			get
-			{
-				return this._StaffId;
-			}
-			set
-			{
-				if ((this._StaffId != value))
-				{
-					if (this._mstUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnStaffIdChanging(value);
-					this.SendPropertyChanging();
-					this._StaffId = value;
-					this.SendPropertyChanged("StaffId");
-					this.OnStaffIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string Username
-		{
-			get
-			{
-				return this._Username;
-			}
-			set
-			{
-				if ((this._Username != value))
-				{
-					if (this._mstUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUsernameChanging(value);
-					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL")]
-		public int FormId
-		{
-			get
-			{
-				return this._FormId;
-			}
-			set
-			{
-				if ((this._FormId != value))
-				{
-					this.OnFormIdChanging(value);
-					this.SendPropertyChanging();
-					this._FormId = value;
-					this.SendPropertyChanged("FormId");
-					this.OnFormIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanAdd", DbType="Bit NOT NULL")]
-		public bool CanAdd
-		{
-			get
-			{
-				return this._CanAdd;
-			}
-			set
-			{
-				if ((this._CanAdd != value))
-				{
-					this.OnCanAddChanging(value);
-					this.SendPropertyChanging();
-					this._CanAdd = value;
-					this.SendPropertyChanged("CanAdd");
-					this.OnCanAddChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanSave", DbType="Bit NOT NULL")]
-		public bool CanSave
-		{
-			get
-			{
-				return this._CanSave;
-			}
-			set
-			{
-				if ((this._CanSave != value))
-				{
-					this.OnCanSaveChanging(value);
-					this.SendPropertyChanging();
-					this._CanSave = value;
-					this.SendPropertyChanged("CanSave");
-					this.OnCanSaveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanEdit", DbType="Bit NOT NULL")]
-		public bool CanEdit
-		{
-			get
-			{
-				return this._CanEdit;
-			}
-			set
-			{
-				if ((this._CanEdit != value))
-				{
-					this.OnCanEditChanging(value);
-					this.SendPropertyChanging();
-					this._CanEdit = value;
-					this.SendPropertyChanged("CanEdit");
-					this.OnCanEditChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanDelete", DbType="Bit NOT NULL")]
-		public bool CanDelete
-		{
-			get
-			{
-				return this._CanDelete;
-			}
-			set
-			{
-				if ((this._CanDelete != value))
-				{
-					this.OnCanDeleteChanging(value);
-					this.SendPropertyChanging();
-					this._CanDelete = value;
-					this.SendPropertyChanged("CanDelete");
-					this.OnCanDeleteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanView", DbType="Bit NOT NULL")]
-		public bool CanView
-		{
-			get
-			{
-				return this._CanView;
-			}
-			set
-			{
-				if ((this._CanView != value))
-				{
-					this.OnCanViewChanging(value);
-					this.SendPropertyChanging();
-					this._CanView = value;
-					this.SendPropertyChanged("CanView");
-					this.OnCanViewChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanPreview", DbType="Bit NOT NULL")]
-		public bool CanPreview
-		{
-			get
-			{
-				return this._CanPreview;
-			}
-			set
-			{
-				if ((this._CanPreview != value))
-				{
-					this.OnCanPreviewChanging(value);
-					this.SendPropertyChanging();
-					this._CanPreview = value;
-					this.SendPropertyChanged("CanPreview");
-					this.OnCanPreviewChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanPrint", DbType="Bit NOT NULL")]
-		public bool CanPrint
-		{
-			get
-			{
-				return this._CanPrint;
-			}
-			set
-			{
-				if ((this._CanPrint != value))
-				{
-					this.OnCanPrintChanging(value);
-					this.SendPropertyChanging();
-					this._CanPrint = value;
-					this.SendPropertyChanged("CanPrint");
-					this.OnCanPrintChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="mstUser_mstUserForm", Storage="_mstUser", ThisKey="StaffId,Username", OtherKey="StaffId,Username", IsForeignKey=true)]
-		public mstUser mstUser
-		{
-			get
-			{
-				return this._mstUser.Entity;
-			}
-			set
-			{
-				mstUser previousValue = this._mstUser.Entity;
-				if (((previousValue != value) 
-							|| (this._mstUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._mstUser.Entity = null;
-						previousValue.mstUserForms.Remove(this);
-					}
-					this._mstUser.Entity = value;
-					if ((value != null))
-					{
-						value.mstUserForms.Add(this);
-						this._StaffId = value.StaffId;
-						this._Username = value.Username;
-					}
-					else
-					{
-						this._StaffId = default(int);
-						this._Username = default(string);
-					}
-					this.SendPropertyChanged("mstUser");
 				}
 			}
 		}
@@ -2012,6 +1343,762 @@ namespace TaskManagementSystem.Data
 		{
 			this.SendPropertyChanging();
 			entity.trnTask = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.mstUser")]
+	public partial class mstUser : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _StaffId;
+		
+		private string _Username;
+		
+		private string _Password;
+		
+		private System.Nullable<int> _Designation;
+		
+		private bool _IsLocked;
+		
+		private EntityRef<mstStaff> _mstStaff;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnStaffIdChanging(int value);
+    partial void OnStaffIdChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnDesignationChanging(System.Nullable<int> value);
+    partial void OnDesignationChanged();
+    partial void OnIsLockedChanging(bool value);
+    partial void OnIsLockedChanged();
+    #endregion
+		
+		public mstUser()
+		{
+			this._mstStaff = default(EntityRef<mstStaff>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffId", DbType="Int NOT NULL")]
+		public int StaffId
+		{
+			get
+			{
+				return this._StaffId;
+			}
+			set
+			{
+				if ((this._StaffId != value))
+				{
+					if (this._mstStaff.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStaffIdChanging(value);
+					this.SendPropertyChanging();
+					this._StaffId = value;
+					this.SendPropertyChanged("StaffId");
+					this.OnStaffIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Designation", DbType="Int")]
+		public System.Nullable<int> Designation
+		{
+			get
+			{
+				return this._Designation;
+			}
+			set
+			{
+				if ((this._Designation != value))
+				{
+					this.OnDesignationChanging(value);
+					this.SendPropertyChanging();
+					this._Designation = value;
+					this.SendPropertyChanged("Designation");
+					this.OnDesignationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLocked", DbType="Bit NOT NULL")]
+		public bool IsLocked
+		{
+			get
+			{
+				return this._IsLocked;
+			}
+			set
+			{
+				if ((this._IsLocked != value))
+				{
+					this.OnIsLockedChanging(value);
+					this.SendPropertyChanging();
+					this._IsLocked = value;
+					this.SendPropertyChanged("IsLocked");
+					this.OnIsLockedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="mstStaff_mstUser", Storage="_mstStaff", ThisKey="StaffId", OtherKey="Id", IsForeignKey=true)]
+		public mstStaff mstStaff
+		{
+			get
+			{
+				return this._mstStaff.Entity;
+			}
+			set
+			{
+				mstStaff previousValue = this._mstStaff.Entity;
+				if (((previousValue != value) 
+							|| (this._mstStaff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._mstStaff.Entity = null;
+						previousValue.mstUsers.Remove(this);
+					}
+					this._mstStaff.Entity = value;
+					if ((value != null))
+					{
+						value.mstUsers.Add(this);
+						this._StaffId = value.Id;
+					}
+					else
+					{
+						this._StaffId = default(int);
+					}
+					this.SendPropertyChanged("mstStaff");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.mstStaff")]
+	public partial class mstStaff : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _StaffName;
+		
+		private string _ContactNumber;
+		
+		private bool _IsLocked;
+		
+		private EntitySet<mstUser> _mstUsers;
+		
+		private EntitySet<mstUserForm> _mstUserForms;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnStaffNameChanging(string value);
+    partial void OnStaffNameChanged();
+    partial void OnContactNumberChanging(string value);
+    partial void OnContactNumberChanged();
+    partial void OnIsLockedChanging(bool value);
+    partial void OnIsLockedChanged();
+    #endregion
+		
+		public mstStaff()
+		{
+			this._mstUsers = new EntitySet<mstUser>(new Action<mstUser>(this.attach_mstUsers), new Action<mstUser>(this.detach_mstUsers));
+			this._mstUserForms = new EntitySet<mstUserForm>(new Action<mstUserForm>(this.attach_mstUserForms), new Action<mstUserForm>(this.detach_mstUserForms));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string StaffName
+		{
+			get
+			{
+				return this._StaffName;
+			}
+			set
+			{
+				if ((this._StaffName != value))
+				{
+					this.OnStaffNameChanging(value);
+					this.SendPropertyChanging();
+					this._StaffName = value;
+					this.SendPropertyChanged("StaffName");
+					this.OnStaffNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactNumber", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ContactNumber
+		{
+			get
+			{
+				return this._ContactNumber;
+			}
+			set
+			{
+				if ((this._ContactNumber != value))
+				{
+					this.OnContactNumberChanging(value);
+					this.SendPropertyChanging();
+					this._ContactNumber = value;
+					this.SendPropertyChanged("ContactNumber");
+					this.OnContactNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLocked", DbType="Bit NOT NULL")]
+		public bool IsLocked
+		{
+			get
+			{
+				return this._IsLocked;
+			}
+			set
+			{
+				if ((this._IsLocked != value))
+				{
+					this.OnIsLockedChanging(value);
+					this.SendPropertyChanging();
+					this._IsLocked = value;
+					this.SendPropertyChanged("IsLocked");
+					this.OnIsLockedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="mstStaff_mstUser", Storage="_mstUsers", ThisKey="Id", OtherKey="StaffId")]
+		public EntitySet<mstUser> mstUsers
+		{
+			get
+			{
+				return this._mstUsers;
+			}
+			set
+			{
+				this._mstUsers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="mstStaff_mstUserForm", Storage="_mstUserForms", ThisKey="Id", OtherKey="StaffId")]
+		public EntitySet<mstUserForm> mstUserForms
+		{
+			get
+			{
+				return this._mstUserForms;
+			}
+			set
+			{
+				this._mstUserForms.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_mstUsers(mstUser entity)
+		{
+			this.SendPropertyChanging();
+			entity.mstStaff = this;
+		}
+		
+		private void detach_mstUsers(mstUser entity)
+		{
+			this.SendPropertyChanging();
+			entity.mstStaff = null;
+		}
+		
+		private void attach_mstUserForms(mstUserForm entity)
+		{
+			this.SendPropertyChanging();
+			entity.mstStaff = this;
+		}
+		
+		private void detach_mstUserForms(mstUserForm entity)
+		{
+			this.SendPropertyChanging();
+			entity.mstStaff = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.mstUserForms")]
+	public partial class mstUserForm : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _StaffId;
+		
+		private string _Username;
+		
+		private int _FormId;
+		
+		private bool _CanAdd;
+		
+		private bool _CanSave;
+		
+		private bool _CanEdit;
+		
+		private bool _CanDelete;
+		
+		private bool _CanView;
+		
+		private bool _CanPreview;
+		
+		private bool _CanPrint;
+		
+		private EntityRef<mstStaff> _mstStaff;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnStaffIdChanging(int value);
+    partial void OnStaffIdChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnFormIdChanging(int value);
+    partial void OnFormIdChanged();
+    partial void OnCanAddChanging(bool value);
+    partial void OnCanAddChanged();
+    partial void OnCanSaveChanging(bool value);
+    partial void OnCanSaveChanged();
+    partial void OnCanEditChanging(bool value);
+    partial void OnCanEditChanged();
+    partial void OnCanDeleteChanging(bool value);
+    partial void OnCanDeleteChanged();
+    partial void OnCanViewChanging(bool value);
+    partial void OnCanViewChanged();
+    partial void OnCanPreviewChanging(bool value);
+    partial void OnCanPreviewChanged();
+    partial void OnCanPrintChanging(bool value);
+    partial void OnCanPrintChanged();
+    #endregion
+		
+		public mstUserForm()
+		{
+			this._mstStaff = default(EntityRef<mstStaff>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffId", DbType="Int NOT NULL")]
+		public int StaffId
+		{
+			get
+			{
+				return this._StaffId;
+			}
+			set
+			{
+				if ((this._StaffId != value))
+				{
+					if (this._mstStaff.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStaffIdChanging(value);
+					this.SendPropertyChanging();
+					this._StaffId = value;
+					this.SendPropertyChanged("StaffId");
+					this.OnStaffIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormId", DbType="Int NOT NULL")]
+		public int FormId
+		{
+			get
+			{
+				return this._FormId;
+			}
+			set
+			{
+				if ((this._FormId != value))
+				{
+					this.OnFormIdChanging(value);
+					this.SendPropertyChanging();
+					this._FormId = value;
+					this.SendPropertyChanged("FormId");
+					this.OnFormIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanAdd", DbType="Bit NOT NULL")]
+		public bool CanAdd
+		{
+			get
+			{
+				return this._CanAdd;
+			}
+			set
+			{
+				if ((this._CanAdd != value))
+				{
+					this.OnCanAddChanging(value);
+					this.SendPropertyChanging();
+					this._CanAdd = value;
+					this.SendPropertyChanged("CanAdd");
+					this.OnCanAddChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanSave", DbType="Bit NOT NULL")]
+		public bool CanSave
+		{
+			get
+			{
+				return this._CanSave;
+			}
+			set
+			{
+				if ((this._CanSave != value))
+				{
+					this.OnCanSaveChanging(value);
+					this.SendPropertyChanging();
+					this._CanSave = value;
+					this.SendPropertyChanged("CanSave");
+					this.OnCanSaveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanEdit", DbType="Bit NOT NULL")]
+		public bool CanEdit
+		{
+			get
+			{
+				return this._CanEdit;
+			}
+			set
+			{
+				if ((this._CanEdit != value))
+				{
+					this.OnCanEditChanging(value);
+					this.SendPropertyChanging();
+					this._CanEdit = value;
+					this.SendPropertyChanged("CanEdit");
+					this.OnCanEditChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanDelete", DbType="Bit NOT NULL")]
+		public bool CanDelete
+		{
+			get
+			{
+				return this._CanDelete;
+			}
+			set
+			{
+				if ((this._CanDelete != value))
+				{
+					this.OnCanDeleteChanging(value);
+					this.SendPropertyChanging();
+					this._CanDelete = value;
+					this.SendPropertyChanged("CanDelete");
+					this.OnCanDeleteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanView", DbType="Bit NOT NULL")]
+		public bool CanView
+		{
+			get
+			{
+				return this._CanView;
+			}
+			set
+			{
+				if ((this._CanView != value))
+				{
+					this.OnCanViewChanging(value);
+					this.SendPropertyChanging();
+					this._CanView = value;
+					this.SendPropertyChanged("CanView");
+					this.OnCanViewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanPreview", DbType="Bit NOT NULL")]
+		public bool CanPreview
+		{
+			get
+			{
+				return this._CanPreview;
+			}
+			set
+			{
+				if ((this._CanPreview != value))
+				{
+					this.OnCanPreviewChanging(value);
+					this.SendPropertyChanging();
+					this._CanPreview = value;
+					this.SendPropertyChanged("CanPreview");
+					this.OnCanPreviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanPrint", DbType="Bit NOT NULL")]
+		public bool CanPrint
+		{
+			get
+			{
+				return this._CanPrint;
+			}
+			set
+			{
+				if ((this._CanPrint != value))
+				{
+					this.OnCanPrintChanging(value);
+					this.SendPropertyChanging();
+					this._CanPrint = value;
+					this.SendPropertyChanged("CanPrint");
+					this.OnCanPrintChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="mstStaff_mstUserForm", Storage="_mstStaff", ThisKey="StaffId", OtherKey="Id", IsForeignKey=true)]
+		public mstStaff mstStaff
+		{
+			get
+			{
+				return this._mstStaff.Entity;
+			}
+			set
+			{
+				mstStaff previousValue = this._mstStaff.Entity;
+				if (((previousValue != value) 
+							|| (this._mstStaff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._mstStaff.Entity = null;
+						previousValue.mstUserForms.Remove(this);
+					}
+					this._mstStaff.Entity = value;
+					if ((value != null))
+					{
+						value.mstUserForms.Add(this);
+						this._StaffId = value.Id;
+					}
+					else
+					{
+						this._StaffId = default(int);
+					}
+					this.SendPropertyChanged("mstStaff");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }
