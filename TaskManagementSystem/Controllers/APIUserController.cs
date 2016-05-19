@@ -48,7 +48,7 @@ namespace TaskManagementSystem.Controllers
             var user = from d in db.mstUsers
                           select new Models.MstUser
                           {
-                              Id = d.StaffId,
+                              Id = d.Id,
                               StaffId = d.StaffId,
                               StaffName = d.mstStaff.StaffName,
                               Password = d.Password,
@@ -96,8 +96,8 @@ namespace TaskManagementSystem.Controllers
         // ==============
         // UPDATE Item
         // ==============
-        [Route("api/staff/update/{id}")]
-        public HttpResponseMessage Put(String id, Models.MstStaff item)
+        [Route("api/user/update/{id}")]
+        public HttpResponseMessage Put(String id, Models.MstUser item)
         {
             try
             {
@@ -107,14 +107,16 @@ namespace TaskManagementSystem.Controllers
                 var date = DateTime.Now;
 
                 var itemId = Convert.ToInt32(id);
-                var items = from d in db.mstStaffs where d.Id == itemId select d;
+                var items = from d in db.mstUsers where d.Id == itemId select d;
 
                 if (items.Any())
                 {
                     var updateItem = items.FirstOrDefault();
 
-                    updateItem.StaffName = item.StaffName;
-                    updateItem.ContactNumber = item.ContactNumber;
+                    updateItem.Username = item.Username;
+                    updateItem.Password = item.Password;
+                    updateItem.StaffId = item.StaffId;
+                    updateItem.Designation = item.Designation;
                     updateItem.IsLocked = isLocked;
 
                     //updateItem.UpdateUserId = 123;
