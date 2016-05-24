@@ -133,7 +133,7 @@
                                     <label for="sel1" class="col-sm-4 control-label">Staff Name</label>
                                     <div class="col-sm-8">
                                         <div class="" id="cboStaffNameDiv"></div>
-                                        <input type="text" class="form-control requiredField" id="staffId">
+                                        <input type="hidden" class="form-control requiredField" id="staffId">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -142,9 +142,9 @@
                                     <div class="col-sm-8">
                                         <div class="" id="cboDesignationDiv"></div>
                                         @*<select class="form-control" id="designation">
-                                            <option>Administrator</option>
-                                            <option>User</option>
-                                        </select>*@
+                                                <option>Administrator</option>
+                                                <option>User</option>
+                                            </select>*@
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +172,6 @@
         // ================
         var userGrid;
         var editUser;
-        
 
         var btnFirstPageGrid;
         var btnPreviousPageGrid;
@@ -185,8 +184,6 @@
 
         var cboBoxStaffName;
         var cboDesignation;
-
-        var cboStaffNameSelectedValue = "";
 
         // =============================
         // Get UserMasterList Data
@@ -208,12 +205,11 @@
                         for (i = 0; i < results.length; i++) {
                             userList.push({
                                 EditId: "<button class='btn btn-primary btn-xs btn-block' id='userEditButton' onClick='cmdUserEditButton_OnClick()'><i class='fa fa-pencil'></i> Edit</button>",
-                                DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='userDeleteButton' onclick='cmdUserDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
-                                Id: results[i]["Id"],
+                                DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='userDeleteButton' onclick='cmdSUserDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
                                 Username: results[i]["Username"],
                                 Password: results[i]["Password"],
                                 StaffName: results[i]["StaffName"],
-                                StaffId: results[i]["StaffId"],
+                                StaffId: results[i]["StaffName"],
                                 Designation: results[i]["Designation"],
                                 IsLocked: results[i]["IsLocked"]
 
@@ -265,7 +261,6 @@
             var staffCollection = new wijmo.collections.CollectionView(staffList);
             var staffList = new Array();
             for (var i = 0; i < staffCollection.items.length; i++) {
-
                 staffList.push(staffCollection.items[i].StaffName);
             }
 
@@ -273,13 +268,11 @@
             cboBoxStaffName = new wijmo.input.ComboBox('#cboStaffNameDiv', {
                 placeholder: "Select Staff",
                 itemsSource: staffList,
-                isEditable: false,
-                selectedValue: cboStaffNameSelectedValue.toString()
+                isEditable: false
             });
 
             cboBoxStaffName.onSelectedIndexChanged = function () {
-                document.getElementById("staffId").value = staffCollection.items[this.selectedIndex].Id 
-                //document.getElementById("staffId").value = cboStaffName.selectedValue
+                document.getElementById("staffId").value = staffCollection.items[this.selectedIndex].Id
             }
         }
 
@@ -308,7 +301,7 @@
                 isEditable: false
             });
             cboDesignation.onSelectedIndexChanged = function () {
-                document.getElementById("cboDesignationDiv").value = cboDesignation.selectedValue
+                document.getElementById("designationId").value = cboDesignation.selectedValue
             }
         }
 
@@ -327,14 +320,13 @@
                 });
             });
 
-            cboStaffNameSelectedValue = "";
             getStaffName();
 
             document.getElementById("userId").value = 0;
             document.getElementById("userName").value = "";
             document.getElementById("password").value = "";
             document.getElementById("cboStaffNameDiv").value = "";
-            document.getElementById("staffId").value = ""; 
+            document.getElementById("staffId").value = "";
             document.getElementById("btnIdAddUser").innerHTML = "Add"
         }
 
@@ -357,12 +349,13 @@
 
             document.getElementById("userName").value = userList.currentItem.Username;
             document.getElementById("password").value = userList.currentItem.Password;
+            document.getElementById("cboStaffNameDiv").value = userList.currentItem.Password;
+            //document.getElementById("userId").value = userList.currentItem.Id;
             document.getElementById("staffId").value = userList.currentItem.StaffId;
-            cboStaffNameSelectedValue = userList.currentItem.StaffName;
+            cboStaffName.selectedValue = userList.currentItem.StaffName;
             cboDesignation.selectedValue = userList.currentItem.Designation;
 
             document.getElementById("btnIdAddUser").innerHTML = "Update"
-            getStaffName();
         }
 
         // ===================
@@ -409,12 +402,12 @@
         function cmdAddUser() {
             var userObject = new Object();
             // userObject.StaffId = cboBoxStaffName.selectedItem["Id"];
-            
+
             userObject.Username = document.getElementById("userName").value;
             userObject.Password = document.getElementById("password").value;
             userObject.StaffId = document.getElementById("staffId").value;
             userObject.Designation = cboDesignation.selectedValue;//document.getElementById("designationId").value;
-            
+
             var data = JSON.stringify(userObject);
             //var data = userObject;
 
@@ -427,7 +420,7 @@
                     var itemdata = data;
                     $('.dis').prop('disabled', true);
                     $.ajax({
-                        url: '/api/user/update/' + userList.currentItem.Id,
+                        url: '/api/user/update/' + userId,
                         type: 'PUT',
                         dataType: 'json',
                         data: itemdata,

@@ -74,7 +74,7 @@ h6 {
   }
 }
 .homedash {
-  background-image: url(../images/hero-img9.jpg);
+  background-image: url(../images/slider/2.jpg);
   background-position: top center;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -135,28 +135,28 @@ h6 {
 .navbar-nav > li > a:hover,
 .navbar-nav > li > a:focus,
 .navbar-nav > li > a:active {
-  color: #4ecdc4;
+  color: #950f10;
   outline-width: 0;
 }
 .navbar-nav > li.active > a,
 .navbar-nav > li.active a:hover,
 .navbar-nav > li.active a:focus,
 .navbar-nav > li.active a:active {
-  color: #4ecdc4;
+  color: #950f10;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #fff;
+  color: #000;
 }
 .navbar-default .navbar-nav > li.active > a,
 .navbar-default .navbar-nav > li.active a:hover,
 .navbar-default .navbar-nav > li.active a:focus,
 .navbar-default .navbar-nav > li.active a:active {
-  color: #4ecdc4;
+  color: #000;
   background-color: rgba(0, 0, 0, 0);
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-  color: #4ecdc4;
+  color: #950f10;
 }
 .hovereffect:hover {
     opacity: 0.75;
