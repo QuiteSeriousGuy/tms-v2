@@ -98,9 +98,8 @@
         </div>
     </div>
     <!-- Edit/Update Modal -->
-    <!-- Modal -->
     <div class="modal fade" id="addUser" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg" style="width: 80%;">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -152,6 +151,10 @@
 
 
                     </form>
+                        <div id="loadingif" style="margin: 0 auto;">
+                            <img class="img-responsive center-block" src="/../images/loadingC.gif">
+                        </div>
+                    <div id="userFormsDiv"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btnIdAddUser" onclick="cmdAddUser()">Add</button>
@@ -161,17 +164,18 @@
 
         </div>
     </div>
+</div>
 
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/software-js")
-    <script type="text/javascript">
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/software-js")
+<script type="text/javascript">
 
         //================
         // Global variables
         // ================
         var userGrid;
         var editUser;
+        var userFormGrid;
 
         var btnFirstPageGrid;
         var btnPreviousPageGrid;
@@ -184,10 +188,14 @@
 
         var cboBoxStaffName;
         var cboDesignation;
+        var cboStaffNameSelectedValue = "";
 
-        // =============================
+        var userFormList;
+        var userForms;
+
+        // =======================
         // Get UserMasterList Data
-        // =============================
+        // =======================
 
         function getUserMasterList() {
             var userList = new wijmo.collections.ObservableArray();
@@ -205,11 +213,12 @@
                         for (i = 0; i < results.length; i++) {
                             userList.push({
                                 EditId: "<button class='btn btn-primary btn-xs btn-block' id='userEditButton' onClick='cmdUserEditButton_OnClick()'><i class='fa fa-pencil'></i> Edit</button>",
-                                DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='userDeleteButton' onclick='cmdSUserDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
+                                DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='userDeleteButton' onclick='cmdUserDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
+                                Id: results[i]["Id"],
                                 Username: results[i]["Username"],
                                 Password: results[i]["Password"],
                                 StaffName: results[i]["StaffName"],
-                                StaffId: results[i]["StaffName"],
+                                StaffId: results[i]["StaffId"],
                                 Designation: results[i]["Designation"],
                                 IsLocked: results[i]["IsLocked"]
 
@@ -222,9 +231,56 @@
             return userList;
         }
 
-        // =============================
-        // Get UserMasterList Data
-        // =============================
+        // ===================
+        // Get User Forms Data
+        // ===================
+
+        function getUserFormsData() {
+            var data = new Array();
+            setTimeout(function () {
+                //$('#loadingif').show();
+                //$('#userFormsDiv').hide();
+                $.ajax({ 
+                    url: '/api/userforms/details/' + userList.currentItem.StaffId,
+                    cache: false,
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    data: {},
+                    success: function (results) {
+                        $('#loadingif').hide();
+                        if (results.length > 0) {
+                            for (i = 0; i < results.length; i++) {
+                                data.push({
+                                    StaffId: results[i]["StaffId"],
+                                    Username: results[i]["Username"],
+                                    FormId: results[i]["FormId"],
+                                    FormDescription: results[i]["FormDescription"],
+                                    CanAdd: results[i]["CanAdd"],
+                                    CanSave: results[i]["CanSave"],
+                                    CanEdit: results[i]["CanEdit"],
+                                    CanDelete: results[i]["CanDelete"],
+                                    CanView: results[i]["CanView"],
+                                    CanPreview: results[i]["CanPreview"],
+                                    CanPrint: results[i]["CanPrint"],
+                                });
+                            }
+
+                            userFormList = new wijmo.collections.CollectionView(data);
+                            userFormList.canFilter = true;
+
+                            userFormsGrid.itemsSource = userFormList;
+                            userFormsGrid.trackChanges = true;
+                        }
+                    }
+                });
+            }, 1000);
+        }
+
+
+
+        // ==================
+        // Get StaffName Data
+        // ==================
 
         function getStaffName() {
             var staffList = new wijmo.collections.ObservableArray();
@@ -261,6 +317,7 @@
             var staffCollection = new wijmo.collections.CollectionView(staffList);
             var staffList = new Array();
             for (var i = 0; i < staffCollection.items.length; i++) {
+
                 staffList.push(staffCollection.items[i].StaffName);
             }
 
@@ -268,11 +325,13 @@
             cboBoxStaffName = new wijmo.input.ComboBox('#cboStaffNameDiv', {
                 placeholder: "Select Staff",
                 itemsSource: staffList,
-                isEditable: false
+                isEditable: false,
+                selectedValue: cboStaffNameSelectedValue.toString()
             });
 
             cboBoxStaffName.onSelectedIndexChanged = function () {
                 document.getElementById("staffId").value = staffCollection.items[this.selectedIndex].Id
+                //document.getElementById("staffId").value = cboStaffName.selectedValue
             }
         }
 
@@ -301,7 +360,7 @@
                 isEditable: false
             });
             cboDesignation.onSelectedIndexChanged = function () {
-                document.getElementById("designationId").value = cboDesignation.selectedValue
+                document.getElementById("cboDesignationDiv").value = cboDesignation.selectedValue
             }
         }
 
@@ -320,6 +379,7 @@
                 });
             });
 
+            cboStaffNameSelectedValue = "";
             getStaffName();
 
             document.getElementById("userId").value = 0;
@@ -349,13 +409,20 @@
 
             document.getElementById("userName").value = userList.currentItem.Username;
             document.getElementById("password").value = userList.currentItem.Password;
-            document.getElementById("cboStaffNameDiv").value = userList.currentItem.Password;
-            //document.getElementById("userId").value = userList.currentItem.Id;
             document.getElementById("staffId").value = userList.currentItem.StaffId;
-            cboStaffName.selectedValue = userList.currentItem.StaffName;
+            cboStaffNameSelectedValue = userList.currentItem.StaffName;
             cboDesignation.selectedValue = userList.currentItem.Designation;
 
             document.getElementById("btnIdAddUser").innerHTML = "Update"
+            getStaffName();
+
+            userFormList = new wijmo.collections.CollectionView(getStaffName());
+            userFormList.canFilter = true;
+            userFormList.pageSize = 15;
+
+            getUserFormsData();
+
+
         }
 
         // ===================
@@ -420,7 +487,7 @@
                     var itemdata = data;
                     $('.dis').prop('disabled', true);
                     $.ajax({
-                        url: '/api/user/update/' + userId,
+                        url: '/api/user/update/' + userList.currentItem.Id,
                         type: 'PUT',
                         dataType: 'json',
                         data: itemdata,
@@ -518,7 +585,7 @@
 
 
 
-        //============
+        // ============
         // On Page Load
         // ============
         $(document).ready(function () {
@@ -538,8 +605,8 @@
             });
             userList.filter = function (item) {
                 return !filterText
-                || (item.UserName.toLowerCase().indexOf(filterText) > -1)
-                || (item.ContactNumber.toLowerCase().indexOf(filterText) > -1)
+                || (item.Username.toLowerCase().indexOf(filterText) > -1)
+                || (item.StaffName.toLowerCase().indexOf(filterText) > -1)
             }
             userList.collectionChanged.addHandler(function (sender, args) {
                 updateNavigateButtonsCollection();
@@ -553,7 +620,7 @@
                 updateNavigateButtonsCollection();
             });
 
-            //Flex Grid
+            //Users - Flex Grid
             userGrid = new wijmo.grid.FlexGrid('#userCollectionGrid');
             userGrid.initialize({
                 columns: [
@@ -605,6 +672,8 @@
 
             userGrid.trackChanges = true;
 
+
+
             // Navigation button
             btnFirstPageGrid = document.getElementById('btnMoveToFirstPageGrid');
             btnPreviousPageGrid = document.getElementById('btnMoveToPreviousPageGrid');
@@ -630,6 +699,88 @@
                 userList.moveToLastPage();
                 updateNavigateButtonsCollection();
             });
+
+            //UserForms - Flex Grid
+            userFormsGrid = new wijmo.grid.FlexGrid('#userFormsDiv');
+            userFormsGrid.initialize({
+                columns: [
+
+
+                {
+                    "header": "Form",
+                    "binding": "FormDescription",
+                    "width": "3*",
+                    "align": "center",
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Add",
+                    "binding": "CanAdd",
+                    "width": ".5*",
+                    "align": "center",
+                    "isContentHtml": true
+
+                },
+                {
+                    "header": "Save",
+                    "binding": "CanSave",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": ".5*"
+                },
+                {
+                    "header": "Edit",
+                    "binding": "CanEdit",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": ".5*"
+                },
+                {
+                    "header": "Delete",
+                    "binding": "CanDelete",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": ".5*"
+                },
+                {
+                    "header": "View",
+                    "binding": "CanView",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": ".5*"
+                },
+                 {
+                     "header": "Preview",
+                     "binding": "CanView",
+                     "align": "center",
+                     "allowSorting": true,
+                     "width": ".5*"
+                 },
+                 {
+                     "header": "Preview",
+                     "binding": "CanPreview",
+                     "align": "center",
+                     "allowSorting": true,
+                     "width": ".5*"
+                 },
+                {
+                    "header": "Delete",
+                    "binding": "CanDelete",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": ".5*"
+                }
+
+                ],
+                autoGenerateColumns: false,
+                itemsSource: userFormList,
+                isReadOnly: true,
+                autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+                allowDragging: wijmo.grid.AllowDragging.None,
+                selectionMode: wijmo.grid.SelectionMode.Row
+            });
+
+            userFormsGrid.trackChanges = true;
 
         });
 
@@ -662,6 +813,7 @@
 
         }
 
-    </script>
-</div>
+</script>
+
+
 @Html.Partial("Footer")

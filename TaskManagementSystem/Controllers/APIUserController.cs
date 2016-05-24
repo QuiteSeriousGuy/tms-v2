@@ -68,7 +68,6 @@ namespace TaskManagementSystem.Controllers
         {
             try
             {
-                var isLocked = true;
                 var identityUserId = User.Identity.GetUserId();
                 var date = DateTime.Now;
 
