@@ -248,7 +248,7 @@
             staffGrid.trackChanges = true;
 
         }
-       
+
         // =========================
         // Staff Entry Validation
         // =========================
@@ -277,13 +277,13 @@
                 var staffObject = new Object();
                 staffObject.StaffName = document.getElementById("staffName").value;
                 staffObject.ContactNumber = document.getElementById("contactNumber").value;
-                
+
                 var data = JSON.stringify(staffObject);
 
                 var staffId = document.getElementById("staffId").value;
                 if (staffEntryValidation() == false) {
                     toastr.error("Fill out form");
-                    
+
                 } else {
                     if (staffId > 0) { //Update
                         var itemdata = data;
@@ -386,7 +386,7 @@
                 });
             }
 
-            
+
 
             //============
             // On Page Load
