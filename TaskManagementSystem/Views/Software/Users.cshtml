@@ -98,9 +98,8 @@
         </div>
     </div>
     <!-- Edit/Update Modal -->
-    <!-- Modal -->
     <div class="modal fade" id="addUser" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg" style="width: 80%;">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -133,7 +132,7 @@
                                     <label for="sel1" class="col-sm-4 control-label">Staff Name</label>
                                     <div class="col-sm-8">
                                         <div class="" id="cboStaffNameDiv"></div>
-                                        <input type="text" class="form-control requiredField" id="staffId">
+                                        <input type="hidden" class="form-control requiredField" id="staffId">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -142,9 +141,9 @@
                                     <div class="col-sm-8">
                                         <div class="" id="cboDesignationDiv"></div>
                                         @*<select class="form-control" id="designation">
-                                            <option>Administrator</option>
-                                            <option>User</option>
-                                        </select>*@
+                                                <option>Administrator</option>
+                                                <option>User</option>
+                                            </select>*@
                                     </div>
                                 </div>
                             </div>
@@ -152,6 +151,10 @@
 
 
                     </form>
+                        <div id="loadingif" style="margin: 0 auto;">
+                            <img class="img-responsive center-block" src="/../images/loadingC.gif">
+                        </div>
+                    <div id="userFormsDiv"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btnIdAddUser" onclick="cmdAddUser()">Add</button>
@@ -161,18 +164,18 @@
 
         </div>
     </div>
+</div>
 
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/software-js")
-    <script type="text/javascript">
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/software-js")
+<script type="text/javascript">
 
         //================
         // Global variables
         // ================
         var userGrid;
         var editUser;
-        
+        var userFormGrid;
 
         var btnFirstPageGrid;
         var btnPreviousPageGrid;
@@ -185,12 +188,14 @@
 
         var cboBoxStaffName;
         var cboDesignation;
-
         var cboStaffNameSelectedValue = "";
 
-        // =============================
+        var userFormList;
+        var userForms;
+
+        // =======================
         // Get UserMasterList Data
-        // =============================
+        // =======================
 
         function getUserMasterList() {
             var userList = new wijmo.collections.ObservableArray();
@@ -226,9 +231,56 @@
             return userList;
         }
 
-        // =============================
-        // Get UserMasterList Data
-        // =============================
+        // ===================
+        // Get User Forms Data
+        // ===================
+
+        function getUserFormsData() {
+            var data = new Array();
+            setTimeout(function () {
+                //$('#loadingif').show();
+                //$('#userFormsDiv').hide();
+                $.ajax({ 
+                    url: '/api/userforms/details/' + userList.currentItem.StaffId,
+                    cache: false,
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    data: {},
+                    success: function (results) {
+                        $('#loadingif').hide();
+                        if (results.length > 0) {
+                            for (i = 0; i < results.length; i++) {
+                                data.push({
+                                    StaffId: results[i]["StaffId"],
+                                    Username: results[i]["Username"],
+                                    FormId: results[i]["FormId"],
+                                    FormDescription: results[i]["FormDescription"],
+                                    CanAdd: results[i]["CanAdd"],
+                                    CanSave: results[i]["CanSave"],
+                                    CanEdit: results[i]["CanEdit"],
+                                    CanDelete: results[i]["CanDelete"],
+                                    CanView: results[i]["CanView"],
+                                    CanPreview: results[i]["CanPreview"],
+                                    CanPrint: results[i]["CanPrint"],
+                                });
+                            }
+
+                            userFormList = new wijmo.collections.CollectionView(data);
+                            userFormList.canFilter = true;
+
+                            userFormsGrid.itemsSource = userFormList;
+                            userFormsGrid.trackChanges = true;
+                        }
+                    }
+                });
+            }, 1000);
+        }
+
+
+
+        // ==================
+        // Get StaffName Data
+        // ==================
 
         function getStaffName() {
             var staffList = new wijmo.collections.ObservableArray();
@@ -278,7 +330,7 @@
             });
 
             cboBoxStaffName.onSelectedIndexChanged = function () {
-                document.getElementById("staffId").value = staffCollection.items[this.selectedIndex].Id 
+                document.getElementById("staffId").value = staffCollection.items[this.selectedIndex].Id
                 //document.getElementById("staffId").value = cboStaffName.selectedValue
             }
         }
@@ -334,7 +386,7 @@
             document.getElementById("userName").value = "";
             document.getElementById("password").value = "";
             document.getElementById("cboStaffNameDiv").value = "";
-            document.getElementById("staffId").value = ""; 
+            document.getElementById("staffId").value = "";
             document.getElementById("btnIdAddUser").innerHTML = "Add"
         }
 
@@ -363,6 +415,14 @@
 
             document.getElementById("btnIdAddUser").innerHTML = "Update"
             getStaffName();
+
+            userFormList = new wijmo.collections.CollectionView(getStaffName());
+            userFormList.canFilter = true;
+            userFormList.pageSize = 15;
+
+            getUserFormsData();
+
+
         }
 
         // ===================
@@ -409,12 +469,12 @@
         function cmdAddUser() {
             var userObject = new Object();
             // userObject.StaffId = cboBoxStaffName.selectedItem["Id"];
-            
+
             userObject.Username = document.getElementById("userName").value;
             userObject.Password = document.getElementById("password").value;
             userObject.StaffId = document.getElementById("staffId").value;
             userObject.Designation = cboDesignation.selectedValue;//document.getElementById("designationId").value;
-            
+
             var data = JSON.stringify(userObject);
             //var data = userObject;
 
@@ -525,7 +585,7 @@
 
 
 
-        //============
+        // ============
         // On Page Load
         // ============
         $(document).ready(function () {
@@ -545,8 +605,8 @@
             });
             userList.filter = function (item) {
                 return !filterText
-                || (item.UserName.toLowerCase().indexOf(filterText) > -1)
-                || (item.ContactNumber.toLowerCase().indexOf(filterText) > -1)
+                || (item.Username.toLowerCase().indexOf(filterText) > -1)
+                || (item.StaffName.toLowerCase().indexOf(filterText) > -1)
             }
             userList.collectionChanged.addHandler(function (sender, args) {
                 updateNavigateButtonsCollection();
@@ -560,7 +620,7 @@
                 updateNavigateButtonsCollection();
             });
 
-            //Flex Grid
+            //Users - Flex Grid
             userGrid = new wijmo.grid.FlexGrid('#userCollectionGrid');
             userGrid.initialize({
                 columns: [
@@ -612,6 +672,8 @@
 
             userGrid.trackChanges = true;
 
+
+
             // Navigation button
             btnFirstPageGrid = document.getElementById('btnMoveToFirstPageGrid');
             btnPreviousPageGrid = document.getElementById('btnMoveToPreviousPageGrid');
@@ -637,6 +699,88 @@
                 userList.moveToLastPage();
                 updateNavigateButtonsCollection();
             });
+
+            //UserForms - Flex Grid
+            userFormsGrid = new wijmo.grid.FlexGrid('#userFormsDiv');
+            userFormsGrid.initialize({
+                columns: [
+
+
+                {
+                    "header": "Form",
+                    "binding": "FormDescription",
+                    "width": "3*",
+                    "align": "center",
+                    "isContentHtml": true
+                },
+                {
+                    "header": "Add",
+                    "binding": "CanAdd",
+                    "width": ".5*",
+                    "align": "center",
+                    "isContentHtml": true
+
+                },
+                {
+                    "header": "Save",
+                    "binding": "CanSave",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": ".5*"
+                },
+                {
+                    "header": "Edit",
+                    "binding": "CanEdit",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": ".5*"
+                },
+                {
+                    "header": "Delete",
+                    "binding": "CanDelete",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": ".5*"
+                },
+                {
+                    "header": "View",
+                    "binding": "CanView",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": ".5*"
+                },
+                 {
+                     "header": "Preview",
+                     "binding": "CanView",
+                     "align": "center",
+                     "allowSorting": true,
+                     "width": ".5*"
+                 },
+                 {
+                     "header": "Preview",
+                     "binding": "CanPreview",
+                     "align": "center",
+                     "allowSorting": true,
+                     "width": ".5*"
+                 },
+                {
+                    "header": "Delete",
+                    "binding": "CanDelete",
+                    "align": "center",
+                    "allowSorting": true,
+                    "width": ".5*"
+                }
+
+                ],
+                autoGenerateColumns: false,
+                itemsSource: userFormList,
+                isReadOnly: true,
+                autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+                allowDragging: wijmo.grid.AllowDragging.None,
+                selectionMode: wijmo.grid.SelectionMode.Row
+            });
+
+            userFormsGrid.trackChanges = true;
 
         });
 
@@ -669,6 +813,7 @@
 
         }
 
-    </script>
-</div>
+</script>
+
+
 @Html.Partial("Footer")

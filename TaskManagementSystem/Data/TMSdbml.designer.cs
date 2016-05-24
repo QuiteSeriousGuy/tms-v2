@@ -39,9 +39,6 @@ namespace TaskManagementSystem.Data
     partial void InsertmstProduct(mstProduct instance);
     partial void UpdatemstProduct(mstProduct instance);
     partial void DeletemstProduct(mstProduct instance);
-    partial void InsertsysForm(sysForm instance);
-    partial void UpdatesysForm(sysForm instance);
-    partial void DeletesysForm(sysForm instance);
     partial void InserttrnTask(trnTask instance);
     partial void UpdatetrnTask(trnTask instance);
     partial void DeletetrnTask(trnTask instance);
@@ -54,6 +51,9 @@ namespace TaskManagementSystem.Data
     partial void InsertmstUserForm(mstUserForm instance);
     partial void UpdatemstUserForm(mstUserForm instance);
     partial void DeletemstUserForm(mstUserForm instance);
+    partial void InsertsysForm(sysForm instance);
+    partial void UpdatesysForm(sysForm instance);
+    partial void DeletesysForm(sysForm instance);
     #endregion
 		
 		public TMSdbmlDataContext() : 
@@ -110,14 +110,6 @@ namespace TaskManagementSystem.Data
 			}
 		}
 		
-		public System.Data.Linq.Table<sysForm> sysForms
-		{
-			get
-			{
-				return this.GetTable<sysForm>();
-			}
-		}
-		
 		public System.Data.Linq.Table<trnTask> trnTasks
 		{
 			get
@@ -147,6 +139,14 @@ namespace TaskManagementSystem.Data
 			get
 			{
 				return this.GetTable<mstUserForm>();
+			}
+		}
+		
+		public System.Data.Linq.Table<sysForm> sysForms
+		{
+			get
+			{
+				return this.GetTable<sysForm>();
 			}
 		}
 	}
@@ -713,116 +713,6 @@ namespace TaskManagementSystem.Data
 					this._IsLocked = value;
 					this.SendPropertyChanged("IsLocked");
 					this.OnIsLockedChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.sysForm")]
-	public partial class sysForm : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _Form;
-		
-		private string _FormDescription;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnFormChanging(string value);
-    partial void OnFormChanged();
-    partial void OnFormDescriptionChanging(string value);
-    partial void OnFormDescriptionChanged();
-    #endregion
-		
-		public sysForm()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Form", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string Form
-		{
-			get
-			{
-				return this._Form;
-			}
-			set
-			{
-				if ((this._Form != value))
-				{
-					this.OnFormChanging(value);
-					this.SendPropertyChanging();
-					this._Form = value;
-					this.SendPropertyChanged("Form");
-					this.OnFormChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormDescription", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string FormDescription
-		{
-			get
-			{
-				return this._FormDescription;
-			}
-			set
-			{
-				if ((this._FormDescription != value))
-				{
-					this.OnFormDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._FormDescription = value;
-					this.SendPropertyChanged("FormDescription");
-					this.OnFormDescriptionChanged();
 				}
 			}
 		}
@@ -1789,6 +1679,8 @@ namespace TaskManagementSystem.Data
 		
 		private EntityRef<mstStaff> _mstStaff;
 		
+		private EntityRef<sysForm> _sysForm;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1820,6 +1712,7 @@ namespace TaskManagementSystem.Data
 		public mstUserForm()
 		{
 			this._mstStaff = default(EntityRef<mstStaff>);
+			this._sysForm = default(EntityRef<sysForm>);
 			OnCreated();
 		}
 		
@@ -1898,6 +1791,10 @@ namespace TaskManagementSystem.Data
 			{
 				if ((this._FormId != value))
 				{
+					if (this._sysForm.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnFormIdChanging(value);
 					this.SendPropertyChanging();
 					this._FormId = value;
@@ -2081,6 +1978,40 @@ namespace TaskManagementSystem.Data
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="sysForm_mstUserForm", Storage="_sysForm", ThisKey="FormId", OtherKey="Id", IsForeignKey=true)]
+		public sysForm sysForm
+		{
+			get
+			{
+				return this._sysForm.Entity;
+			}
+			set
+			{
+				sysForm previousValue = this._sysForm.Entity;
+				if (((previousValue != value) 
+							|| (this._sysForm.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._sysForm.Entity = null;
+						previousValue.mstUserForms.Remove(this);
+					}
+					this._sysForm.Entity = value;
+					if ((value != null))
+					{
+						value.mstUserForms.Add(this);
+						this._FormId = value.Id;
+					}
+					else
+					{
+						this._FormId = default(int);
+					}
+					this.SendPropertyChanged("sysForm");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2099,6 +2030,144 @@ namespace TaskManagementSystem.Data
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.sysForm")]
+	public partial class sysForm : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Form;
+		
+		private string _FormDescription;
+		
+		private EntitySet<mstUserForm> _mstUserForms;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnFormChanging(string value);
+    partial void OnFormChanged();
+    partial void OnFormDescriptionChanging(string value);
+    partial void OnFormDescriptionChanged();
+    #endregion
+		
+		public sysForm()
+		{
+			this._mstUserForms = new EntitySet<mstUserForm>(new Action<mstUserForm>(this.attach_mstUserForms), new Action<mstUserForm>(this.detach_mstUserForms));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Form", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Form
+		{
+			get
+			{
+				return this._Form;
+			}
+			set
+			{
+				if ((this._Form != value))
+				{
+					this.OnFormChanging(value);
+					this.SendPropertyChanging();
+					this._Form = value;
+					this.SendPropertyChanged("Form");
+					this.OnFormChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FormDescription", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string FormDescription
+		{
+			get
+			{
+				return this._FormDescription;
+			}
+			set
+			{
+				if ((this._FormDescription != value))
+				{
+					this.OnFormDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._FormDescription = value;
+					this.SendPropertyChanged("FormDescription");
+					this.OnFormDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="sysForm_mstUserForm", Storage="_mstUserForms", ThisKey="Id", OtherKey="FormId")]
+		public EntitySet<mstUserForm> mstUserForms
+		{
+			get
+			{
+				return this._mstUserForms;
+			}
+			set
+			{
+				this._mstUserForms.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_mstUserForms(mstUserForm entity)
+		{
+			this.SendPropertyChanging();
+			entity.sysForm = this;
+		}
+		
+		private void detach_mstUserForms(mstUserForm entity)
+		{
+			this.SendPropertyChanging();
+			entity.sysForm = null;
 		}
 	}
 }
