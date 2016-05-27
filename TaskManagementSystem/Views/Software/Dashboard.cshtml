@@ -9,6 +9,11 @@
 </head>
 
 <body>
+
+    <!--.preloader-->
+    <div class="preloader"></div>
+    <!--/.preloader-->
+
     @Html.Partial("NavBarD")
     <div class="container">
         <div class="row">
@@ -18,7 +23,7 @@
 
             <!--Product-->
 
-            <div class="col-sm-3 hovereffect wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms" style="margin: 0 auto;">
+            <div class="col-sm-3 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="300ms" style="margin: 0 auto;">
                 <a href="@Url.Action("Product","Software")">
                     <div class="panel panel-blue">
 
@@ -44,7 +49,7 @@
 
             <!--Client-->
 
-            <div class="col-sm-3 hovereffect wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms" style="margin: 0 auto;">
+            <div class="col-sm-3 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms" style="margin: 0 auto;">
                 <a href="@Url.Action("Client","Software")">
                     <div class="panel panel-blue">
                         <div class="panel-heading">
@@ -64,7 +69,7 @@
                 </a>
 
             </div><!--Staff-->
-            <div class="col-sm-3 hovereffect wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="700ms" style="margin: 0 auto;">
+            <div class="col-sm-3 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="700ms" style="margin: 0 auto;">
                 <a href="/Software/Staff">
                     <div class="panel panel-blue">
                         <div class="panel-heading">
@@ -85,7 +90,7 @@
             </div>
 
             <!--User-->
-            <div class="col-sm-3 hovereffect wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="900ms" style="margin: 0 auto;">
+            <div class="col-sm-3 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="900ms" style="margin: 0 auto;">
                 <a href="@Url.Action("Users","Software")">
                     <div class="panel panel-blue">
                         <div class="panel-heading">
@@ -114,7 +119,7 @@
 
 
             <!--Task-->
-            <div class="col-sm-3 hovereffect wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="1100ms" style="margin: 0 auto;">
+            <div class="col-sm-3 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="1100ms" style="margin: 0 auto;">
                 <a href="#">
                     <div class="panel panel-green">
                         <div class="panel-heading">
@@ -147,7 +152,7 @@
             </div>
 
             <!--Calls-->
-            <div class="col-sm-3 hovereffect wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="1300ms" style="margin: 0 auto;">
+            <div class="col-sm-3 wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="1300ms" style="margin: 0 auto;">
                 <a href="#">
                     <div class="panel panel-red">
                         <div class="panel-heading">
@@ -173,7 +178,7 @@
             </div>
         </div>
     </div>
-    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/wow.min.js")
+    @Scripts.Render("~/bundles/bootstrap")
     @Html.Partial("Footer")
 </body>
