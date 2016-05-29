@@ -748,6 +748,18 @@ section {
   opacity: 1;
 }
 
+@media only screen and (max-width: 768px) {
+    .clients-caro {
+        display: none;
+    }
+    .lasthr {
+        display: none;
+    }
+    #twitter {
+        display: none;
+   }
+}
+
 /*************************
 ********Twitter CSS*******
 **************************/
