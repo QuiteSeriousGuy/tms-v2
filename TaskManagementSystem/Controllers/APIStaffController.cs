@@ -72,7 +72,7 @@ namespace TaskManagementSystem.Controllers
 
                 newItem.StaffName = item.StaffName != null ? item.StaffName : "00000";
                 newItem.ContactNumber = item.ContactNumber != null ? item.ContactNumber : "00000";
-                newItem.IsLocked = isLocked != null ? isLocked : false;
+                newItem.IsLocked = isLocked;
 
                 //ALLOW NULL
 
