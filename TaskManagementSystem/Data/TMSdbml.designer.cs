@@ -36,9 +36,6 @@ namespace TaskManagementSystem.Data
     partial void InserttrnTaskSub(trnTaskSub instance);
     partial void UpdatetrnTaskSub(trnTaskSub instance);
     partial void DeletetrnTaskSub(trnTaskSub instance);
-    partial void InsertmstProduct(mstProduct instance);
-    partial void UpdatemstProduct(mstProduct instance);
-    partial void DeletemstProduct(mstProduct instance);
     partial void InserttrnTask(trnTask instance);
     partial void UpdatetrnTask(trnTask instance);
     partial void DeletetrnTask(trnTask instance);
@@ -54,6 +51,9 @@ namespace TaskManagementSystem.Data
     partial void InsertsysForm(sysForm instance);
     partial void UpdatesysForm(sysForm instance);
     partial void DeletesysForm(sysForm instance);
+    partial void InsertmstProduct(mstProduct instance);
+    partial void UpdatemstProduct(mstProduct instance);
+    partial void DeletemstProduct(mstProduct instance);
     #endregion
 		
 		public TMSdbmlDataContext() : 
@@ -102,14 +102,6 @@ namespace TaskManagementSystem.Data
 			}
 		}
 		
-		public System.Data.Linq.Table<mstProduct> mstProducts
-		{
-			get
-			{
-				return this.GetTable<mstProduct>();
-			}
-		}
-		
 		public System.Data.Linq.Table<trnTask> trnTasks
 		{
 			get
@@ -147,6 +139,14 @@ namespace TaskManagementSystem.Data
 			get
 			{
 				return this.GetTable<sysForm>();
+			}
+		}
+		
+		public System.Data.Linq.Table<mstProduct> mstProducts
+		{
+			get
+			{
+				return this.GetTable<mstProduct>();
 			}
 		}
 	}
@@ -604,140 +604,6 @@ namespace TaskManagementSystem.Data
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.mstProduct")]
-	public partial class mstProduct : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _ProductCode;
-		
-		private string _ProductDescription;
-		
-		private bool _IsLocked;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnProductCodeChanging(string value);
-    partial void OnProductCodeChanged();
-    partial void OnProductDescriptionChanging(string value);
-    partial void OnProductDescriptionChanged();
-    partial void OnIsLockedChanging(bool value);
-    partial void OnIsLockedChanged();
-    #endregion
-		
-		public mstProduct()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductCode", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ProductCode
-		{
-			get
-			{
-				return this._ProductCode;
-			}
-			set
-			{
-				if ((this._ProductCode != value))
-				{
-					this.OnProductCodeChanging(value);
-					this.SendPropertyChanging();
-					this._ProductCode = value;
-					this.SendPropertyChanged("ProductCode");
-					this.OnProductCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductDescription", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ProductDescription
-		{
-			get
-			{
-				return this._ProductDescription;
-			}
-			set
-			{
-				if ((this._ProductDescription != value))
-				{
-					this.OnProductDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._ProductDescription = value;
-					this.SendPropertyChanged("ProductDescription");
-					this.OnProductDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLocked", DbType="Bit NOT NULL")]
-		public bool IsLocked
-		{
-			get
-			{
-				return this._IsLocked;
-			}
-			set
-			{
-				if ((this._IsLocked != value))
-				{
-					this.OnIsLockedChanging(value);
-					this.SendPropertyChanging();
-					this._IsLocked = value;
-					this.SendPropertyChanged("IsLocked");
-					this.OnIsLockedChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.trnTask")]
 	public partial class trnTask : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -781,6 +647,8 @@ namespace TaskManagementSystem.Data
 		private bool _IsLocked;
 		
 		private EntitySet<trnTaskSub> _trnTaskSubs;
+		
+		private EntityRef<mstProduct> _mstProduct;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -827,6 +695,7 @@ namespace TaskManagementSystem.Data
 		public trnTask()
 		{
 			this._trnTaskSubs = new EntitySet<trnTaskSub>(new Action<trnTaskSub>(this.attach_trnTaskSubs), new Action<trnTaskSub>(this.detach_trnTaskSubs));
+			this._mstProduct = default(EntityRef<mstProduct>);
 			OnCreated();
 		}
 		
@@ -1001,6 +870,10 @@ namespace TaskManagementSystem.Data
 			{
 				if ((this._ProductId != value))
 				{
+					if (this._mstProduct.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnProductIdChanging(value);
 					this.SendPropertyChanging();
 					this._ProductId = value;
@@ -1200,6 +1073,40 @@ namespace TaskManagementSystem.Data
 			set
 			{
 				this._trnTaskSubs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="mstProduct_trnTask", Storage="_mstProduct", ThisKey="ProductId", OtherKey="Id", IsForeignKey=true)]
+		public mstProduct mstProduct
+		{
+			get
+			{
+				return this._mstProduct.Entity;
+			}
+			set
+			{
+				mstProduct previousValue = this._mstProduct.Entity;
+				if (((previousValue != value) 
+							|| (this._mstProduct.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._mstProduct.Entity = null;
+						previousValue.trnTasks.Remove(this);
+					}
+					this._mstProduct.Entity = value;
+					if ((value != null))
+					{
+						value.trnTasks.Add(this);
+						this._ProductId = value.Id;
+					}
+					else
+					{
+						this._ProductId = default(int);
+					}
+					this.SendPropertyChanged("mstProduct");
+				}
 			}
 		}
 		
@@ -2168,6 +2075,168 @@ namespace TaskManagementSystem.Data
 		{
 			this.SendPropertyChanging();
 			entity.sysForm = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.mstProduct")]
+	public partial class mstProduct : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _ProductCode;
+		
+		private string _ProductDescription;
+		
+		private bool _IsLocked;
+		
+		private EntitySet<trnTask> _trnTasks;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnProductCodeChanging(string value);
+    partial void OnProductCodeChanged();
+    partial void OnProductDescriptionChanging(string value);
+    partial void OnProductDescriptionChanged();
+    partial void OnIsLockedChanging(bool value);
+    partial void OnIsLockedChanged();
+    #endregion
+		
+		public mstProduct()
+		{
+			this._trnTasks = new EntitySet<trnTask>(new Action<trnTask>(this.attach_trnTasks), new Action<trnTask>(this.detach_trnTasks));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductCode", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ProductCode
+		{
+			get
+			{
+				return this._ProductCode;
+			}
+			set
+			{
+				if ((this._ProductCode != value))
+				{
+					this.OnProductCodeChanging(value);
+					this.SendPropertyChanging();
+					this._ProductCode = value;
+					this.SendPropertyChanged("ProductCode");
+					this.OnProductCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductDescription", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ProductDescription
+		{
+			get
+			{
+				return this._ProductDescription;
+			}
+			set
+			{
+				if ((this._ProductDescription != value))
+				{
+					this.OnProductDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._ProductDescription = value;
+					this.SendPropertyChanged("ProductDescription");
+					this.OnProductDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLocked", DbType="Bit NOT NULL")]
+		public bool IsLocked
+		{
+			get
+			{
+				return this._IsLocked;
+			}
+			set
+			{
+				if ((this._IsLocked != value))
+				{
+					this.OnIsLockedChanging(value);
+					this.SendPropertyChanging();
+					this._IsLocked = value;
+					this.SendPropertyChanged("IsLocked");
+					this.OnIsLockedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="mstProduct_trnTask", Storage="_trnTasks", ThisKey="Id", OtherKey="ProductId")]
+		public EntitySet<trnTask> trnTasks
+		{
+			get
+			{
+				return this._trnTasks;
+			}
+			set
+			{
+				this._trnTasks.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_trnTasks(trnTask entity)
+		{
+			this.SendPropertyChanging();
+			entity.mstProduct = this;
+		}
+		
+		private void detach_trnTasks(trnTask entity)
+		{
+			this.SendPropertyChanging();
+			entity.mstProduct = null;
 		}
 	}
 }

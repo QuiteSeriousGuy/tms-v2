@@ -19,6 +19,7 @@ namespace TaskManagementSystem.Models
         public Int32 AnsweredBy  { get; set; }
         public Int32 StaffId { get; set; }
         public Int32 ProductId { get; set; }
+        public String ProductCode { get; set; }
         public String Remarks { get; set; }
         public String Status { get; set; }
         public String ProblemType { get; set; }

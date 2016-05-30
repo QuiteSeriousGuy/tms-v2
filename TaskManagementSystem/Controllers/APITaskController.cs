@@ -137,6 +137,7 @@ namespace TaskManagementSystem.Controllers
                                AnsweredBy = d.AnsweredBy,
                                StaffId = d.StaffId,
                                ProductId = d.ProductId,
+                               ProductCode = d.mstProduct.ProductCode,
                                Remarks = d.Remarks,
                                Status = d.Status,
                                ProblemType = d.ProblemType,
