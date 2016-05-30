@@ -84,6 +84,29 @@ h6 {
   /* Temp CSS */
   /* Temp CSS End */
 }
+
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999999;
+  background: url('../images/preloader.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+
+.preloader > i {
+  position: absolute;
+  font-size: 36px;
+  line-height: 36px;
+  top: 50%;
+  left: 50%;
+  height: 36px;
+  width: 36px;
+  margin-top: -15px;
+  margin-left: -15px;
+  display: inline-block;
+}
 .st-highlight {
   color: #4ecdc4;
 }
@@ -158,9 +181,7 @@ h6 {
 .navbar-default .navbar-nav > li > a:focus {
   color: #950f10;
 }
-.hovereffect:hover {
-    opacity: 0.75;
-}
+
 @-webkit-keyframes process {
   0% {
     -webkit-transform: scaleX(0);
