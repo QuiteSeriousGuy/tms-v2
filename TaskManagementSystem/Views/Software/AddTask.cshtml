@@ -47,15 +47,36 @@
                 <div class="form-group">
                     <label for="" class="col-sm-3 control-label">Product</label>
                     <div class="col-sm-5">
-                        <div id="productDiv"></div>
+                        <div style="width:330px;" id="productDiv"></div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="barCode" class="col-sm-3 control-label">Caller</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control requiredField" id="password">
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label for="barCode" class="col-sm-3 control-label">Task No</label>
+                    <div class="col-sm-6">
+                        <textarea type="" class="form-control requiredField" id="password"></textarea>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-6">
+                <!--Staff-->
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">Answered by</label>
+                    <div class="col-sm-5">
+                        <div style="width:330px;" id="cboStaffNameDiv"></div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <!--Staff Name-->
                     <label for="sel1" class="col-sm-3 control-label">Staff Name</label>
                     <div class="col-sm-9">
-                        
+
                         <input type="hidden" class="form-control requiredField" id="staffId">
                     </div>
                 </div>
@@ -68,7 +89,6 @@
                 </div>
             </div>
         </div>
-        
     </form>
 
 </div>
@@ -78,15 +98,16 @@
 <script type="text/javascript">
 
     var clientList;
+    var productList;
     var cboBoxClientName;
     var cboClientNameSelectedValue = "";
 
     // ==================
-    // Get StaffName Data
+    // Get Client Data
     // ==================
 
     function getClientName() {
-        var clientList = new wijmo.collections.ObservableArray();
+        var productList = new wijmo.collections.ObservableArray();
         $.ajax({
             url: '/api/client/list',
             cache: false,
@@ -97,42 +118,150 @@
                 var lastUser = 0;
                 if (results.length > 0) {
                     for (i = 0; i < results.length; i++) {
-                        clientList.push({
+                        productList.push({
                             Id: results[i]["Id"],
                             CompanyName: results[i]["CompanyName"]
                         });
                     }
-                    cboStaffName(clientList);
+                    cboClientName(productList);
                 } else {
-                    cboStaffName(clientList);
+                    cboClientName(productList);
                 }
             }
         });
 
-        return clientList;
+        return productList;
+    }
+
+    // =============================
+    // Combo Box Wijmo - Client
+    // =============================
+
+    function cboClientName(productList) {
+        var clientCollection = new wijmo.collections.CollectionView(productList);
+        var productList = new Array();
+        for (var i = 0; i < clientCollection.items.length; i++) {
+
+            productList.push(clientCollection.items[i].CompanyName);
+        }
+
+        cboBoxClientName.dispose();
+        cboBoxClientName = new wijmo.input.ComboBox('#clientDiv', {
+            placeholder: "Select Client",
+            itemsSource: productList
+        });
+
+        cboBoxClientName.onSelectedIndexChanged = function () {
+        }
+    }
+
+    // ==================
+    // Get Product Data
+    // ==================
+
+    function getProduct() {
+        var productList = new wijmo.collections.ObservableArray();
+        $.ajax({
+            url: '/api/product/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (results) {
+                var lastUser = 0;
+                if (results.length > 0) {
+                    for (i = 0; i < results.length; i++) {
+                        productList.push({
+                            Id: results[i]["Id"],
+                            ProductCode: results[i]["ProductCode"],
+                            ProductDescription: results[i]["ProductDescription"]
+                        });
+                    }
+                    cboProductName(productList);
+                } else {
+                    cboProductName(productList);
+                }
+            }
+        });
+
+        return productList;
+    }
+
+    // =============================
+    // Combo Box Wijmo - Product 
+    // =============================
+
+    function cboProductName(productList) {
+        var productCollection = new wijmo.collections.CollectionView(productList);
+        var productList = new Array();
+        for (var i = 0; i < productCollection.items.length; i++) {
+
+            productList.push(productCollection.items[i].ProductDescription);
+        }
+
+        cboBoxProductName.dispose();
+        cboBoxProductName = new wijmo.input.ComboBox('#productDiv', {
+            placeholder: "Select Product",
+            itemsSource: productList,
+            isEditable: false,
+        });
+
+        cboBoxProductName.onSelectedIndexChanged = function () {
+        }
+    }
+
+    // ==================
+    // Get StaffName Data
+    // ==================
+
+    function getStaffName() {
+        var staffList = new wijmo.collections.ObservableArray();
+        $.ajax({
+            url: '/api/staff/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (results) {
+                var lastUser = 0;
+                if (results.length > 0) {
+                    for (i = 0; i < results.length; i++) {
+                        staffList.push({
+                            Id: results[i]["Id"],
+                            StaffName: results[i]["StaffName"]
+                        });
+                    }
+                    cboStaffName(staffList);
+                } else {
+                    cboStaffName(staffList);
+                }
+            }
+        });
+
+        return staffList;
     }
 
     // =============================
     // Combo Box Wijmo - Staff Name
     // =============================
 
-    function cboStaffName(clientList) {
-        var staffCollection = new wijmo.collections.CollectionView(clientList);
-        var clientList = new Array();
+    function cboStaffName(staffList) {
+        var staffCollection = new wijmo.collections.CollectionView(staffList);
+        var staffList = new Array();
         for (var i = 0; i < staffCollection.items.length; i++) {
 
-            clientList.push(staffCollection.items[i].CompanyName);
+            staffList.push(staffCollection.items[i].StaffName);
         }
 
-        cboBoxClientName.dispose();
-        cboBoxClientName = new wijmo.input.ComboBox('#clientDiv', {
-            placeholder: "Select Client",
-            itemsSource: clientList
+        cboBoxStaffName.dispose();
+        cboBoxStaffName = new wijmo.input.ComboBox('#cboStaffNameDiv', {
+            placeholder: "Select Staff",
+            itemsSource: staffList,
+            isEditable: false
         });
 
-        cboBoxClientName.onSelectedIndexChanged = function () {
+        cboBoxStaffName.onSelectedIndexChanged = function () {
             document.getElementById("staffId").value = staffCollection.items[this.selectedIndex].Id
-            //document.getElementById("staffId").value = cboStaffName.selectedValue
         }
     }
 
@@ -141,7 +270,11 @@
     // ============
     $(document).ready(function () {
         cboBoxClientName = new wijmo.input.ComboBox('#clientDiv');
+        cboBoxProductName = new wijmo.input.ComboBox('#productDiv');
+        cboBoxStaffName = new wijmo.input.ComboBox('#cboStaffNameDiv');
         getClientName();
+        getProduct();
+        getStaffName();
     });
 </script>
 
