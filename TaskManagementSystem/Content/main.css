@@ -188,8 +188,8 @@ section {
 
 #home-slider .caption {
   position: absolute;
-  top: 50%;
   margin-top: -250px;
+  top: 50%;
   /*margin-left: 200px;
   margin-right: 200px;*/
   left: 0;
@@ -206,6 +206,13 @@ section {
   font-size: 60px;
   font-weight: 700;
   margin-bottom: 30px;
+}
+
+
+@media  screen and (max-width: 1920px) {
+    /*#home-slider .caption {
+        top: 40%;
+    }*/
 }
 
 .prodcar {
@@ -388,6 +395,25 @@ section {
   margin-top: 35px;
 }
 
+.techpic, .techpic1 {
+    height:45%;
+    width:45%;
+}
+
+.techpic1 {
+    padding-bottom: 5%;
+    padding-right: 1.5%;
+}
+
+.techpic {
+    padding-bottom: 5%;
+    padding-left: 1.5%;
+}
+
+.hoveropa:hover {
+    opacity: 0.9;
+}
+
 /*************************
 ********About CSS*******
 **************************/
@@ -408,6 +434,23 @@ section {
 
 #about-us h1 {
   margin-bottom: 30px;
+}
+
+.about-info {
+    padding-bottom: 5%;
+}
+
+.aboutpic1 {
+    height: 70%;
+    width: 70%;
+    padding-bottom:5%;
+    padding-top:7%;
+}
+
+.aboutpic2 {
+    height: 40%;
+    width: 40%;
+    padding-bottom:7%;
 }
 
 .progress{
@@ -746,6 +789,12 @@ section {
 }
 .clients-carousel li:hover {
   opacity: 1;
+}
+
+.clientsname {
+    text-align:center;
+    font-size:13px;
+    line-height:15px;
 }
 
 @media only screen and (max-width: 768px) {

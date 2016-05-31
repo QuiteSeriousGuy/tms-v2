@@ -85,6 +85,10 @@ h6 {
   /* Temp CSS End */
 }
 
+.widgetopa:hover {
+    opacity:0.9;
+}
+
 .preloader {
   position: fixed;
   top: 0;
