@@ -13,11 +13,13 @@ namespace TaskManagementSystem.Models
         public String TaskNo { get; set; }
         public String TaskDate { get; set; }
         public Int32 ClientId { get; set; }
+        public String CompanyName { get; set; }
         public String Caller { get; set; }
         public String Concern { get; set; }
         public Int32 AnsweredBy  { get; set; }
         public Int32 StaffId { get; set; }
         public Int32 ProductId { get; set; }
+        public String ProductCode { get; set; }
         public String Remarks { get; set; }
         public String Status { get; set; }
         public String ProblemType { get; set; }

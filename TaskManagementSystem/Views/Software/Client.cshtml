@@ -163,7 +163,7 @@
         // =============================
 
         function getClientMasterList() {
-            var clientList = new wijmo.collections.ObservableArray();
+           var clientList = new wijmo.collections.ObservableArray();
             $("#loadingModal").modal("show");
             $.ajax({
                 url: '/api/client/list',

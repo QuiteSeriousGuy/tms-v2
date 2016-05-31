@@ -23,14 +23,6 @@
       <Association Name="trnTask_trnTaskSub" Member="trnTask" ThisKey="TaskId" OtherKey="Id" Type="trnTask" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.mstProduct" Member="mstProducts">
-    <Type Name="mstProduct">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ProductCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="ProductDescription" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.trnTask" Member="trnTasks">
     <Type Name="trnTask">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -52,6 +44,7 @@
       <Column Name="VerifiedBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="trnTask_trnTaskSub" Member="trnTaskSubs" ThisKey="Id" OtherKey="TaskId" Type="trnTaskSub" />
+      <Association Name="mstProduct_trnTask" Member="mstProduct" ThisKey="ProductId" OtherKey="Id" Type="mstProduct" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.mstUser" Member="mstUsers">
@@ -98,6 +91,15 @@
       <Column Name="Form" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="FormDescription" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Association Name="sysForm_mstUserForm" Member="mstUserForms" ThisKey="Id" OtherKey="FormId" Type="mstUserForm" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mstProduct" Member="mstProducts">
+    <Type Name="mstProduct">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ProductDescription" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="IsLocked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="mstProduct_trnTask" Member="trnTasks" ThisKey="Id" OtherKey="ProductId" Type="trnTask" />
     </Type>
   </Table>
 </Database>

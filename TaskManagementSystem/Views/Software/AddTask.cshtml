@@ -1,0 +1,148 @@
+﻿
+@{
+    ViewBag.Title = "AddTask";
+}
+
+<head>
+    @Styles.Render("~/Content/styleD.css")
+</head>
+@Html.Partial("NavBar")
+
+<div class="container">
+    <section class="content-header">
+        <h2>
+            Task Detail
+        </h2>
+        <ol class="breadcrumb">
+            <li><a href="../Software/Dashboard"><i class="fa fa-table"></i> Home</a></li>
+            <li> <a href="../Software/Task">Task</a></li>
+            <li class="active">Add Task</li>
+        </ol>
+    </section>
+
+    <form class="form-horizontal" id="add-form">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="barCode" class="col-sm-3 control-label">Task Date</label>
+                    <div class="col-sm-4">
+                        <input type="hidden" class="form-control requiredField" id="userId">
+                        <input type="text" class="form-control requiredField" id="userName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="barCode" class="col-sm-3 control-label">Task No</label>
+                    <div class="col-sm-4">
+                        <input type="password" class="form-control requiredField" id="password">
+                    </div>
+                </div>
+                <!--Client-->
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">Client</label>
+                    <div class="col-sm-5">
+                        <div id="clientDiv"></div>
+                    </div>
+                </div>
+                <!--Product-->
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">Product</label>
+                    <div class="col-sm-5">
+                        <div id="productDiv"></div>
+                    </div>
+                </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <!--Staff Name-->
+                    <label for="sel1" class="col-sm-3 control-label">Staff Name</label>
+                    <div class="col-sm-9">
+                        
+                        <input type="hidden" class="form-control requiredField" id="staffId">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!--Designation-->
+                    <label for="designation" class="col-sm-4 control-label">Designation</label>
+                    <div class="col-sm-8">
+                        <div class="" id="cboDesignationDiv"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/software-js")
+<script type="text/javascript">
+
+    var clientList;
+    var cboBoxClientName;
+    var cboClientNameSelectedValue = "";
+
+    // ==================
+    // Get StaffName Data
+    // ==================
+
+    function getClientName() {
+        var clientList = new wijmo.collections.ObservableArray();
+        $.ajax({
+            url: '/api/client/list',
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (results) {
+                var lastUser = 0;
+                if (results.length > 0) {
+                    for (i = 0; i < results.length; i++) {
+                        clientList.push({
+                            Id: results[i]["Id"],
+                            CompanyName: results[i]["CompanyName"]
+                        });
+                    }
+                    cboStaffName(clientList);
+                } else {
+                    cboStaffName(clientList);
+                }
+            }
+        });
+
+        return clientList;
+    }
+
+    // =============================
+    // Combo Box Wijmo - Staff Name
+    // =============================
+
+    function cboStaffName(clientList) {
+        var staffCollection = new wijmo.collections.CollectionView(clientList);
+        var clientList = new Array();
+        for (var i = 0; i < staffCollection.items.length; i++) {
+
+            clientList.push(staffCollection.items[i].CompanyName);
+        }
+
+        cboBoxClientName.dispose();
+        cboBoxClientName = new wijmo.input.ComboBox('#clientDiv', {
+            placeholder: "Select Client",
+            itemsSource: clientList
+        });
+
+        cboBoxClientName.onSelectedIndexChanged = function () {
+            document.getElementById("staffId").value = staffCollection.items[this.selectedIndex].Id
+            //document.getElementById("staffId").value = cboStaffName.selectedValue
+        }
+    }
+
+    // ============
+    // On Page Load
+    // ============
+    $(document).ready(function () {
+        cboBoxClientName = new wijmo.input.ComboBox('#clientDiv');
+        getClientName();
+    });
+</script>
+
+@Html.Partial("Footer")
