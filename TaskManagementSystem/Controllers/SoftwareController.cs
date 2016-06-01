@@ -51,6 +51,12 @@ namespace TaskManagementSystem.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult Calls()
+        {
+            return View();
+        }
+
     }
 
   
