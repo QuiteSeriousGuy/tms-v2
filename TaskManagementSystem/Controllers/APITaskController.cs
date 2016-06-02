@@ -62,7 +62,7 @@ namespace TaskManagementSystem.Controllers
                            TaskNo = d.TaskNo,
                        };
 
-            return task.FirstOrDefault();
+            return (Models.MstTask)task.FirstOrDefault();
 
         }
 

@@ -118,7 +118,7 @@
         </form>
     </div>
 
-    <div class="container">
+    <div class="">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#menu1">Action</a></li>
             <li><a data-toggle="tab" href="#menu2">Solution</a></li>
@@ -129,8 +129,36 @@
                 <div id="actionDiv"></div>
             </div>
             <div id="menu2" class="tab-pane fade">
-                <h3>Menu 2</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                <form class="form-horizontal" id="add-form">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="barCode" class="control-label">Solution</label>
+                                <div class="col-sm-12">
+                                    <textarea type="" class="form-control requiredField" id=""></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="doneDateDiv" class="col-sm-2 control-label">Done Date</label>
+                                <div class="col-sm-6">
+                                    <div  id="doneDateDiv"></div>
+                                </div>
+                           </div>
+                            <div class="form-group">
+                                <label for="doneDateDiv" class="col-sm-2 control-label">Done Time</label>
+                                <div class="col-sm-6">
+                                    <div id="doneTimeDiv"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="doneDateDiv" class="col-sm-2 control-label">Verified by</label>
+                                <div class="col-sm-6">
+                                    <div id="verifiedDiv"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -149,6 +177,10 @@
     var cboAssignedStaffName;
     var problemTypeList;
     var taskList;
+    var inputDate;
+    var dateId;
+    var taskNumber;
+    var inputTime;
 
     // ==================
     // Get Client Data
@@ -281,10 +313,12 @@
                     }
                     createCboStaff(staffList);
                     createCboStaffAssignedName(staffList);
+                    createCboStaffVerified(staffList);
 
                 } else {
                     createCboStaff(staffList);
                     createCboStaffAssignedName(staffList);
+                    createCboStaffVerified(staffList);
                 }
             }
         });
@@ -414,115 +448,160 @@
             placeholder: 'Select Status',
             isEditable: false
         });
-
     }
 
-    ////Client list
-
-    //function getClientMasterList() {
-    //    clientList = new wijmo.collections.ObservableArray();
-    //    $.ajax({
-    //        url: '/api/client/list',
-    //        cache: false,
-    //        type: 'GET',
-    //        contentType: 'application/json; charset=utf-8',
-    //        data: {},
-    //        success: function (results) {
-    //            var lastClient = 0;
-    //            if (results.length > 0) {
-    //                for (i = 0; i < results.length; i++) {
-    //                    clientList.push({
-    //                        EditId: "<button class='btn btn-primary btn-xs btn-block' id='clientEditButton' onClick='cmdClientEditButton_OnClick()'><i class='fa fa-pencil'></i> Edit</button>",
-    //                        DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='clientDeleteButton' onclick='cmdClientDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
-    //                        Id: results[i]["Id"],
-    //                        CompanyName: results[i]["CompanyName"],
-    //                        CompanyAddress: results[i]["CompanyAddress"],
-    //                        ContactNumber: results[i]["ContactNumber"],
-    //                        IsLocked: results[i]["IsLocked"]
-
-    //                    });}
-    //                }
-    //            }
-    //        })
-    //    }
-            
-
-  
-                // =======================
-                // Get Task Data by date
-                // =======================
-
-                function getTaskList() {
-                    var taskList = new wijmo.collections.ObservableArray();
-                    $.ajax({
-                        url: '/api/task/listByDate/' + "2016-6-1",
-                        cache: false,
-                        type: 'GET',
-                        contentType: 'application/json; charset=utf-8',
-                        //data: data,
-                        success: function (results) {
-                            var lastUser = 0;
-                            if (results.length > 0) {
-                                for (i = 0; i < results.length; i++) {
-                                    var name = "";
-                                    for (x = 0; x < clientList.length; x++) {
-                                        if (clientList[x].Id == results[i]["ClientId"]) {
-                                            name = clientList[x].CompanyName;
-                                            break;
-                                        }
-                                    }
-                                    taskList.push({
-                                        EditId: "<button class='btn btn-primary btn-xs btn-block' id='userEditButton' onClick='cmdUserEditButton_OnClick()'><i class='fa fa-bars'></i> View</button>",
-                                        DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='userDeleteButton' onclick='cmdUserDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
-                                        Id: results[i]["Id"],
-                                        TaskNo: results[i]["TaskNo"],
-                                        TaskDate: results[i]["TaskDate"],
-                                        ClientId: name,
-                                        Status: results[i]["Status"],
-                                        ProductId: results[i]["ProductId"],
-                                        ProductCode: results[i]["ProductCode"],
-                                        ProblemType: results[i]["ProblemType"]
-
-                                    });
-                                }
+    // =======================
+    // Get Task Data by date
+    // =======================
+    function getTaskList() {
+        var taskList = new wijmo.collections.ObservableArray();
+        $.ajax({
+            url: '/api/task/listByDate/' + "2016-6-1",
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            //data: data,
+            success: function (results) {
+                var lastUser = 0;
+                if (results.length > 0) {
+                    for (i = 0; i < results.length; i++) {
+                        var name = "";
+                        for (x = 0; x < clientList.length; x++) {
+                            if (clientList[x].Id == results[i]["ClientId"]) {
+                                name = clientList[x].CompanyName;
+                                break;
                             }
                         }
-                    });
+                        taskList.push({
+                            EditId: "<button class='btn btn-primary btn-xs btn-block' id='userEditButton' onClick='cmdUserEditButton_OnClick()'><i class='fa fa-bars'></i> View</button>",
+                            DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='userDeleteButton' onclick='cmdUserDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
+                            Id: results[i]["Id"],
+                            TaskNo: results[i]["TaskNo"],
+                            TaskDate: results[i]["TaskDate"],
+                            ClientId: name,
+                            Status: results[i]["Status"],
+                            ProductId: results[i]["ProductId"],
+                            ProductCode: results[i]["ProductCode"],
+                            ProblemType: results[i]["ProblemType"]
 
-                    return taskList;
+                        });
+                    }
                 }
-            
+            }
+        });
+
+        return taskList;
+    }
+
+    //Format Date MM-dd-yyy
+    function getDate() {
+        var year = inputDate.value.getFullYear();
+        var month = (1 + inputDate.value.getMonth()).toString();
+        month = month.length > 1 ? month : '0' + month;
+        var day = inputDate.value.getDate().toString();
+        day = day.length > 1 ? day : '0' + day;
+        dateId = year + '-' + month + '-' + day;
+
+        //document.getElementById("taskNoDiv").value = dateId;
+    }
+
+    //Task No. Generator
+    function generateTaskNo() {
+        $.ajax({
+            url: '/api/task/listByOrder/' + dateId,
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            data: {},
+            success: function (results) {
+                if (results == null) {
+                    document.getElementById("taskNoDiv").value = dateId + '-' + '001';
+                } else {
+                    taskNumber = results.TaskNo;
+                    var t = taskNumber.split("-");
+                    var f = parseInt(t[3], 10);
+                    var p = f + 1;
+
+                    if (f < 10) {
+                        document.getElementById("taskNoDiv").value = dateId + '-' + '00' + p;
+                    } else if (f=>10) {
+                        document.getElementById("taskNoDiv").value = dateId + '-' + '0' + p;
+                    }
+                }
+            }
+        });
+    }
+
+    // =============================
+    // Combo Box Wijmo - Staff Assigned
+    // =============================
+
+    function createCboStaffVerified(staffList) {
+        var staffCollection = new wijmo.collections.CollectionView(staffList);
+        var astaffList = new Array();
+        for (var i = 0; i < staffCollection.items.length; i++) {
+
+            astaffList.push(staffCollection.items[i].StaffName);
+        }
+
+        cboStaffVerified.dispose();
+        cboStaffVerified = new wijmo.input.ComboBox('#verifiedDiv', {
+            placeholder: "Select Staff",
+            itemsSource: astaffList,
+            isEditable: false
+        });
+
+        cboStaffName.onSelectedIndexChanged = function () {
+            //document.getElementById("staffId").value = staffCollection.items[this.selectedIndex].Id
+        }
+    }
    
                 // ============
                 // On Page Load
                 // ============
                 $(document).ready(function () {
 
+                    //TASK DATE
                     theDate = new Date();
                     // create InputDate control
                     inputDate = new wijmo.input.InputDate('#theInputDate', {
                         min: new Date(2014, 01, 01),
-                        format: 'M/dd/yyyy',
+                        format: 'MM/dd/yyyy',
                         value: theDate,
-                        disabled: true,
-                        onValueChanged: function () {
-                            dateId = [this.value.getMonth() + 1, this.value.getDate(), this.value.getFullYear()].join('-');
-                        }
+                        disabled: true
                     });
-                    //inputDate.valueChanged.addHandler(valueChanged);
 
-                    dateId = [inputDate.value.getFullYear(), inputDate.value.getMonth() + 1, inputDate.value.getDate() ].join('-');
+                    //DONE DATE
+                    doneDate = new Date();
+                    // create InputDate control
+                    inputDate = new wijmo.input.InputDate('#doneDateDiv', {
+                        min: new Date(2014, 01, 01),
+                        format: 'MM/dd/yyyy',
+                        value: doneDate
+                    });
 
-                    document.getElementById("taskNoDiv").value = dateId;
-
+                    // DONE TIME
+                    doneTime = new Date();
+                    inputTime = new wijmo.input.InputTime('#doneTimeDiv', {
+                    min: new Date(2014, 8, 1, 9, 0),
+                    max: new Date(2014, 8, 1, 17, 0),
+                    step: 15,
+                    format: 'h:mm tt',
+                    value: doneTime
+                    });
                     ////////////////
                     //////////
                     ////////////////
+                    
                     cboBoxClientName = new wijmo.input.ComboBox('#clientDiv');
                     cboBoxProductName = new wijmo.input.ComboBox('#productDiv');
                     cboStaffName = new wijmo.input.ComboBox('#cboStaffNameDiv');
                     cboAssignedStaffName = new wijmo.input.ComboBox('#cboStaffAssignedDiv');
+                    cboStaffVerified = new wijmo.input.ComboBox('#verifiedDiv');
        
+                    getDate();
+                    generateTaskNo();
+
                     getClientName();
                     getProduct();
                     getStaffName();
