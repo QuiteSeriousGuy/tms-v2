@@ -234,12 +234,13 @@
         <div class="container">
             <div class="row">
                 <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <span id="POS"></span>
                     <h2><span class="fa fa-desktop"></span> Our Products</h2>
                     <p><strong>Innosoft Solutions</strong> has three growing products: The <strong>POS</strong>, <strong>FMIS</strong>, and <strong>HRIS</strong>.</p>
                 </div>
             </div>
             <div class="row">
-                <div id="POS" class="col-sm-6">
+                <div class="col-sm-6">
                     <div class="about-info wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="300ms">
                         <h2><span class="fa fa-shopping-cart"></span> POS (Point-of-sales)</h2>
                         <img class="prodpic" src="~/images/products/IPOSdesk.png" alt="">
@@ -261,12 +262,12 @@
                             <li>Stock In / Out Forms that records movement of Inventory.</li>
                             <li>Disbursement, Remittance / Cash Breakdown Feature</li>
                             <li>Debit Memo and Credit Memo allow adjustments on Accounts Receivable.</li>
-                            <li>Real-time Reports on Sales, Collection, Accounts Receivables, Inventory, Disbursements and Basic Accounting with Export to Excel / CSV text files feature.</li>
+                            <li><span id="FMIS"></span>Real-time Reports on Sales, Collection, Accounts Receivables, Inventory, Disbursements and Basic Accounting with Export to Excel / CSV text files feature.</li>
                         </ul>
                     </div>
                     <hr class="about-info wow fadeInUp" />
                 </div>
-                <div id="FMIS" class="col-sm-6">
+                <div class="col-sm-6">
                     <div class="about-info wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="300ms">
                         <h2><span class="fa fa-bar-chart"></span> FMIS (Accounting)</h2>
                         <img class="prodpic" src="~/images/products/FMISdesk.png" alt="">
@@ -284,12 +285,12 @@
                             <li>Multiple Units of Measures with Unit Conversions. The user will have an ability to purchase an item using a unit that is different from the base inventory unit.</li>
                             <li>Real-time Financial Statements with subsidiary ledgers. On the fly, the user can print and view Financial Statements with drill down to transactions.</li>
                             <li>Simplified Bank Reconciliation. Automated booked cash value versus bank balances.</li>
-                            <li>Item Components feature can be used in monitoring items that needs to be assembled before it can be sold.</li>
+                            <li><span id="HRIS"></span>Item Components feature can be used in monitoring items that needs to be assembled before it can be sold.</li>
                         </ul>
                     </div>
                     <hr class="about-info wow fadeInUp" />
                 </div>
-                <div id="HRIS" class="col-sm-6">
+                <div class="col-sm-6">
                     <div class="about-info wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="300ms">
                         <h2><span class="fa fa-clock-o"></span> HRIS (Payroll)</h2>
                         <img class="prodpic" src="~/images/products/IHRISdesk.png" alt="">
@@ -426,64 +427,67 @@
     </section><!--/#twitter-->
 
     <section id="contact">
-        <div id="google-map" class="wow fadeIn" data-latitude="10.315477" data-longitude="123.885602" data-wow-duration="1000ms" data-wow-delay="400ms"></div>
-        <div id="contact-us" class="parallax">
-            <div class="container">
-                <div class="row">
-                    <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <h2><span class="fa fa-phone"></span> Contact Us</h2>
-                        <p>Get in Touch with Us!</p>
-                    </div>
-                </div>
-                <div class="contact-form wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+        <div class="map-wrap">
+            <div class="overlay" onClick="style.pointerEvents='none'"></div>
+            <iframe class="map" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7851.127052348251!2d123.8970618286828!3d10.296708435189553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a99eb4d4f75c7b%3A0x91d2680e9eae4ce6!2sInnosoft+Solutions!5e0!3m2!1sen!2sph!4v1464854211542" frameborder="0" allowfullscreen></iframe>
+        </div>
+            <div id="contact-us" class="parallax">
+                <div class="container">
                     <div class="row">
-                        <div class="contact-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            <div class="col-md-6">
-                                <h3><span class="fa fa-gift" aria-hidden="true"></span> Free Support</h3>
-                                <ul>
-                                    <li>Forum</li>
-                                    <li>One-day response time</li>
-                                    <li>Deployment of on-site technical support if necessary</li>
-                                </ul>
-                                <h3><span class="fa fa-wrench" aria-hidden="true"></span> Annual Subscription Support</h3>
-                                <ul>
-                                    <li>Telephone Call, Call Ticket, Forum</li>
-                                    <li>One-hour response time</li>
-                                    <li>Remote support, e.g., Teamviewer, Logmein, etc.</li>
-                                    <li>Deployment of on-site technical support if necessary</li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-6">
-                                <h3><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> Contact Us</h3>
-                                <address>
-                                    Innosoft Bldg. Corner V. Rama Avenue & R. Duterte St.
-                                    Guadalupe, Cebu City
-                                </address>
-                                <table>
-                                    <tr>
-                                        <td><span class="fa fa-phone" aria-hidden="true"></span></td>
-                                        <td>&nbsp;0932 591 5156 (SUN) / 0936 338 2541 (TM) / 0908 278 1026 (SMART)</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></td>
-                                        <td>&nbsp;(032) 580 3030 / 266 3773 / 580 3040 / 520 7245</td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="fa fa-envelope" aria-hidden="true"></span></td>
-                                        <td>&nbsp;<a href="mailto:info@innosoft.ph" style="color: inherit;">info@innosoft.ph</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="fa fa-clock-o" aria-hidden="true"></span></td>
-                                        <td>&nbsp;Monday - Saturday: 9:00 AM to 6:00 PM</td>
-                                    <tr>
-                                </table>
+                        <div class="heading text-center col-sm-8 col-sm-offset-2 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <h2><span class="fa fa-phone"></span> Contact Us</h2>
+                            <p>Get in Touch with Us!</p>
+                        </div>
+                    </div>
+                    <div class="contact-form wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="row">
+                            <div class="contact-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                <div class="col-md-6">
+                                    <h3><span class="fa fa-gift" aria-hidden="true"></span> Free Support</h3>
+                                    <ul>
+                                        <li>Forum</li>
+                                        <li>One-day response time</li>
+                                        <li>Deployment of on-site technical support if necessary</li>
+                                    </ul>
+                                    <h3><span class="fa fa-wrench" aria-hidden="true"></span> Annual Subscription Support</h3>
+                                    <ul>
+                                        <li>Telephone Call, Call Ticket, Forum</li>
+                                        <li>One-hour response time</li>
+                                        <li>Remote support, e.g., Teamviewer, Logmein, etc.</li>
+                                        <li>Deployment of on-site technical support if necessary</li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h3><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> Contact Us</h3>
+                                    <address>
+                                        Innosoft Bldg. Corner V. Rama Avenue & R. Duterte St.
+                                        Guadalupe, Cebu City
+                                    </address>
+                                    <table>
+                                        <tr>
+                                            <td><span class="fa fa-phone" aria-hidden="true"></span></td>
+                                            <td>&nbsp;0932 591 5156 (SUN) / 0936 338 2541 (TM) / 0908 278 1026 (SMART)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></td>
+                                            <td>&nbsp;(032) 580 3030 / 266 3773 / 580 3040 / 520 7245</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="fa fa-envelope" aria-hidden="true"></span></td>
+                                            <td>&nbsp;<a href="mailto:info@innosoft.ph" style="color: inherit;">info@innosoft.ph</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="fa fa-clock-o" aria-hidden="true"></span></td>
+                                            <td>&nbsp;Monday - Saturday: 9:00 AM to 6:00 PM</td>
+                                        <tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section><!--/#contact-->
+</section><!--/#contact-->
 
     <footer id="footer">
         <div class="footer-top wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
