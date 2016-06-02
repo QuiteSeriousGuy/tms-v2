@@ -1010,8 +1010,27 @@ section {
   padding-bottom: 0;
 }
 
-#google-map {
-  height: 350px;
+.map {
+  overflow:hidden;
+  border:0;
+  width:100%;
+  height:350px
+}
+
+iframe {
+    border:0;
+    display:block;
+}
+
+.map-wrap {
+	position:relative;
+}
+	
+.overlay {
+	width:100%;
+	min-height:500px; 
+	position:absolute; 
+	top:0;
 }
 
 #contact-us {
