@@ -21,7 +21,7 @@
     </section>
 
     <div class="btn-group-horizontal btn-sm pull-right">
-        <button class="btn btn-info" id="" onclick="cmdShowAddModal_OnClick()"><i class="fa fa-plus"></i> Add</button>
+        <button class="btn btn-info" id="" onclick="cmdAddTask()"><i class="fa fa-plus"></i> Add</button>
         <a href="../Software/Task" class="btn btn-danger "><i class="fa fa-close"></i> Close</a>
     </div>
     <br/>
@@ -56,22 +56,24 @@
                             <div style="width:330px;" id="productDiv"></div>
                         </div>
                     </div>
+                    <!--Caller-->
                     <div class="form-group">
                         <label for="barCode" class="col-sm-3 control-label">Caller</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control requiredField" id="password">
+                            <input type="text" class="form-control requiredField" id="callerDiv">
                         </div>
                     </div>
+                    <!--Concern-->
                     <div class="form-group">
                         <label for="barCode" class="col-sm-3 control-label">Concern</label>
                         <div class="col-sm-6">
-                            <textarea type="" class="form-control requiredField" id="password"></textarea>
+                            <textarea type="" class="form-control requiredField" id="concernDiv"></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-6">
-                    <!--Staff-->
+                    <!--Answered by Staff-->
                     <div class="form-group">
                         <label for="" class="col-sm-3 control-label">Answered By</label>
                         <div class="col-sm-5">
@@ -89,7 +91,7 @@
                     <div class="form-group">
                         <label for="barCode" class="col-sm-3 control-label">Remarks</label>
                         <div class="col-sm-6">
-                            <textarea type="" class="form-control requiredField" id="password"></textarea>
+                            <textarea type="" class="form-control requiredField" id="remarksDiv"></textarea>
                         </div>
                     </div>
                     <!--Problem Type-->
@@ -117,18 +119,20 @@
             </div>
         </form>
     </div>
-
-    <div class="">
+    <div class="container">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#menu1">Action</a></li>
-            <li><a data-toggle="tab" href="#menu2">Solution</a></li>
+            <li class="active"><a data-toggle="tab" href="#home">Action</a></li>
+            <li><a data-toggle="tab" href="#menu1">Solution</a></li>
         </ul>
 
         <div class="tab-content">
-            <div id="menu1" class="tab-pane fade">
+            <div id="home" class="tab-pane fade in active">
+                <div id="loadingif" style="margin: 0 auto;">
+                    <img class="img-responsive center-block" src="/../images/loadingC.gif">
+                </div>
                 <div id="actionDiv"></div>
             </div>
-            <div id="menu2" class="tab-pane fade">
+            <div id="menu1" class="tab-pane fade">
                 <form class="form-horizontal" id="add-form">
                     <div class="row">
                         <div class="col-sm-12">
@@ -141,9 +145,9 @@
                             <div class="form-group">
                                 <label for="doneDateDiv" class="col-sm-2 control-label">Done Date</label>
                                 <div class="col-sm-6">
-                                    <div  id="doneDateDiv"></div>
+                                    <div id="doneDateDiv"></div>
                                 </div>
-                           </div>
+                            </div>
                             <div class="form-group">
                                 <label for="doneDateDiv" class="col-sm-2 control-label">Done Time</label>
                                 <div class="col-sm-6">
@@ -162,7 +166,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 @Scripts.Render("~/bundles/jquery")
@@ -181,6 +184,7 @@
     var dateId;
     var taskNumber;
     var inputTime;
+    var actionList;
 
     // ==================
     // Get Client Data
@@ -218,17 +222,20 @@
     // =============================
 
     function cboClientName(productList) {
-        var clientCollection = new wijmo.collections.CollectionView(productList);
-        var productList = new Array();
-        for (var i = 0; i < clientCollection.items.length; i++) {
+        //var clientCollection = new wijmo.collections.CollectionView(productList);
+        //var productList = new Array();
+        //for (var i = 0; i < clientCollection.items.length; i++) {
 
-            productList.push(clientCollection.items[i].CompanyName);
-        }
+        //    productList.push(clientCollection.items[i].CompanyName);
+        //}
 
         cboBoxClientName.dispose();
         cboBoxClientName = new wijmo.input.ComboBox('#clientDiv', {
             placeholder: "Select Client",
-            itemsSource: productList
+            displayMemberPath: "CompanyName",
+            selectedValuePath: "Id",
+            itemsSource: productList,
+
         });
 
         cboBoxClientName.onSelectedIndexChanged = function () {
@@ -454,9 +461,9 @@
     // Get Task Data by date
     // =======================
     function getTaskList() {
-        var taskList = new wijmo.collections.ObservableArray();
+        taskList = new wijmo.collections.ObservableArray
         $.ajax({
-            url: '/api/task/listByDate/' + "2016-6-1",
+            url: '/api/task/listByDate/' + dateId,
             cache: false,
             type: 'GET',
             contentType: 'application/json; charset=utf-8',
@@ -555,6 +562,58 @@
             //document.getElementById("staffId").value = staffCollection.items[this.selectedIndex].Id
         }
     }
+
+    //// =============================
+    //// Get Action Data
+    //// =============================
+
+    //function getAction() {
+    //    actionList = new wijmo.collections.ObservableArray();
+    //    $.ajax({
+    //        url: '/api/tasksub/list/' + taskList.currentItem.Id,
+    //        cache: false,
+    //        type: 'GET',
+    //        contentType: 'application/json; charset=utf-8',
+    //        data: {},
+    //        success: function (results) {
+    //            var lastProduct = 0;
+    //            $('#loadingif').hide();
+    //            if (results.length > 0) {
+    //                for (i = 0; i < results.length; i++) {
+    //                    actionList.push({
+    //                        EditId: "<button class='btn btn-primary btn-xs btn-block' id='productEditButton' onClick='cmdProductEditButton_OnClick()'><i class='fa fa-pencil'></i> Edit</button>",
+    //                        DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='productDeleteButton' onclick='cmdProductDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
+    //                        Id: results[i]["Id"],
+    //                        TaskId: results[i]["TaskId"],
+    //                        Action: results[i]["Action"],
+    //                        DateCalled: results[i]["DateCalled"]
+
+    //                    });
+    //                }
+    //            }
+    //        }
+    //    });
+
+    //    return actionList;
+    //}
+
+        // ============
+        // Add Task
+        // ============
+        function cmdAddTask() {
+            var taskObject = new Object();
+            userObject.TaskDate = dateId;
+            userObject.TaskNo = document.getElementById("").value;
+            userObject.ClientId = cboBoxClientName.selectedValue;
+            //userObject.ProductId = cboBoxClientName.ProductId.selectedValue;
+            userObject.Caller = document.getElementById("callerDiv").value;
+            userObject.Concern = document.getElementById("concernDiv").value;
+            userObject.AnsweredBy = cboStaffName.StaffId.selectedValue;
+            userObject.StaffId = cboAssignedStaffName.StaffId.selectedValue;
+            userObject.Remarks = document.getElementById("remarksDiv").value;
+            //userObject.ProblemType = 
+        }
+    
    
                 // ============
                 // On Page Load
@@ -609,6 +668,80 @@
                     createSeverityCboBox();
                     createStatusCboBox();
                     getTaskList();
+                    //getAction();
+
+                    //Flex Grid
+                    var productGrid = new wijmo.grid.FlexGrid('#actionDiv');
+                    productGrid.initialize({
+                        columns: [
+
+
+                        {
+                            "header": "Edit",
+                            "binding": "EditId",
+                            "width": 70,
+                            "align": "center",
+                            "isContentHtml": true
+                        },
+                        {
+                            "header": "Delete",
+                            "binding": "DeleteId",
+                            "width": 90,
+                            "align": "center",
+                            "isContentHtml": true
+
+                        },
+                        {
+                            "header": "Action",
+                            "binding": "ProductCode",
+                            "align": "center",
+                            "allowSorting": true,
+                            "width": "2.5*"
+                        },
+                        {
+                            "header": "Date Called",
+                            "binding": "ProductDescription",
+                            "align": "center",
+                            "allowSorting": true,
+                            "width": "5*"
+                        },
+                        {
+                            "header": "Time Called",
+                            "binding": "ProductDescription",
+                            "align": "center",
+                            "allowSorting": true,
+                            "width": "5*"
+                        },
+                        {
+                            "header": "Finish Date",
+                            "binding": "ProductDescription",
+                            "align": "center",
+                            "allowSorting": true,
+                            "width": "5*"
+                        },
+                        {
+                            "header": "Finish Time",
+                            "binding": "ProductDescription",
+                            "align": "center",
+                            "allowSorting": true,
+                            "width": "5*"
+                        },
+                        {
+                            "header": "Remarks",
+                            "binding": "Remarks",
+                            "align": "center",
+                            "allowSorting": true,
+                            "width": "1.5*"
+                        }],
+                        autoGenerateColumns: false,
+                        itemsSource: productList,
+                        isReadOnly: true,
+                        autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+                        allowDragging: wijmo.grid.AllowDragging.None,
+                        selectionMode: wijmo.grid.SelectionMode.Row
+                    });
+
+                    productGrid.trackChanges = true;
                 });
 </script>
 

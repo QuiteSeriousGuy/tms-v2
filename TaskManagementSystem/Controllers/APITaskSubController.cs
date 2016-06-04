@@ -14,12 +14,13 @@ namespace TaskManagementSystem.Controllers
 
         // ===========
         // LIST Item
-        // =========== a
-        [Route("api/tasksub/list")]
-        public List<Models.MstTaskSub> Get()
+        // =========== 
+        [Route("api/tasksub/list/{t}")]
+        public List<Models.MstTaskSub> Get(int t)
         {
             
             var tasksub = from d in db.trnTaskSubs
+                          where d.TaskId == t
                           select new Models.MstTaskSub
                           {
                               Id = d.Id,
