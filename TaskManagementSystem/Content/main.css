@@ -17,16 +17,12 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
-.prodtitle1, .prodtitle2 {
+.prodtitle1 {
   font-family: 'Open Sans', sans-serif;
   color: #fff;
 }
 .prodtitle1, .carpara1 {
     text-align: left;
-}
-
-.prodtitle2, .carpara2 {
-    text-align: right;
 }
 
 h2 {
