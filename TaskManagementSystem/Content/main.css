@@ -152,7 +152,7 @@ a:hover {
 }
 
 section {
-  padding: 40px 0;
+  padding: 60px 0;
 }
 
 .heading {
@@ -325,6 +325,9 @@ section {
   animation: bounce 3000ms infinite;
 }
 
+.navbar {
+    box-shadow: 0px -11px 30px 9px rgba(0,0,0,1);
+}
 
 .navbar-right li a {
   color: #950f10;
@@ -333,6 +336,11 @@ section {
   font-weight: 600;
   padding-top:30px;
   padding-bottom:30px;
+}
+
+.navbar-right li a:hover {
+  color: #fff;
+  background-color: #950f10;
 }
 
 .navbar-right li.active a {
@@ -1165,5 +1173,3 @@ ul.address {
 }
 
 /*Presets*/
-
-
