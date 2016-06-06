@@ -9,97 +9,15 @@
     @Styles.Render("~/Content/preset1.css")
 </head><!--/head-->
 
-<body>
+<body id="top">
 
     <!--.preloader-->
     <div class="preloader"></div>
     <!--/.preloader-->
 
     <header id="home">
-        <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="item active">
-                    <div id="startcar" class="caption">
-                        <img class="logocar animated wow fadeInUp" src="~/images/innosoft.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <h2 class="qoute animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Making <span>IT</span> simpler.</h2>
-                        <p class="editsize animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">Innovative Software Solutions for your Business.</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <a data-scroll href="#POS">
-                        <div class="caption">
-                            <div id="imagehide" class="col-sm-6">
-                                <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/IPOSdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            </div>
-                            <div id="sliderpara" class="col-sm-6">
-                                <h1 class="prodtitle1 animated fadeInRightBig">POS</h1>
-                                <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
-                                    <strong>Point-Of-Sale (POS) System</strong> is a 3-in-1 software that caters to micro, small and medium sized businesses (MSMB)<br /><br />
-                                    Its module includes Sales, Accounts Receivable and Inventory. It is designed to be light and simplified to make users easily adapt and understand the flow of operations yet powerful enough to gather vital information for making business decisions.<br /><br />
-                                    By using <strong>POS</strong>, you can check your inventory in real-time and any given period. Sales and Collection Summaries can be generated instantly and accurately. With these reports you will be able to control the operations of your business, minimize inventory pilferage, and monitor you cash.
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="item">
-                    <a data-scroll href="#FMIS">
-                        <div class="caption">
-                            <div id="sliderpara" class="col-sm-6">
-                                <h1 class="prodtitle2 animated fadeInLeftBig">FMIS</h1>
-                                <p class="carpara2 animated wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="700ms">
-                                    <strong>Financial Management Information System</strong> is designed for robust enterprise transactions that includes customer and sales management, payables, supply-chain management, warehousing, accounting and finance for trading businesses.<br/><br />
-                                    <strong>FMIS</strong> is a strategic tool that can leverage an organization in making its operations transparent and efficient.<br /><br />
-                                    With <strong>FMIS</strong>, your business can accurately generate real-time Financial Statements, multiple warehouse inventories, aging of Accounts Receivables and Payables, simplified bank reconciliation and follow standard ERP procedures.
-                                </p>
-                            </div>
-                            <div id="imagehide" class="col-sm-6">
-                                <img class="prodcar animated wow fadeInRightBig" src="~/images/products/FMISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="item">
-                    <a data-scroll href="#EasyFIS">
-                        <div class="caption">
-                            <div id="imagehide" class="col-sm-6">
-                                <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/WebFMISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            </div>
-                            <div id="sliderpara" class="col-sm-6">
-                                <h1 class="prodtitle1 animated fadeInRightBig">EasyFIS</h1>
-                                <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
-                                    <strong>Easy Financial Information System</strong> is designed for robust enterprise transactions that includes customer and sales management, payables, supply-chain management, warehousing, accounting and finance for trading businesses.<br /><br />
-                                    <strong>EasyFIS</strong> is an online strategic tool that can leverage an organization in making its operations transparent and efficient.<br /><br />
-                                    With <strong>EasyFIS</strong>, your business can accurately generate real-time Financial Statements, multiple warehouse inventories, aging of Accounts Receivables and Payables, simplified bank reconciliation and follow standard ERP procedures.
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="item">
-                    <a data-scroll href="#HRIS">
-                        <div class="caption">
-                            <div id="sliderpara" class="col-sm-6">
-                                <h1 class="prodtitle2 animated fadeInLeftBig">HRIS</h1>
-                                <p class="carpara2 animated wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="700ms">
-                                    <strong>Human Resource Information System</strong> is a comprehensive system for managing Employee Records from Attendance and Time Keeping to Payroll. Designed for large employee based pool with multiple and geographically separated branches.<br/><br />
-                                    Designed to save-time for your payroll clerks and staff in generating payroll for large number of employees. It will also guide your staff to accurately pinpoint employee records like Lates and Absences, Leaves, Loans, Earnings and Other Deduction Compositions.
-                                </p>
-                            </div>
-                            <div class="col-sm-6">
-                                <img id="imagehide" class="prodcar animated wow fadeInRightBig" src="~/images/products/IHRISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <a class="left-control" href="#home-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-            <a class="right-control" href="#home-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
 
-            <a id="tohash" href="#services"><i class="fa fa-angle-down"></i></a>
-
-        </div><!--/#home-slider-->
-        <div class="main-nav">
+        <div class="navbar main-nav navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -114,7 +32,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="scroll active"><a href="#home">Home</a></li>
+                        <li class="scroll active"><a href="#top">Home</a></li>
                         <li class="scroll"><a href="#services">Service</a></li>
                         <li class="scroll"><a href="#anchorabout-us">About Us</a></li>
                         <li class="scroll"><a href="#portfolio">Products</a></li>
@@ -124,6 +42,82 @@
                 </div>
             </div>
         </div><!--/#main-nav-->
+
+        <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <a data-scroll href="#POS">
+                        <div class="caption">
+                            <div id="imagehide" class="col-sm-5">
+                                <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/IPOSdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            </div>
+                            <div id="sliderpara" class="col-sm-7">
+                                <h1 class="prodtitle1 animated fadeInRightBig">POS</h1>
+                                <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
+                                    <strong>Point-Of-Sale (POS) System</strong> is a 3-in-1 software that caters to micro, small and medium sized businesses (MSMB)<br /><br />
+                                    Its module includes Sales, Accounts Receivable and Inventory. It is designed to be light and simplified to make users easily adapt and understand the flow of operations yet powerful enough to gather vital information for making business decisions.<br /><br />
+                                    By using <strong>POS</strong>, you can check your inventory in real-time and any given period. Sales and Collection Summaries can be generated instantly and accurately. With these reports you will be able to control the operations of your business, minimize inventory pilferage, and monitor you cash.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a data-scroll href="#FMIS">
+                        <div class="caption">
+                            <div id="imagehide" class="col-sm-5">
+                                <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/FMISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            </div>
+                            <div id="sliderpara" class="col-sm-7">
+                                <h1 class="prodtitle1 animated fadeInRightBig">FMIS</h1>
+                                <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
+                                    <strong>Financial Management Information System</strong> is designed for robust enterprise transactions that includes customer and sales management, payables, supply-chain management, warehousing, accounting and finance for trading businesses.<br/><br />
+                                    <strong>FMIS</strong> is a strategic tool that can leverage an organization in making its operations transparent and efficient.<br /><br />
+                                    With <strong>FMIS</strong>, your business can accurately generate real-time Financial Statements, multiple warehouse inventories, aging of Accounts Receivables and Payables, simplified bank reconciliation and follow standard ERP procedures.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a data-scroll href="#EasyFIS">
+                        <div class="caption">
+                            <div id="imagehide" class="col-sm-5">
+                                <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/WebFMISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            </div>
+                            <div id="sliderpara" class="col-sm-7">
+                                <h1 class="prodtitle1 animated fadeInRightBig">EasyFIS</h1>
+                                <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
+                                    <strong>Easy Financial Information System</strong> is designed for robust enterprise transactions that includes customer and sales management, payables, supply-chain management, warehousing, accounting and finance for trading businesses.<br /><br />
+                                    <strong>EasyFIS</strong> is an online strategic tool that can leverage an organization in making its operations transparent and efficient.<br /><br />
+                                    With <strong>EasyFIS</strong>, your business can accurately generate real-time Financial Statements, multiple warehouse inventories, aging of Accounts Receivables and Payables, simplified bank reconciliation and follow standard ERP procedures.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="item">
+                    <a data-scroll href="#HRIS">
+                        <div class="caption">
+                            <div id="imagehide" class="col-sm-5">
+                                <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/IHRISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            </div>
+                            <div id="sliderpara" class="col-sm-7">
+                                <h1 class="prodtitle1 animated fadeInRightBig">HRIS</h1>
+                                <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
+                                    <strong>Human Resource Information System</strong> is a comprehensive system for managing Employee Records from Attendance and Time Keeping to Payroll. Designed for large employee based pool with multiple and geographically separated branches.<br/><br />
+                                    Designed to save-time for your payroll clerks and staff in generating payroll for large number of employees. It will also guide your staff to accurately pinpoint employee records like Lates and Absences, Leaves, Loans, Earnings and Other Deduction Compositions.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <a class="left-control" href="#home-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+            <a class="right-control" href="#home-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
+
+
+        </div><!--/#home-slider-->
     </header><!--/#home-->
 
     <section id="services">
@@ -388,7 +382,6 @@
                                 <li><a href="http://www.thegrandesuites.com/"><img src="~/images/clients/grandesuite.png" class="img-responsive" alt=""></a><div class="clientsname">The Grande Suites</div></li>
                                 <li><a href="http://gtcosmetics.com.ph/"><img src="~/images/clients/GT.png" class="img-responsive" alt=""></a><div class="clientsname">GT Cosmetics Manufacturing</div></li>
                                 <li><a href="http://haroldsmansion.com/"><img src="~/images/clients/harolds.png" class="img-responsive" alt=""></a><div class="clientsname">Harolds Mansion Hostel</div></li>
-                                <li><a href="http://www.hondaphil.com/"><img src="~/images/clients/Honda.png" class="img-responsive" alt=""></a><div class="clientsname">Honda Philippines</div></li>
                                 <li><a href="http://ipi-phil.com/"><img src="~/images/clients/IPI.png" class="img-responsive" alt=""></a><div class="clientsname">International Pharmaceuticals Inc.</div></li>
                                 <li><a href="http://www.juliesbakeshop.com.ph/"><img src="~/images/clients/julies.png" class="img-responsive" alt=""></a><div class="clientsname">Julie's Bakeshop</div></li>
                                 <li><a href="http://www.kingsfoods.com.ph/"><img src="~/images/clients/Kings.png" class="img-responsive" alt=""></a><div class="clientsname">King's Quality Foods Inc.</div></li>

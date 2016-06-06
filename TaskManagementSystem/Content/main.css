@@ -5,6 +5,7 @@ body {
   color: #666;
   background-color: #fff;
   overflow-x: hidden;
+  padding-top: 70px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -17,7 +18,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
-.prodtitle1, .prodtitle2 {
+.prodtitle1 {
   font-family: 'Open Sans', sans-serif;
   color: #fff;
 }
@@ -25,8 +26,12 @@ h1, h2, h3, h4, h5, h6 {
     text-align: left;
 }
 
-.prodtitle2, .carpara2 {
-    text-align: right;
+.prodtitle1{
+    line-height: 50px;
+}
+
+.carpara1 {
+    margin-right: 100px;
 }
 
 h2 {
@@ -48,7 +53,6 @@ p {
     /* For mobile phones: */
     p {
         font-size: 13px;
-        margin-top: 20px;
     }
 
     #imagehide {
@@ -57,9 +61,8 @@ p {
 
     #sliderpara .carpara1,
     #sliderpara .carpara2 {
-        text-align: center;
-        font-size: 13px;
-        line-height: 19px;
+        font-size: 12.5px;
+        line-height: 18px;
     }
 
     #startcar .logocar {
@@ -72,10 +75,18 @@ p {
         text-align: center;
     }
 
+    .carpara1 {
+        margin-right: 0px;
+    }
+
+    .prodtitle1{
+        line-height: 15px;
+    }
 }
 
 .carpara1, carpara2 {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 17px;
 }
 
 .parallax {
@@ -141,7 +152,7 @@ a:hover {
 }
 
 section {
-  padding: 90px 0;
+  padding: 40px 0;
 }
 
 .heading {
@@ -177,6 +188,8 @@ section {
 **************************/
 #home {
     background-image: url(../images/slider/2.jpg);
+    background-size: cover;
+    background-position: center; 
     position:relative;
     
 }
@@ -184,12 +197,13 @@ section {
 #home-slider {
   overflow: hidden;
   position: relative;
+  height: 400px;
 }
 
 #home-slider .caption {
   position: absolute;
   margin-top: -250px;
-  top: 50%;
+  top: 15%;
   /*margin-left: 200px;
   margin-right: 200px;*/
   left: 0;
@@ -216,23 +230,16 @@ section {
 }
 
 .prodcar {
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
     position: relative;
-}
-
-.logocar {
-    width: 20%;
-    height: 20%;
-    position: relative;
+    float:right;
 }
 
 .carousel-fade .carousel-inner .item {
   opacity: 0;
   -webkit-transition-property: opacity;
   transition-property: opacity;
-  background-repeat: no-repeat;
-  background-size: cover;
   height: 2037px;
 }
 
@@ -243,7 +250,7 @@ section {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0,0,0,.7);
+  background: rgba(0,0,0,.8);
 }
 
 .carousel-fade .carousel-inner .active {
@@ -345,10 +352,7 @@ section {
     .navbar-header {
         padding-bottom: 14px;
         text-align: center;
-    }
-
-    .main-nav {
-        padding-top: 11px;
+        padding-top: 14px;
     }
 }
 

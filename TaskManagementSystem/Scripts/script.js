@@ -4,16 +4,6 @@ $(function () {
 		horizontalScrolling: false 
 	});
 
-	$('.main-nav a:not(.dropdown-toggle)').bind('click', function(event) {
-		var $anchor = $(this);
-
-		$('html, body').stop().animate({
-			scrollTop: $($anchor.attr('href')).offset().top
-		}, 1500, 'easeInOutExpo');
-
-		event.preventDefault();
-	});
-
 	$('[data-toggle="tooltip"]').tooltip();
 
     function home_height () {
