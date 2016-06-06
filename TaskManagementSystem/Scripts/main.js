@@ -5,23 +5,6 @@ jQuery(function($) {
 	$(window).load(function(){
 		preloader.remove();
 	});
-
-	//#main-slider
-	var slideHeight = $(window).height();
-	$('#home-slider .item').css('height',slideHeight);
-
-	$(window).resize(function(){'use strict',
-		$('#home-slider .item').css('height',slideHeight);
-	});
-	
-	//Scroll Menu
-	$(window).on('scroll', function(){
-		if( $(window).scrollTop()>slideHeight ){
-			$('.main-nav').addClass('navbar-fixed-top');
-		} else {
-			$('.main-nav').removeClass('navbar-fixed-top');
-		}
-	});
 	
 	// Navigation Scroll
 	$(window).scroll(function(event) {
@@ -52,11 +35,6 @@ jQuery(function($) {
 			}
 		})
 	};
-
-	$('#tohash').on('click', function(){
-		$('html, body').animate({scrollTop: $(this.hash).offset().top - 5}, 1000);
-		return false;
-	});
 	
 	//Initiat WOW JS
 	new WOW().init();
