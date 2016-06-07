@@ -21,6 +21,20 @@
             </ol>
         </section>
 
+        <!-- Loading Modal -->
+        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="Loading..." aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h4 style="text-align:center; color:#000000;">Loading...</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <img class="img-thumbnail img-responsive center-block img-custom" src='~/images/progress_bar.gif'>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Company Delete -->
         <div class="modal fade" id="deleteStaffConfirm" role="dialog">
             <div class="modal-dialog modal-sm">
@@ -33,20 +47,6 @@
                     <div class="modal-footer">
                         <button class="btn btn-danger btn-sm" id="cmdConfirmDeleteStaff" onclick="cmdStaffConfirmDeleteButton_OnClick()">Delete</button>
                         <button id="cmdConfirmDeleteCloseButton" class="btn btn-primary btn-sm" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Loading Modal -->
-        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="Loading..." aria-hidden="true" data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h4 style="text-align:center; color:#000000;">Loading...</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <img class="img-thumbnail img-responsive center-block img-custom" src='~/images/progress_bar.gif'>
                     </div>
                 </div>
             </div>
@@ -226,12 +226,10 @@
     }
 
     // =====================
-    // Task delete Button
+    // Staff delete Button
     // =====================
     function cmdStaffDeleteButton_OnClick() {
-        var id = taskList.currentItem.Id;
-
-        console.log(typeof id + id);
+        var id = staffList.currentItem.Id;
 
         $('#deleteStaffConfirm').modal({
             show: true,
@@ -246,10 +244,10 @@
         $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
 
         //====================
-        var id = taskList.currentItem.Id;
+        var id = staffList.currentItem.Id;
 
         $.ajax({
-            url: '/api/task/delete/' + id,
+            url: '/api/staff/delete/' + id,
             type: "DELETE",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
