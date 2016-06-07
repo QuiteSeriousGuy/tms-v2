@@ -197,7 +197,7 @@ section {
 #home-slider {
   overflow: hidden;
   position: relative;
-  height: 500px;
+  height: 400px;
 }
 
 #home-slider .caption {
@@ -222,18 +222,18 @@ section {
   margin-bottom: 30px;
 }
 
-
-@media  screen and (max-width: 1366px) {
-    #home-slider {
-        height: 400px;
-    }
-}
-
 .prodcar {
-    width: 70%;
-    height: 70%;
+    width: 50%;
+    height: 50%;
     position: relative;
     float:right;
+}
+
+@media  screen and (max-width: 1366px) {
+    .prodcar {
+        width: 70%;
+        height: 70%;
+    }
 }
 
 .carousel-fade .carousel-inner .item {
