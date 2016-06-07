@@ -152,7 +152,7 @@ a:hover {
 }
 
 section {
-  padding: 40px 0;
+  padding: 60px 0;
 }
 
 .heading {
@@ -197,7 +197,7 @@ section {
 #home-slider {
   overflow: hidden;
   position: relative;
-  height: 400px;
+  height: 500px;
 }
 
 #home-slider .caption {
@@ -223,10 +223,10 @@ section {
 }
 
 
-@media  screen and (max-width: 1920px) {
-    /*#home-slider .caption {
-        top: 40%;
-    }*/
+@media  screen and (max-width: 1366px) {
+    #home-slider {
+        height: 400px;
+    }
 }
 
 .prodcar {
@@ -325,6 +325,9 @@ section {
   animation: bounce 3000ms infinite;
 }
 
+.navbar {
+    box-shadow: 0px -11px 30px 9px rgba(0,0,0,1);
+}
 
 .navbar-right li a {
   color: #950f10;
@@ -333,6 +336,11 @@ section {
   font-weight: 600;
   padding-top:30px;
   padding-bottom:30px;
+}
+
+.navbar-right li a:hover {
+  color: #fff;
+  background-color: #950f10;
 }
 
 .navbar-right li.active a {
@@ -351,6 +359,12 @@ section {
     padding: 0px 0;
 }
 
+.navbar-toggle {
+  border: none;
+  outline: none;
+  margin-right:5px;
+}
+
 @media only screen and (max-width: 768px) {
 
     .navbar-header {
@@ -367,6 +381,16 @@ section {
     .navbar-right li.active a {
         padding-top:10px;
         padding-bottom:10px;
+    }
+
+    #home-slider .caption {
+        margin-top: -275px;
+    }
+
+    .navbar-brand h1 {
+        width: 100%;
+        max-width: 100px;
+        height: auto;
     }
 }
 
@@ -629,17 +653,6 @@ section {
   margin-left: -17px;
 }
 
-/*************************
-*********Team CSS*********
-**************************/
-#team {
-  padding-top: 0;
-}
-
-.team-members {
-  margin-bottom: 25px;
-}
-
 .social-icons {
   margin-top:30px;
   text-align: center;
@@ -678,119 +691,6 @@ section {
   transform: scale(1.2);
 }
 
-.team-member {
-  text-align: center;
-  color: #333;
-  font-size: 14px;
-}
-
-.team-member:hover .social-icons ul li a.facebook {
-  background-color: #3b5999;
-}
-.team-member:hover .social-icons ul li a.twitter {
-  background-color: #2ac6f7;
-}
-.team-member:hover .social-icons ul li a.dribbble {
-  background-color: #ff5b92;
-}
-.team-member:hover .social-icons ul li a.linkedin {
-  background-color: #036dc0;
-}
-.team-member:hover .social-icons ul li a.rss {
-  background-color: #ff6b00;
-}
-
-#team .img-responsive {
-  width: 100%;
-}
-
-.member-info h3 {
-  margin-top: 35px;
-}
-
-.member-info h4 {
-  font-size: 14px;
-  margin-bottom: 15px;
-  color: #999;
-}
-
-
-/*************************
-*******Features CSS*******
-**************************/
-#features {
-  text-align: center;
-  background-image: url(../images/hero-img9.jpg);
-}
-
-#features i {
-  font-size: 48px;
-}
-
-#features h3 {
-  margin-top: 15px;
-  font-size: 30px;
-  margin-bottom: 7px;
-  color: #fff;
-}
-
-#features .slider-overlay {
-  opacity: 0.8;
-}
-
-
-/*************************
-*****Pricing Table CSS****
-**************************/
-.pricing-table {
-  text-align: center;
-}
-
-.single-table {
-  padding: 30px 20px 20px;
-  border:1px solid #f2f2f2;
-}
-
-.single-table h3 {
-  margin-top: 0;
-  padding: 0;
-  font-size: 18px;
-  text-transform: uppercase;
-  margin-bottom: 30px;
-}
-
-.price {
-  font-size: 36px;
-  line-height: 36px;
-}
-
-.price span {
-  font-size: 14px;
-  line-height: 14px;
-}
-
-.single-table ul {
-  list-style: none;
-  padding: 0;
-  margin: 30px 0;
-}
-
-.single-table ul li {
-  line-height: 30px;
-}
-
-.single-table.featured {  
-  color: #fff;
-}
-
-.single-table.featured h3 { 
-  color: #fff;
-}
-
-.single-table.featured .btn.btn-primary {
-  background-color: #fff;
-}
-
 .clients {
   padding: 100px 0;
 }
@@ -815,6 +715,10 @@ section {
     line-height:15px;
 }
 
+.innov {
+    padding-top:50px;
+}
+
 @media only screen and (max-width: 768px) {
     .clients-caro {
         display: none;
@@ -825,6 +729,7 @@ section {
     #twitter {
         display: none;
    }
+
 }
 
 /*************************
@@ -911,114 +816,6 @@ section {
   color: #fff;
 }
 
-
-/*************************
-**********Blog CSS********
-**************************/
-
-.post-thumb {
-  position: relative;
-}
-
-.post-icon {
-  position: absolute;
-  top:10px;
-  right:10px;
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
-  border-radius:4px;
-  text-align: center;
-  color: #fff;
-  font-size: 12px;
-}
-
-.post-meta {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
-  color: #fff;
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
-.post-meta span {
-  margin-right: 16px;
-}
-
-#post-carousel .carousel-indicators {
-  bottom: 3px;
-  left: 90%;
-}
-
-.blog-left-control, .blog-right-control {
-  position: absolute;
-  top: 45%;
-  width: 30px;
-  text-align: center;
-  color: rgba(255,255,255,.7);
-  font-size: 36px;
-}
-
-.blog-left-control {
-  left: 0;
-}
-
-.blog-right-control {
-  right: 0;
-}
-
-.blog-left-control:hover, .blog-right-control:hover {
-  color: #fff;  
-}
-
-.entry-header h3 a {
-  line-height: 30px;
-}
-
-.entry-header .date, 
-.entry-header .cetagory {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  margin-bottom: 30px;
-  text-transform: uppercase;
-  position: relative;
-}
-
-.entry-header .date:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom:-22px;
-  width: 20px;
-  height: 3px;
-}
-
-.entry-content {
-  font-size: 14px;
-}
-
-.load-more {
-  display:block;
-  text-align: center;
-  margin-top: 70px;
-}
-
-.btn-loadmore {
-  border: 1px solid #f2f2f2;
-  color: #666666;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 15px 125px;
-  text-transform: uppercase;
-}
-
-.btn-loadmore:hover {
-  color:#fff;
-}
-
 /*************************
 **********Contact CSS*****
 **************************/
@@ -1068,11 +865,6 @@ iframe {
   box-shadow: none;
 }
 
-textarea.form-control {
-  min-height: 180px;
-  resize:none;
-}
-
 .form-group {
   margin-bottom: 30px;
 }
@@ -1097,13 +889,11 @@ ul.address {
   color: #fff;
 }
 
-.btn-submit {
-  display: block;
-  padding: 12px;
-  width: 100%;
-  color: #fff;
-  border:0;
-  margin-top: 40px;
+@media only screen and (max-width: 768px) {
+    .contact-info {
+        padding-left:20px;
+    }
+
 }
 
 #footer {
@@ -1166,4 +956,10 @@ ul.address {
 
 /*Presets*/
 
+@media only screen and (max-width: 768px) {
+    .about-info p, .ulservices,
+    .ulprod, .ulcontact {
+        text-align:left;
+    }
 
+}
