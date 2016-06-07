@@ -197,7 +197,7 @@ section {
 #home-slider {
   overflow: hidden;
   position: relative;
-  height: 400px;
+  height: 500px;
 }
 
 #home-slider .caption {
@@ -223,10 +223,10 @@ section {
 }
 
 
-@media  screen and (max-width: 1920px) {
-    /*#home-slider .caption {
-        top: 40%;
-    }*/
+@media  screen and (max-width: 1366px) {
+    #home-slider {
+        height: 400px;
+    }
 }
 
 .prodcar {
