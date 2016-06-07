@@ -118,5 +118,36 @@ namespace TaskManagementSystem.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
         }
+
+        // ==============
+        // DELETE Item
+        // ==============
+        [Route("api/task/delete/{id}")]
+        public HttpResponseMessage Delete(String id)
+        {
+
+            try
+            {
+                var taskId = Convert.ToInt32(id);
+                var tasks = from d in db.trnTasks where d.Id == taskId select d;
+
+                if (tasks.Any())
+                {
+                    db.trnTasks.DeleteOnSubmit(tasks.First());
+                    db.SubmitChanges();
+
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
     }
 }

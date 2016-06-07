@@ -35,5 +35,57 @@ namespace TaskManagementSystem.Controllers
 
             return tasksub.ToList();
         }
+
+        // ===========
+        // ADD Item
+        // ===========
+        [Route("api/tasksub/add")]
+        public HttpResponseMessage Post(Models.MstTaskSub item)
+        {
+            try
+            {
+                var identityUserId = User.Identity.GetUserId();
+                var date = DateTime.Now;
+
+                Data.trnTaskSub newItem = new Data.trnTaskSub();
+
+                newItem.TaskId = item.TaskId;
+                newItem.Action = item.Action != null ? item.Action : "00000";
+                
+                if (item.DateCalled == null && item.TimeCalled == null)
+                {
+                    newItem.DateCalled = null;
+                    newItem.TimeCalled = null;
+                }
+                else
+                {
+                    newItem.DateCalled = Convert.ToDateTime(item.DateCalled);
+                    newItem.TimeCalled = Convert.ToDateTime(item.TimeCalled);
+                }
+
+                if (item.FinishedDate == null && item.FinishedTime == null)
+                {
+                    newItem.FinishedDate = null;
+                    newItem.FinishedTime = null;
+                }
+                else
+                {
+                    newItem.FinishedDate = Convert.ToDateTime(item.FinishedDate);
+                    newItem.FinishedTime = Convert.ToDateTime(item.FinishedTime);
+                }
+                newItem.Remarks = item.Remarks != null ? item.Remarks : "00000";
+
+                //ALLOW NULL
+
+                db.trnTaskSubs.InsertOnSubmit(newItem);
+                db.SubmitChanges();
+
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
     }
 }

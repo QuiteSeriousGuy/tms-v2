@@ -128,36 +128,48 @@
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
                 <form class="form-horizontal" id="add-form">
-                    <div class="row">
+                    <div class="tabstyle">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="barCode" class="control-label">Action</label>
-                                <div class="col-sm-12">
+                                <label for="barCode" class="col-sm-2 control-label">Action</label>
+                                <div class="col-sm-9">
                                     <textarea type="" class="form-control" id="actionDiv"></textarea>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="doneDateDiv" class="col-sm-2 control-label">Date Called</label>
-                                <div class="col-sm-6">
-                                    <div id="dateCalledDiv"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="col-sm-2 control-label">Time Called</label>
-                                <div class="col-sm-6">
-                                    <div id="timeCalledDiv"></div>
-                                </div>
-                            </div>
+                           
+                                
+                                    <div class="form-group">
+                                        <label for="doneDateDiv" class="col-sm-2 control-label">Date Called</label>
+                                        <div class="col-sm-4">
+                                            <div id="dateCalledDiv"></div>
+                                        </div>
+                                    </div>
+                              
+                                
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-2 control-label">Time Called</label>
+                                        <div class="col-sm-4">
+                                            <div id="timeCalledDiv"></div>
+                                        </div>
+                                    </div>
+                               
+                           
                             <div class="form-group">
                                 <label for="" class="col-sm-2 control-label">Finished Date</label>
                                 <div class="col-sm-6">
-                                    <div id="timeCalledDiv"></div>
+                                    <div id="finishedDateDiv"></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-sm-2 control-label">Finished Time</label>
                                 <div class="col-sm-6">
                                     <div id="finishedTimeDiv"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="barCode" class="col-sm-2 control-label">Remarks</label>
+                                <div class="col-sm-9">
+                                    <textarea type="" class="form-control" id="remarksDiv"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -172,7 +184,7 @@
                                 <div class="form-group">
                                     <label for="barCode" class="col-sm-2 control-label">Solution</label>
                                     <div class="col-sm-9">
-                                        <textarea type="" class="form-control requiredField" id=""></textarea>
+                                        <textarea type="" class="form-control" id="solutionDiv"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -181,12 +193,14 @@
                                         <div id="doneDateDiv"></div>
                                     </div>
                                 </div>
+                                
                                 <div class="form-group">
                                     <label for="doneDateDiv" class="col-sm-2 control-label">Done Time</label>
                                     <div class="col-sm-6">
                                         <div id="doneTimeDiv"></div>
                                     </div>
                                 </div>
+                                
                                 <div class="form-group">
                                     <label for="doneDateDiv" class="col-sm-2 control-label">Verified by</label>
                                     <div class="col-sm-6">
@@ -223,9 +237,12 @@
     var dateId;
     var doneDate;
     var doneTime;
+    var finishedDate;
+    var finishedTime;
     var taskNumber;
     var inputTime;
     var actionList;
+    var timeCalled;
 
     // ==================
     // Get Client Data
@@ -677,7 +694,6 @@
 
             //TASK DATE
             theDate = new Date();
-            // create InputDate control
             inputDate = new wijmo.input.InputDate('#theInputDate', {
                 min: new Date(2014, 01, 01),
                 format: 'MM/dd/yyyy',
@@ -698,6 +714,8 @@
                 }
             });
 
+            doneDate = [iDate.value.getFullYear(), iDate.value.getMonth() + 1, iDate.value.getDate()].join('-');
+
             // DONE TIME
             inputTime = new wijmo.input.InputTime('#doneTimeDiv', {
                 min: new Date(2014, 8, 1, 9, 0),
@@ -710,13 +728,56 @@
                     console.log(doneTime);
                 }
             });
+
+            //DATE CALLED
+            dCalled = new Date();
+            dateCalled = new wijmo.input.InputDate('#dateCalledDiv', {
+                min: new Date(2014, 01, 01),
+                format: 'MM/dd/yyyy',
+                value: dCalled,
+                onValueChanged: function () {
+                    doneDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
+                }
+            });
+
+            //TIME CALLED
+            var inpDateCalled = new wijmo.input.InputTime('#timeCalledDiv', {
+                min: new Date(2014, 8, 1, 9, 0),
+                max: new Date(2014, 8, 1, 17, 0),
+                step: 15,
+                format: 'h:mm tt',
+                value: dCalled,
+                onValueChanged: function () {
+                    timeCalled = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
+                }
+            });
+
+            //FINISHED DATE
+            fDate = new Date();
+            inptFinishedDate = new wijmo.input.InputDate('#finishedDateDiv', {
+                min: new Date(2014, 01, 01),
+                format: 'MM/dd/yyyy',
+                value: fDate,
+                onValueChanged: function () {
+                    finishedDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
+                }
+            });
+
+            //FINISHED TIME
+            var inpFinishedTime = new wijmo.input.InputTime('#finishedTimeDiv', {
+                min: new Date(2014, 8, 1, 9, 0),
+                max: new Date(2014, 8, 1, 17, 0),
+                step: 15,
+                format: 'h:mm tt',
+                value: dCalled,
+                onValueChanged: function () {
+                    finishedTime = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
+                }
+            });
+
             ////////////////
             //////////
             ////////////////
-
-            //cboStaffVerified = new wijmo.input.ComboBox('#verifiedDiv');
-            //cboProblemType = new wijmo.input.ComboBox('#problemTypeDiv');
-
             getDate();
             generateTaskNo();
             getClientName();
@@ -726,9 +787,7 @@
             createSeverityCboBox();
             createStatusCboBox();
             getTaskList();
-            //getAction();
 
-           
         })
 </script>
 
