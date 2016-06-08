@@ -81,6 +81,8 @@
     var dateItem;
     var dateId;
 
+    var userGrid;
+
     var inputDate;
     var clientList;
 
@@ -89,7 +91,7 @@
     // =======================
 
     function getUserMasterList() {
-        var taskList = new wijmo.collections.ObservableArray();
+        var result = new wijmo.collections.ObservableArray();
         $("#loadingModal").modal("show");
         $.ajax({
             url: '/api/task/listByDate/' + dateId,
@@ -111,8 +113,8 @@
                             }
                         }
 
-                        taskList.push({
-                            EditId: "<button class='btn btn-primary btn-xs btn-block' id='userEditButton' onClick='cmdUserEditButton_OnClick()'><i class='fa fa-bars'></i> View</button>",
+                        result.push({
+                            EditId: "<button class='btn btn-primary btn-xs btn-block' id='userEditButton'><i class='fa fa-bars'></i> View</button>",
                             DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='userDeleteButton' onclick='cmdStaffDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
                             Id: results[i]["Id"],
                             TaskNo: results[i]["TaskNo"],
@@ -129,7 +131,7 @@
             }
         });
 
-        return taskList;
+        return result;
     }
 
     //Client list
@@ -229,14 +231,16 @@
     // Staff delete Button
     // =====================
     function cmdStaffDeleteButton_OnClick() {
-        var id = staffList.currentItem.Id;
+        //var id = taskList.currentItem.Id;
 
-        $('#deleteStaffConfirm').modal({
-            show: true,
-            backdrop: 'static'
-        });
-        $("#cmdConfirmDeleteStaff").prop("disabled", false);
-        $("#cmdConfirmDeleteCloseButton").prop("disabled", false);
+        //$('#deleteStaffConfirm').modal({
+        //    show: true,
+        //    backdrop: 'static'
+        //});
+        //$("#cmdConfirmDeleteStaff").prop("disabled", false);
+        //$("#cmdConfirmDeleteCloseButton").prop("disabled", false);
+
+        toastr.success("lol");
     }
     // Company Confirm Delete Button
     function cmdStaffConfirmDeleteButton_OnClick() {

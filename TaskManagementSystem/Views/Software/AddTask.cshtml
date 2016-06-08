@@ -678,6 +678,7 @@
                     statusCode: {
                         200: function () {
                             toastr.success("Saved");
+                            setTimeout(function () { window.location = "../Software/Task"; }, 1000);
                         },
                         400: function () {
                             alert("Error");

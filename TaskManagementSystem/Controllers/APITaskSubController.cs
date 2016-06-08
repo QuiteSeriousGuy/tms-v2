@@ -51,7 +51,7 @@ namespace TaskManagementSystem.Controllers
 
                 newItem.TaskId = item.TaskId;
                 newItem.Action = item.Action != null ? item.Action : "00000";
-                
+
                 if (item.DateCalled == null && item.TimeCalled == null)
                 {
                     newItem.DateCalled = null;
