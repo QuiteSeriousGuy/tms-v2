@@ -504,16 +504,13 @@ section {
 }
 
 .aboutpic1 {
-    height: 70%;
-    width: 70%;
-    padding-bottom:5%;
-    padding-top:7%;
+    height: 90%;
+    width: 90%;
 }
 
 .aboutpic2 {
-    height: 40%;
-    width: 40%;
-    padding-bottom:7%;
+    height: 50%;
+    width: 50%;
 }
 
 .progress{
