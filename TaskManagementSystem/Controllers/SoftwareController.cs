@@ -57,6 +57,12 @@ namespace TaskManagementSystem.Controllers
             return View();
         }
 
+        [Authorize]
+        public ActionResult EditTask()
+        {
+            return View();
+        }
+
     }
 
   

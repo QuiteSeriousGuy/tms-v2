@@ -124,7 +124,7 @@
             <li class="active"><a data-toggle="tab" href="#home">Action</a></li>
             <li><a data-toggle="tab" href="#menu1">Solution</a></li>
         </ul>
-
+       
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
                 <form class="form-horizontal" id="add-form">
@@ -242,6 +242,7 @@
     var taskNumber;
     var inputTime;
     var actionList;
+    var dateCalled;
     var timeCalled;
 
     // ==================
@@ -280,14 +281,6 @@
     // =============================
 
     function cboClientName(clientList) {
-        //var clientCollection = new wijmo.collections.CollectionView(clientList);
-        //var productList = new Array();
-        //for (var i = 0; i < clientCollection.items.length; i++) {
-
-        //    productList.push(clientCollection.items[i].CompanyName);
-        //}
-
-        //cboBoxClientName.dispose();
         cboBoxClientName = new wijmo.input.ComboBox('#clientDiv', {
             placeholder: "Select Client",
             displayMemberPath: "CompanyName",
@@ -337,14 +330,6 @@
     // =============================
 
     function cboProductName(productList) {
-        //var productCollection = new wijmo.collections.CollectionView(productList);
-        //var productList = new Array();
-        //for (var i = 0; i < productCollection.items.length; i++) {
-
-        //    productList.push(productCollection.items[i].ProductDescription);
-        //}
-
-        //cboBoxProductName.dispose();
         cboBoxProductName = new wijmo.input.ComboBox('#productDiv', {
             placeholder: "Select Product",
             displayMemberPath: "ProductDescription",
@@ -398,14 +383,6 @@
     // =============================
 
     function createCboStaff(staffList) {
-        //var staffCollection = new wijmo.collections.CollectionView(staffList);
-        //var astaffList = new Array();
-        //for (var i = 0; i < staffCollection.items.length; i++) {
-
-        //    astaffList.push(staffCollection.items[i].StaffName);
-        //}
-
-        //cboStaffName.dispose();
         cboStaffName = new wijmo.input.ComboBox('#cboStaffNameDiv', {
             placeholder: "Select Staff",
             displayMemberPath: "StaffName",
@@ -413,10 +390,6 @@
             itemsSource: staffList,
             isEditable: false
         });
-
-        //cboStaffName.onSelectedIndexChanged = function () {
-        //   // document.getElementById("staffId").value = staffCollection.items[this.selectedIndex].Id
-        //}
     }
 
     // =============================
@@ -424,14 +397,6 @@
     // =============================
 
     function createCboStaffAssignedName(staffList) {
-        //var staffCollection = new wijmo.collections.CollectionView(staffList);
-        //var astaffList = new Array();
-        //for (var i = 0; i < staffCollection.items.length; i++) {
-
-        //    astaffList.push(staffCollection.items[i].StaffName);
-        //}
-
-        //cboAssignedStaffName.dispose();
         cboAssignedStaffName = new wijmo.input.ComboBox('#cboStaffAssignedDiv', {
             placeholder: "Select Staff",
             displayMemberPath: "StaffName",
@@ -540,8 +505,7 @@
                             }
                         }
                         taskList.push({
-                            EditId: "<button class='btn btn-primary btn-xs btn-block' id='userEditButton' onClick='cmdUserEditButton_OnClick()'><i class='fa fa-bars'></i> View</button>",
-                            DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='userDeleteButton' onclick='cmdUserDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
+                            
                             Id: results[i]["Id"],
                             TaskNo: results[i]["TaskNo"],
                             TaskDate: results[i]["TaskDate"],
@@ -604,14 +568,6 @@
     // =============================
 
     function createCboStaffVerified(staffList) {
-        //var staffCollection = new wijmo.collections.CollectionView(staffList);
-        //var astaffList = new Array();
-        //for (var i = 0; i < staffCollection.items.length; i++) {
-
-        //    astaffList.push(staffCollection.items[i].StaffName);
-        //}
-
-        //cboStaffVerified.dispose();
         cboStaffVerified = new wijmo.input.ComboBox('#verifiedDiv', {
             placeholder: "Select Staff",
             displayMemberPath: "StaffName",
@@ -646,7 +602,9 @@
         // Add Task
         // ============
         function cmdAddTask() {
-            var taskObject = new Object();
+        var taskObject = new Object();
+        var taskSubObject = new Object();
+
             taskObject.TaskDate = dateId;
             taskObject.TaskNo = document.getElementById("taskNoDiv").value;
             taskObject.ClientId = cboBoxClientName.selectedValue;
@@ -665,6 +623,7 @@
             taskObject.VerifiedBy = cboStaffVerified.selectedValue;
 
             var data = JSON.stringify(taskObject);
+          
 
             if (taskEntryValidation() == false) {
                 toastr.error("Fill out form");
@@ -676,15 +635,46 @@
                     contentType: "application/json;charset=utf-8",
                     cache: false,
                     statusCode: {
-                        200: function () {
-                            toastr.success("Saved");
-                            setTimeout(function () { window.location = "../Software/Task"; }, 1000);
+                        200: function (id) {
+                            if (document.getElementById("actionDiv").value == "") {
+                                toastr.success("Saved");
+                                setTimeout(function () { window.location = "../Software/Task"; }, 1000);
+                            } else {
+
+                                taskSubObject.TaskId = id;
+                                taskSubObject.Action = document.getElementById("actionDiv").value;
+                                taskSubObject.DateCalled = dateCalled;
+                                taskSubObject.TimeCalled = timeCalled;
+                                taskSubObject.FinishedDate = finishedDate;
+                                taskSubObject.FinishedTime = finishedTime;
+                                taskSubObject.Remarks = document.getElementById("remarksDiv").value;
+
+                                var data2 = JSON.stringify(taskSubObject);
+                                $.ajax({
+                                    url: '/api/tasksub/add/',
+                                    type: 'POST',
+                                    data: data2,
+                                    contentType: "application/json;charset=utf-8",
+                                    cache: false,
+                                    statusCode: {
+                                        200: function () {
+                                            toastr.success("Saved");
+                                            setTimeout(function () { window.location = "../Software/Task"; }, 1000);
+                                        },
+                                        400: function () {
+                                            alert("Error");
+                                        },
+                                    }
+                                });
+                            }
                         },
                         400: function () {
                             alert("Error");
                         },
                     }
                 });
+
+             
             }
         }
 
@@ -711,7 +701,7 @@
                 value: dDate,
                 onValueChanged: function () {
                     doneDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
-                    console.log(doneDate);
+                    
                 }
             });
 
@@ -732,14 +722,17 @@
 
             //DATE CALLED
             dCalled = new Date();
-            dateCalled = new wijmo.input.InputDate('#dateCalledDiv', {
+            inptDateCalled = new wijmo.input.InputDate('#dateCalledDiv', {
                 min: new Date(2014, 01, 01),
                 format: 'MM/dd/yyyy',
                 value: dCalled,
                 onValueChanged: function () {
-                    doneDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
+                    dateCalled = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
+                    console.log(dateCalled);
                 }
             });
+
+            dateCalled = [inptDateCalled.value.getFullYear(), inptDateCalled.value.getMonth() + 1, inptDateCalled.value.getDate()].join('-');
 
             //TIME CALLED
             var inpDateCalled = new wijmo.input.InputTime('#timeCalledDiv', {
@@ -750,6 +743,7 @@
                 value: dCalled,
                 onValueChanged: function () {
                     timeCalled = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
+                    console.log(timeCalled);
                 }
             });
 
@@ -761,8 +755,12 @@
                 value: fDate,
                 onValueChanged: function () {
                     finishedDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
+                    console.log(finishedDate);
                 }
             });
+
+            finishedDate = [inptFinishedDate.value.getFullYear(), inptFinishedDate.value.getMonth() + 1, inptFinishedDate.value.getDate()].join('-');
+
 
             //FINISHED TIME
             var inpFinishedTime = new wijmo.input.InputTime('#finishedTimeDiv', {
@@ -773,12 +771,11 @@
                 value: dCalled,
                 onValueChanged: function () {
                     finishedTime = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
+                    console.log(finishedTime);
                 }
             });
 
-            ////////////////
-            //////////
-            ////////////////
+         
             getDate();
             generateTaskNo();
             getClientName();
@@ -787,7 +784,7 @@
             createProblemTypeCboBox();
             createSeverityCboBox();
             createStatusCboBox();
-            getTaskList();
+           
 
         })
 </script>

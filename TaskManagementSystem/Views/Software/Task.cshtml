@@ -84,7 +84,6 @@
     var userGrid;
 
     var inputDate;
-    var clientList;
 
     // =======================
     // Get UserMasterList Data
@@ -102,7 +101,6 @@
             success: function (results) {
                 $("#loadingModal").modal("hide");
                 var lastUser = 0;
-                $("#loadingModal").modal("hide");
                 if (results.length > 0) {
                     for (i = 0; i < results.length; i++) {
                         var name = "";
@@ -112,10 +110,9 @@
                                 break;
                             }
                         }
-
                         result.push({
-                            EditId: "<button class='btn btn-primary btn-xs btn-block' id='userEditButton'><i class='fa fa-bars'></i> View</button>",
-                            DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='userDeleteButton' onclick='cmdStaffDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
+                            EditId: "<button class='btn btn-primary btn-xs btn-block' id='userEditButton' onclick='cmdEditTask()'><i class='fa fa-bars'></i> View</button>",
+                            DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='userDeleteButton' onclick='cmdStaffDeleteButton_OnClicks()'><i class='fa fa-trash'></i> Delete</button>",
                             Id: results[i]["Id"],
                             TaskNo: results[i]["TaskNo"],
                             TaskDate: results[i]["TaskDate"],
@@ -124,7 +121,6 @@
                             ProductId: results[i]["ProductId"],
                             ProductCode: results[i]["ProductCode"],
                             ProblemType: results[i]["ProblemType"]
-
                         });
                     }
                 }
@@ -223,8 +219,16 @@
                 userGrid.trackChanges = true;
             }
         });
+    }
 
-        return clientList;
+    // =====================
+    // Edit Task
+    // =====================
+    function cmdEditTask() {
+        var t = taskList.currentItem;
+        var task = t.Id;
+        window.location = '/Software/EditTask?TaskId=' + task;
+
     }
 
     // =====================
@@ -243,15 +247,15 @@
         toastr.success("lol");
     }
     // Company Confirm Delete Button
-    function cmdStaffConfirmDeleteButton_OnClick() {
+    function cmdStaffDeleteButton_OnClicks() {
         $("#cmdConfirmDeleteStaff").prop("disabled", true);
         $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
 
         //====================
-        var id = staffList.currentItem.Id;
+        var id = taskList.currentItem.Id;
 
         $.ajax({
-            url: '/api/staff/delete/' + id,
+            url: '/api/task/delete/' + id,
             type: "DELETE",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -282,6 +286,7 @@
     $(document).ready(function () {
 
         theDate = new Date();
+      
         // create InputDate control
         inputDate = new wijmo.input.InputDate('#theInputDate', {
             min: new Date(2014, 8, 1),
@@ -301,43 +306,13 @@
                 userGrid.trackChanges = true;
             }
         });
-        //inputDate.valueChanged.addHandler(valueChanged);
-
+     
+        
         dateId = [inputDate.value.getMonth() + 1, inputDate.value.getDate(), inputDate.value.getFullYear()].join('-');
         console.log(dateId);
 
-
+       
         getClientMasterList();
-
-
-
-        // the date/time being edited
-
-
-        //// create InputTime control
-        //var inputTime = new wijmo.input.InputTime('#theInputTime', {
-        //    min: new Date(2014, 8, 1, 9, 0),
-        //    max: new Date(2014, 8, 1, 17, 0),
-        //    step: 15,
-        //    format: 'h:mm tt',
-        //    value: theDate
-        //});
-        //inputTime.valueChanged.addHandler(valueChanged);
-
-        //// create Calendar control
-        //var calendar = new wijmo.input.Calendar('#theCalendar', {
-        //    min: new Date(2014, 8, 1),
-        //    value: theDate
-        //});
-        //calendar.valueChanged.addHandler(valueChanged);
-
-        // udpate theDate when the value changes in any of the controls
-        //function valueChanged(s, e) {
-        //    theDate = s.value;
-        //    inputDate.value = inputTime.value = calendar.value = theDate;
-        //}
-
-        
     });
 </script>
 

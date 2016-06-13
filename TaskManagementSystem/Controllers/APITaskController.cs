@@ -111,7 +111,7 @@ namespace TaskManagementSystem.Controllers
                 db.trnTasks.InsertOnSubmit(newItem);
                 db.SubmitChanges();
 
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Request.CreateResponse(HttpStatusCode.OK, newItem.Id);
             }
             catch (Exception e)
             {
