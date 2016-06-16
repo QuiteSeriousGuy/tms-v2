@@ -67,6 +67,43 @@ namespace TaskManagementSystem.Controllers
         }
 
         // ===========
+        // LIST Item search by ID
+        // =========== 
+        [HttpGet]
+        [Route("api/task/list/{id}")] //
+        public List<Models.MstTask> getId(String id) //
+        {
+            var ID = Convert.ToInt32(id);
+            var task = from d in db.trnTasks
+                       where d.Id == ID
+                       select new Models.MstTask
+                       {
+                           Id = d.Id,
+                           TaskNo = d.TaskNo,
+                           TaskDate = d.TaskDate.ToShortDateString(),
+                           ClientId = d.ClientId,
+                           Caller = d.Caller,
+                           Concern = d.Concern,
+                           AnsweredBy = d.AnsweredBy,
+                           StaffId = d.StaffId,
+                           ProductId = d.ProductId,
+                           ProductCode = d.mstProduct.ProductCode,
+                           Remarks = d.Remarks,
+                           Status = d.Status,
+                           ProblemType = d.ProblemType,
+                           Severity = d.Severity,
+                           Solution = d.Solution,
+                           DoneDate = d.DoneDate.ToString(),
+                           DoneTime = d.DoneTime.ToString(),
+                           VerifiedBy = d.VerifiedBy,
+                           IsLocked = d.IsLocked
+                       };
+
+            return task.ToList();
+
+        }
+
+        // ===========
         // ADD Item
         // ===========
         [Route("api/task/add")]
