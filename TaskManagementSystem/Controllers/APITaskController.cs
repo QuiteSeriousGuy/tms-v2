@@ -157,6 +157,58 @@ namespace TaskManagementSystem.Controllers
         }
 
         // ==============
+        // UPDATE Item
+        // ==============
+        [Route("api/task/update/{id}")]
+        public HttpResponseMessage Put(String id, Models.MstTask task)
+        {
+            try
+            {
+                var isLocked = true;
+                var identityUserId = User.Identity.GetUserId();
+               
+                var date = DateTime.Now;
+
+                var taskId = Convert.ToInt32(id);
+                var tasks = from d in db.trnTasks where d.Id == taskId select d;
+
+                if (tasks.Any())
+                {
+                    var updateItem = tasks.FirstOrDefault();
+
+                    updateItem.ClientId = task.ClientId;
+                    updateItem.Caller = task.Caller;
+                    updateItem.Concern = task.Concern;
+                    updateItem.AnsweredBy = task.AnsweredBy;
+                    updateItem.StaffId = task.StaffId;
+                    updateItem.ProductId = task.ProductId;
+                    updateItem.Remarks = task.Remarks;
+                    updateItem.Status = task.Status;
+                    updateItem.ProblemType = task.ProblemType;
+                    updateItem.Severity = task.Severity;
+                    updateItem.Solution = task.Solution;
+                    updateItem.DoneDate = Convert.ToDateTime(task.DoneDate);
+                    updateItem.DoneTime = Convert.ToDateTime(task.DoneTime);
+                    updateItem.VerifiedBy = task.VerifiedBy;
+                    updateItem.IsLocked = isLocked;
+
+                    db.SubmitChanges();
+
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+        }
+
+
+        // ==============
         // DELETE Item
         // ==============
         [Route("api/task/delete/{id}")]
@@ -167,8 +219,10 @@ namespace TaskManagementSystem.Controllers
             {
                 var taskId = Convert.ToInt32(id);
                 var tasks = from d in db.trnTasks where d.Id == taskId select d;
-
-                if (tasks.Any())
+                var tasksub = from t in db.trnTaskSubs where t.TaskId == taskId select t;
+                
+              
+               if (tasks.Any())
                 {
                     db.trnTasks.DeleteOnSubmit(tasks.First());
                     db.SubmitChanges();

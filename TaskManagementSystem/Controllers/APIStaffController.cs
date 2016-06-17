@@ -112,10 +112,6 @@ namespace TaskManagementSystem.Controllers
                     updateItem.ContactNumber = item.ContactNumber;
                     updateItem.IsLocked = isLocked;
 
-                    //updateItem.UpdateUserId = 123;
-                    //updateItem.UpdateDateTime = date;
-                    //updateItem.IsLocked = isLocked;
-
                     db.SubmitChanges();
 
                     return Request.CreateResponse(HttpStatusCode.OK);

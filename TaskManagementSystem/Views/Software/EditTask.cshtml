@@ -232,6 +232,8 @@
     var cboProblemType;
     var cboSeverity;
     var cboStatus;
+    var iDateSelectedValue = "";
+    var cboDate;
 
     // =======================
     // Get URL Parameter Value
@@ -280,6 +282,7 @@
                         cboStatus.selectedValue = results[i]["Status"];
                         document.getElementById("solutionDiv").value = results[i]["Solution"];
                         cboStaffVerifiedSelectedValue = results[i]["VerifiedBy"];
+                        cboDate.selectedValue = results[i]["DoneDate"];
                         
                         result.push({
                             Id: results[i]["Id"],
@@ -570,18 +573,15 @@
         //DONE DATE
         dDate = new Date();
         // create InputDate control
-        iDate = new wijmo.input.InputDate('#doneDateDiv', {
+        cboDate = new wijmo.input.InputDate('#doneDateDiv', {
             min: new Date(2014, 01, 01),
             format: 'MM/dd/yyyy',
             value: dDate,
-            selectedValue: iDateSelectedValue.toString(),
             onValueChanged: function () {
                 doneDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
-
             }
         });
-
-        doneDate = [iDate.value.getFullYear(), iDate.value.getMonth() + 1, iDate.value.getDate()].join('-');
+       
 
         // DONE TIME
         inputTime = new wijmo.input.InputTime('#doneTimeDiv', {
