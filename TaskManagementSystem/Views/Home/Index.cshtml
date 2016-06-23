@@ -30,12 +30,25 @@
                         <h1><img src="~/images/logo.png" alt=""></h1>
                     </a>
                 </div>
-                <div class="navbar-collapse collapse">
+                <div class="navbar-collapse collapse" data-hover="dropdown" data-animations="fadeInDown fadeInRight fadeInUp fadeInLeft">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="scroll active"><a href="#top">Home</a></li>
+                        <li class="scroll"><a href="#top">Home</a></li>
                         <li class="scroll"><a href="#services">Service</a></li>
                         <li class="scroll"><a href="#anchorabout-us">About Us</a></li>
-                        <li class="scroll"><a href="#portfolio">Products</a></li>
+                        @*<li class="scroll"><a href="#portfolio">Products</a></li>*@
+                        <li class="dropdown scroll">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="scroll subli"><a href="#portfolio">Our Products</a></li>
+                                <li class="scroll subli"><a href="#POS">POS</a></li>
+                                <li class="scroll subli"><a href="#FMIS">FMIS</a></li>
+                                <li class="scroll subli"><a href="#EasyFIS">EasyFIS</a></li>
+                                <li class="scroll subli"><a href="#HRIS">HRIS</a></li>
+                                <li class="divider"></li>
+                                <li class="scroll subli"><a href="#menuClients">Our Clients</a></li>
+                                <li class="scroll subli"><a href="#menuTest">Testimonials</a></li>
+                            </ul>
+                        </li>
                         <li class="scroll"><a href="#contact-us">Contact</a></li>
                         <li><a href="@Url.Action("Login","Account")">Login</a></li>
                     </ul>
@@ -52,7 +65,7 @@
                                 <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/IPOSdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
                             </div>
                             <div id="sliderpara" class="col-sm-7">
-                                <h1 class="prodtitle1 animated fadeInRightBig">POS</h1>
+                                <div class="prodtitlealign"><img class="prodtitle1 animated fadeInRightBig" src="~/images/products/POSbrand2.png" alt=""></div>
                                 <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
                                     <strong>Point-Of-Sale (POS) System</strong> is a 3-in-1 software that caters to micro, small and medium sized businesses (MSMB)<br /><br />
                                     Its module includes Sales, Accounts Receivable and Inventory. It is designed to be light and simplified to make users easily adapt and understand the flow of operations yet powerful enough to gather vital information for making business decisions.<br /><br />
@@ -69,7 +82,7 @@
                                 <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/FMISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
                             </div>
                             <div id="sliderpara" class="col-sm-7">
-                                <h1 class="prodtitle1 animated fadeInRightBig">FMIS</h1>
+                                <div class="prodtitlealign"><img class="prodtitle1 animated fadeInRightBig" src="~/images/products/FMISbrand2.png" alt=""></div>
                                 <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
                                     <strong>Financial Management Information System</strong> is designed for robust enterprise transactions that includes customer and sales management, payables, supply-chain management, warehousing, accounting and finance for trading businesses.<br/><br />
                                     <strong>FMIS</strong> is a strategic tool that can leverage an organization in making its operations transparent and efficient.<br /><br />
@@ -86,7 +99,7 @@
                                 <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/WebFMISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
                             </div>
                             <div id="sliderpara" class="col-sm-7">
-                                <h1 class="prodtitle1 animated fadeInRightBig">EasyFIS</h1>
+                                <div class="prodtitlealign"><img class="prodtitle1 animated fadeInRightBig" src="~/images/products/easyfislogo2.png" alt=""></div>
                                 <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
                                     <strong>Easy Financial Information System</strong> is designed for robust enterprise transactions that includes customer and sales management, payables, supply-chain management, warehousing, accounting and finance for trading businesses.<br /><br />
                                     <strong>EasyFIS</strong> is an online strategic tool that can leverage an organization in making its operations transparent and efficient.<br /><br />
@@ -103,7 +116,7 @@
                                 <img class="prodcar animated wow fadeInLeftBig" src="~/images/products/IHRISdesk.png" alt="" data-wow-duration="1000ms" data-wow-delay="300ms">
                             </div>
                             <div id="sliderpara" class="col-sm-7">
-                                <h1 class="prodtitle1 animated fadeInRightBig">HRIS</h1>
+                                <div class="prodtitlealign"><img class="prodtitle1 animated fadeInRightBig" src="~/images/products/HRISbrand2.png" alt=""></div>
                                 <p class="carpara1 animated wow fadeInRightBig" data-wow-duration="1000ms" data-wow-delay="700ms">
                                     <strong>Human Resource Information System</strong> is a comprehensive system for managing Employee Records from Attendance and Time Keeping to Payroll. Designed for large employee based pool with multiple and geographically separated branches.<br/><br />
                                     Designed to save-time for your payroll clerks and staff in generating payroll for large number of employees. It will also guide your staff to accurately pinpoint employee records like Lates and Absences, Leaves, Loans, Earnings and Other Deduction Compositions.
@@ -201,8 +214,8 @@
                 <div class="col-sm-6">
                     <div class="about-info wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="700ms">
                         <center>
-                        <a href="http://psia.org.ph/" target="_blank"><img class="aboutpic1 hoveropa" src="~/images/others/PSIA.png" class="img-responsive" alt=""></a>
-                        <a href="http://www.chamber-commerce.net/dir/3348/Cebu-Chamber-of-Commerce-and-Industry-in-Cebu-City" target="_blank"><img class="aboutpic2 hoveropa" src="~/images/others/CCCI.png" class="img-responsive" alt=""></a>
+                            <a href="http://psia.org.ph/" target="_blank"><img class="aboutpic1 hoveropa" src="~/images/others/PSIA.png" class="img-responsive" alt=""></a>
+                            <a href="http://www.chamber-commerce.net/dir/3348/Cebu-Chamber-of-Commerce-and-Industry-in-Cebu-City" target="_blank"><img class="aboutpic2 hoveropa" src="~/images/others/CCCI.png" class="img-responsive" alt=""></a>
                         </center>
                     </div>
                 </div>
@@ -253,7 +266,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="about-info wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <h2><span class="fa fa-shopping-cart"></span> POS (Point-of-sales)</h2>
+                        <img class="brandpic" src="~/images/products/POSbrand.png" alt="">
                         <img class="prodpic" src="~/images/products/IPOSdesk.png" alt="">
                     </div>
                 </div>
@@ -281,7 +294,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="about-info wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <h2><span class="fa fa-bar-chart"></span> FMIS (Accounting)</h2>
+                        <img class="brandpic" src="~/images/products/FMISbrand.png" alt="">
                         <img class="prodpic" src="~/images/products/FMISdesk.png" alt="">
                     </div>
                 </div>
@@ -305,7 +318,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="about-info wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <h2><span class="fa fa-bar-chart"></span> EasyFIS (Online Accounting)</h2>
+                        <img class="brandpic" src="~/images/products/easyfislogo.png" alt="">
                         <img class="prodpic" src="~/images/products/WebFMISdesk.png" alt="">
                     </div>
                 </div>
@@ -329,7 +342,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="about-info wow fadeInLeftBig" data-wow-duration="1000ms" data-wow-delay="300ms">
-                        <h2><span class="fa fa-clock-o"></span> HRIS (Payroll)</h2>
+                        <img class="brandpic" src="~/images/products/HRISbrand.png" alt="">
                         <img class="prodpic" src="~/images/products/IHRISdesk.png" alt="">
                     </div>
                 </div>
@@ -344,12 +357,13 @@
                             <li>Automatic deduction based on legal requirements (SSS, GSIS, Philhealth, HDMF, Withholding Tax).</li>
                             <li>Generates Pay Slip and Payroll Worksheet in Real-time.</li>
                             <li>Generates Management and Analysis Reports (Attendance Monitoring and Demographics).</li>
-                            <li>Generates EDI files for external entities (Banks for ATM, SSS, Philhealt, HDMF and BIR).</li>
+                            <li>Generates EDI files for external entities (Banks for ATM, SSS, Philhealth, HDMF and BIR).</li>
                             <li>Monitors Loans with Ledger. The system will automatically credit payments from the payroll to the ledger so that the loan balances are updated.</li>
                             <li>Monitors Leaves with Balances. The systems can monitor sick and vacation leaves based on leave application and employee time records.</li>
                             <li>Leave Management</li>
                             <li>Employee Exit Management</li>
                         </ul>
+                        <i id="menuClients"></i>
                     </div>
                     <hr class="about-info wow fadeInUp lasthr" />
                 </div>
@@ -362,59 +376,6 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-                            @*<ul class="clients-carousel">
-                                <li><a href="http://theabacagroup.com/" target="_blank"><img src="~/images/clients/abaca.png" class="img-responsive" alt=""></a><div class="clientsname">The Abaca Group</div></li>
-                                <li><img src="~/images/clients/arbees.png" class="img-responsive" alt=""><div class="clientsname">Arbee's Bakeshop</div></li>
-                                <li><a href="http://cebuatlantichardware.com/wp/" target="_blank"><img src="~/images/clients/atlantic.png" class="img-responsive" alt=""></a><div class="clientsname">Cebu Atlantic Hardware Inc.</div></li>
-                                <li><a href="http://www.bianospizza.com/" target="_blank"><img src="~/images/clients/bianos.png" class="img-responsive" alt=""></a><div class="clientsname">Biaño's Pizzaderia</div></li>
-                                <li><img src="~/images/clients/bigtoms.png" class="img-responsive" alt=""><div class="clientsname">Big Tom's Charbroiled Burgers</div></li>
-                                <li><img src="~/images/clients/cafenamoo.png" class="img-responsive" alt=""><div class="clientsname">Café Namoo</div></li>
-                                <li><a href="http://www.caldapizzacebu.com/" target="_blank"><img src="~/images/clients/caldapizza.png" class="img-responsive" alt=""></a><div class="clientsname">Calda Pizza Cebu</div></li>
-                                <li><a href="http://www.casaverdecebu.com/" target="_blank"><img src="~/images/clients/casaverde.png" class="img-responsive" alt=""></a><div class="clientsname">Casa Verde Restaurant</div></li>
-                                <li><a href="http://www.castlepeakhotel.net/" target="_blank"><img src="~/images/clients/castlepeak.png" class="img-responsive" alt=""></a><div class="clientsname">Castle Peak Hotel</div></li>
-                                <li><img src="~/images/clients/CEC.png" class="img-responsive" alt=""><div class="clientsname">Cebu Eastern College</div></li>
-                                <li><a href="http://cnu.edu.ph/" target="_blank"><img src="~/images/clients/CNU.png" class="img-responsive" alt=""></a><div class="clientsname">Cebu Normal University</div></li>
-                                <li><a href="http://www.crunchicken.com/" target="_blank"><img src="~/images/clients/crunchicken.png" class="img-responsive" alt=""></a><div class="clientsname">Andy's Crunchicken</div></li>
-                                <li><img src="~/images/clients/Davinci.png" class="img-responsive" alt=""><div class="clientsname">Da Vinci's Pizza</div></li>
-                                <li><a href="http://www.dranix.com.ph/" target="_blank"><img src="~/images/clients/dranix.png" class="img-responsive" alt=""></a><div class="clientsname">Dranix Distributors Inc.</div></li>
-                                <li><a href="http://estacabaygarden.com/" target="_blank"><img src="~/images/clients/estacabay.png" class="img-responsive" alt=""></a><div class="clientsname">Estaca Bay Gardens Conference Resort</div></li>
-                                <li><a href="http://www.figarocoffee.com/" target="_blank"><img src="~/images/clients/figaro.png" class="img-responsive" alt=""></a><div class="clientsname">Figaro Coffee Company</div></li>
-                                <li><img src="~/images/clients/flameit.png" class="img-responsive" alt=""><div class="clientsname">Flame It! Burgers and Sausages</div></li>
-                                <li><img src="~/images/clients/gaisano.png" class="img-responsive" alt=""><div class="clientsname">Gaisano Grand Group</div></li>
-                                <li><img src="~/images/clients/goldencowrie.png" class="img-responsive" alt=""><div class="clientsname">Golden Cowrie Native Restaurant</div></li>
-                                <li><a href="http://www.thegrandesuites.com/" target="_blank"><img src="~/images/clients/grandesuite.png" class="img-responsive" alt=""></a><div class="clientsname">The Grande Suites</div></li>
-                                <li><a href="http://gtcosmetics.com.ph/" target="_blank"><img src="~/images/clients/GT.png" class="img-responsive" alt=""></a><div class="clientsname">GT Cosmetics Manufacturing</div></li>
-                                <li><a href="http://haroldsmansion.com/" target="_blank"><img src="~/images/clients/harolds.png" class="img-responsive" alt=""></a><div class="clientsname">Harolds Mansion Hostel</div></li>
-                                <li><a href="http://ipi-phil.com/" target="_blank"><img src="~/images/clients/IPI.png" class="img-responsive" alt=""></a><div class="clientsname">International Pharmaceuticals Inc.</div></li>
-                                <li><a href="http://www.juliesbakeshop.com.ph/" target="_blank"><img src="~/images/clients/julies.png" class="img-responsive" alt=""></a><div class="clientsname">Julie's Bakeshop</div></li>
-                                <li><a href="http://www.kingsfoods.com.ph/" target="_blank"><img src="~/images/clients/Kings.png" class="img-responsive" alt=""></a><div class="clientsname">King's Quality Foods Inc.</div></li>
-                                <li><a href="http://malapascualegend.com/" target="_blank"><img src="~/images/clients/malapascualegend.png" class="img-responsive" alt=""></a><div class="clientsname">Malapascua Legend Water Sports & Resort</div></li>
-                                <li><a href="http://mactancebuairport.com/" target="_blank"><img src="~/images/clients/mcia.png" class="img-responsive" alt=""></a><div class="clientsname">Mactan Cebu International Airport</div></li>
-                                <li><a href="http://www.mcwd.gov.ph/" target="_blank"><img src="~/images/clients/mcwd.png" class="img-responsive" alt=""></a><div class="clientsname">Metropolitan Cebu Water District</div></li>
-                                <li><a href="http://mfcomputersolution.com/" target="_blank"><img src="~/images/clients/mfcomputers.png" class="img-responsive" alt=""></a><div class="clientsname">MF Computer Solution</div></li>
-                                <li><img src="~/images/clients/mooncafe.png" class="img-responsive" alt=""><div class="clientsname">Mooon Cafe</div></li>
-                                <li><img src="~/images/clients/nutech.png" class="img-responsive" alt=""><div class="clientsname">Nutech</div></li>
-                                <li><a href="http://olympus.com.ph/" target="_blank"><img src="~/images/clients/olympus.png" class="img-responsive" alt=""></a><div class="clientsname">S.E.A. Olympus Marketing, Inc.</div></li>
-                                <li><a href="http://www.orangebrutus.com/" target="_blank"><img src="~/images/clients/OrangeBrutus.png" class="img-responsive" alt=""></a><div class="clientsname">Orange Brutus</div></li>
-                                <li><a href="http://papakitsmarina.com/" target="_blank"><img src="~/images/clients/papakits.png" class="img-responsive" alt=""></a><div class="clientsname">Papa Kit's Marina & Fishing Lagoon</div></li>
-                                <li><a href="http://www.philhealth.gov.ph/" target="_blank"><img src="~/images/clients/philhealth.png" class="img-responsive" alt=""></a><div class="clientsname">Philippine Health Insurance Corporation</div></li>
-                                <li><a href="http://www.regalbusinessparkhotel.com/" target="_blank"><img src="~/images/clients/regal.png" class="img-responsive" alt=""></a><div class="clientsname">Regal Business Park Hotel</div></li>
-                                <li><a href="http://www.sanmiguel.com.ph/" target="_blank"><img src="~/images/clients/sanmig.png" class="img-responsive" alt=""></a><div class="clientsname">San Miguel Corporation</div></li>
-                                <li><img src="~/images/clients/seacrest.png" class="img-responsive" alt=""><div class="clientsname">Seacrest Maritime Foundation, Inc.</div></li>
-                                <li><a href="http://www.seaoil.com.ph/" target="_blank"><img src="~/images/clients/seaoil.png" class="img-responsive" alt=""></a><div class="clientsname">Seaoil Philippines Inc.</div></li>
-                                <li><a href="http://shamrockotap.com/" target="_blank"><img src="~/images/clients/shamrocki.png" class="img-responsive" alt=""></a><div class="clientsname">Shamrock Bakery and Restaurant Corp.</div></li>
-                                <li><a href="http://www.skygo.com.ph/" target="_blank"><img src="~/images/clients/skygo.png" class="img-responsive" alt=""></a><div class="clientsname">Skygo Marketing Corporation</div></li>
-                                <li><a href="http://www.spcfi.edu.ph/" target="_blank"><img src="~/images/clients/spcfi.png" class="img-responsive" alt=""></a><div class="clientsname">St. Paul College Foundation, Inc.</div></li>
-                                <li><img src="~/images/clients/spicefusion.png" class="img-responsive" alt=""><div class="clientsname">Spice Fusion Philippines</div></li>
-                                <li><img src="~/images/clients/subzero.png" class="img-responsive" alt=""><div class="clientsname">Cebu Subzero Logistics Inc.</div></li>
-                                <li><a href="http://sunpride.net/" target="_blank"><img src="~/images/clients/sunpride.png" class="img-responsive" alt=""></a><div class="clientsname">Sunpride Foods, Inc.</div></li>
-                                <li><img src="~/images/clients/threesixty.png" class="img-responsive" alt=""><div class="clientsname">ThreeSixty Pharmacy</div></li>
-                                <li><a href="http://www.toyota.com.ph/" target="_blank"><img src="~/images/clients/toyota.png" class="img-responsive" alt=""></a><div class="clientsname">Toyota Motor Philippines</div></li>
-                                <li><a href="http://universityofbohol.edu.ph/" target="_blank"><img src="~/images/clients/UB.png" class="img-responsive" alt=""></a><div class="clientsname">University of Bohol</div></li>
-                                <li><a href="http://vsmmc.doh.gov.ph/" target="_blank"><img src="~/images/clients/vsmmci.png" class="img-responsive" alt=""></a><div class="clientsname">Vicente Sotto Memorial Medical Center</div></li>
-                                <li><a href="http://wellnessland-ph.com/" target="_blank"><img src="~/images/clients/wellnessland.png" class="img-responsive" alt=""></a><div class="clientsname">Wellnessland Health Institute</div></li>
-                                <li><a href="http://www.yakskibarbecue.com/" target="_blank"><img src="~/images/clients/yakski.png" class="img-responsive" alt=""></a><div class="clientsname">Yakski Barbecue</div></li>
-                            </ul>*@
                             <div class="grid grid-pad">
                                 <div class="col-1-8">
                                     <div class="module">
@@ -677,6 +638,7 @@
                 </div>
             </div>
         </div>
+        <i id="menuTest"></i>
     </section><!--/#portfolio-->
 
 
@@ -796,17 +758,25 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <p>&copy; 2016 Innosoft Solutions.</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="pull-right">All Rights Reserved.</p>
-                    </div>
+                        <p>&copy; 2016 Innosoft Solutions. All Rights Reserved.</p>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/575faf595a78e2816f7911dc/default';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
 
 </body>
 </html>

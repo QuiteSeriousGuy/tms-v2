@@ -18,19 +18,19 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
-.prodtitle1 {
-  font-family: 'Open Sans', sans-serif;
-  color: #fff;
-}
-.prodtitle1, .carpara1 {
-    text-align: left;
+.prodtitlealign {
+    text-align:left;
 }
 
-.prodtitle1{
-    line-height: 50px;
+.prodtitle1 {
+  margin-top: 10px;
+  height:40%;
+  width:40%;
+  line-height: 50px;
 }
 
 .carpara1 {
+    text-align: left;
     margin-right: 100px;
 }
 
@@ -70,9 +70,8 @@ p {
         height: 50%;
     }
 
-    #sliderpara .prodtitle1,
-    #sliderpara .prodtitle2 {
-        text-align: center;
+    .prodtitlealign {
+        text-align:center;
     }
 
     .carpara1 {
@@ -80,7 +79,10 @@ p {
     }
 
     .prodtitle1{
+        width: 60%;
+        height: 60%;
         line-height: 15px;
+        margin-top: 0px;
     }
 }
 
@@ -105,20 +107,6 @@ p {
 .parallax h6 {
   color: #fff;
 }
-
-/*.parallax input[type="text"],
-.parallax input[type="text"]:hover,
-.parallax input[type="email"],
-.parallax input[type="email"]:hover,
-.parallax input[type="url"],
-.parallax input[type="url"]:hover,
-.parallax input[type="password"],
-.parallax input[type="password"]:hover,
-.parallax textarea,
-.parallax textarea:hover {
-  font-weight: 300;
-  color: #fff;
-}*/
 
 .btn {
   border: 0;
@@ -257,6 +245,12 @@ section {
     }
 }
 
+@media only screen and (max-width: 768px) {
+    #home-slider {
+        height:450px;
+    }
+}
+
 .carousel-fade .carousel-inner .item {
   opacity: 0;
   -webkit-transition-property: opacity;
@@ -361,14 +355,31 @@ section {
 
 .navbar-right li a:hover {
   color: #fff;
-  background-color: #950f10;
+  background-color: #12263f;
 }
 
-.navbar-right li.active a {
+.navbar-right li .dropdown-toggle:hover {
   color: #fff;
   background-color: #12263f;
-  padding-top:30px;
-  padding-bottom:30px;
+}
+
+.navbar-right li .dropdown-toggle:focus {
+  color: #fff;
+  background-color: #12263f;
+}
+
+.navbar-right li.subli a {
+  color: #950f10;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  padding-top:5px;
+  padding-bottom:5px;
+}
+
+.navbar-right li.subli a:hover {
+  color: #fff;
+  background-color: #12263f;
 }
 
 .navbar-brand h1 {
@@ -395,11 +406,6 @@ section {
     }
 
     .navbar-right li a {
-        padding-top:10px;
-        padding-bottom:10px;
-    }
-
-    .navbar-right li.active a {
         padding-top:10px;
         padding-bottom:10px;
     }
@@ -437,6 +443,11 @@ section {
   background-color: #950f10;
 }
 
+.ulservices {
+    text-align:left;
+    margin-left: 30px;
+}
+
 .our-services .col-sm-4 {
   padding-bottom: 50px;
   
@@ -452,6 +463,10 @@ section {
 .our-services .col-sm-4:nth-child(3), 
 .our-services .col-sm-4:nth-child(6) {
   border-right:0;
+}
+
+.service-info {
+    text-align: center;
 }
 
 .service-info h3 {
@@ -504,13 +519,26 @@ section {
 }
 
 .aboutpic1 {
+    margin-top:20px;
     height: 90%;
     width: 90%;
+    margin-bottom:20px;
 }
 
 .aboutpic2 {
-    height: 50%;
-    width: 50%;
+    height: 40%;
+    width: 40%;
+    margin-bottom:20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .aboutpic1 {
+    margin-top:0px;
+    }
+
+.aboutpic2 {
+    margin-bottom:0px;
+    }
 }
 
 .progress{
@@ -545,6 +573,18 @@ section {
     padding-top:40px;
     width: 90%;
     height: 90%;
+}
+
+.brandpic {
+    margin-left:20px;
+    width: 35%;
+    height: 35%;
+}
+
+@media only screen and (max-width: 768px) {
+    .brandpic {
+    margin-left:0px;
+}
 }
 
 #portfolio .container-fluid, 
@@ -708,30 +748,6 @@ section {
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
 }
-
-/*.clients {
-  padding: 100px 0;
-}
-.clients-carousel {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.clients-carousel li {
-  padding: 0 20px;
-  opacity: 0.8;
-  -webkit-transition: opacity 0.3s;
-          transition: opacity 0.3s;
-}
-.clients-carousel li:hover {
-  opacity: 1;
-}
-
-.clientsname {
-    text-align:center;
-    font-size:13px;
-    line-height:15px;
-}*/
 
 /***/
 
@@ -1027,6 +1043,11 @@ ul.address {
     .about-info p, .ulservices,
     .ulprod, .ulcontact {
         text-align:left;
+        margin-left: 0px;
+    }
+
+    #footer .footer-bottom {
+        padding-bottom:40px;
     }
 
 }
