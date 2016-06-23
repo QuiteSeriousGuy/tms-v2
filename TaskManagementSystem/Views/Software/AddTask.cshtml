@@ -21,7 +21,7 @@
     </section>
 
     <div class="btn-group-horizontal btn-sm pull-right">
-        <button class="btn btn-info" id="" onclick="cmdAddTask()"><i class="fa fa-plus"></i> Add</button>
+        <button class="btn btn-info" id="" onclick="cmdAddTask()"><i class="fa fa-plus"></i> Save</button>
         <a href="../Software/Task" class="btn btn-danger "><i class="fa fa-close"></i> Cancel</a>
     </div>
     <br/>
@@ -709,9 +709,9 @@
 
             // DONE TIME
             inputTime = new wijmo.input.InputTime('#doneTimeDiv', {
-                min: new Date(2014, 8, 1, 9, 0),
-                max: new Date(2014, 8, 1, 17, 0),
-                step: 15,
+                min: new Date(2014, 8, 1, 7, 0),
+                max: new Date(2014, 8, 1, 20, 0),
+                step: 1,
                 format: 'h:mm tt',
                 value: dDate,
                 onValueChanged: function () {
@@ -719,6 +719,8 @@
                     console.log(doneTime);
                 }
             });
+
+            doneTime = ([inputTime.value.getFullYear(), inputTime.value.getMonth() + 1, inputTime.value.getDate()].join('-') + " " + [inputTime.value.getHours(), inputTime.value.getMinutes(), inputTime.value.getSeconds()].join(':'));
 
             //DATE CALLED
             dCalled = new Date();
@@ -736,8 +738,8 @@
 
             //TIME CALLED
             var inpDateCalled = new wijmo.input.InputTime('#timeCalledDiv', {
-                min: new Date(2014, 8, 1, 9, 0),
-                max: new Date(2014, 8, 1, 17, 0),
+                min: new Date(2014, 8, 1, 7, 0),
+                max: new Date(2014, 8, 1, 20, 0),
                 step: 15,
                 format: 'h:mm tt',
                 value: dCalled,
@@ -764,8 +766,8 @@
 
             //FINISHED TIME
             var inpFinishedTime = new wijmo.input.InputTime('#finishedTimeDiv', {
-                min: new Date(2014, 8, 1, 9, 0),
-                max: new Date(2014, 8, 1, 17, 0),
+                min: new Date(2014, 8, 1, 7, 0),
+                max: new Date(2014, 8, 1, 20, 0),
                 step: 15,
                 format: 'h:mm tt',
                 value: dCalled,
