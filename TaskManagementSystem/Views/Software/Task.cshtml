@@ -86,10 +86,10 @@
     var inputDate;
 
     // =======================
-    // Get UserMasterList Data
+    // Get Task List Data
     // =======================
 
-    function getUserMasterList() {
+    function getTaskList() {
         var result = new wijmo.collections.ObservableArray();
         $("#loadingModal").modal("show");
         $.ajax({
@@ -165,7 +165,7 @@
     // Reload Grid Only
     // =====================
     function refresh(){
-    taskList = new wijmo.collections.CollectionView(getUserMasterList());
+        taskList = new wijmo.collections.CollectionView(getTaskList());
 
     taskList.canFilter = true;
     taskList.pageSize = 15;
@@ -251,7 +251,7 @@
                 dateId = [this.value.getMonth() + 1, this.value.getDate(), this.value.getFullYear()].join('-');
                 console.log(dateId);
 
-                taskList = new wijmo.collections.CollectionView(getUserMasterList());
+                taskList = new wijmo.collections.CollectionView(getTaskList());
 
                 taskList.canFilter = true;
                 taskList.pageSize = 15;
@@ -267,7 +267,7 @@
        
         getClientMasterList();
 
-        taskList = new wijmo.collections.CollectionView(getUserMasterList());
+        taskList = new wijmo.collections.CollectionView(getTaskList());
 
         taskList.canFilter = true;
         taskList.pageSize = 15;
