@@ -31,6 +31,7 @@ namespace TaskManagementSystem
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/bootstrap-dropdownhover.min.js",
                       "~/Scripts/respond.min.js",
                       "~/Scripts/jquery.js",
                       "~/Scripts/jquery.inview.min.js",
@@ -45,6 +46,7 @@ namespace TaskManagementSystem
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/animate.min.css",
+                      "~/Content/bootstrap-dropdown.min.css",
                       "~/font-awesome-4.6.1/css/font-awesome.min.css",
                       "~/Content/owl.carousel.css",
                       "~/Content/owl.theme.css",
