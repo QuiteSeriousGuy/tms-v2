@@ -38,7 +38,7 @@
 
     <div class="btn-group-horizontal btn-sm pull-right">
         <button class="btn btn-primary" id="editButton" onclick="cmdEdit()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
-        <button type="button" class="btn btn-info" id="saveButton" onclick="cmdUpdate"><i class="fa fa-floppy-o" aria-hidden="true" disabled></i> Save</button>
+        <button type="button" class="btn btn-info" id="saveButton" onclick="cmdUpdate()"><i class="fa fa-floppy-o" aria-hidden="true" disabled></i> Save</button>
         <button type="button" class="btn btn-danger" id="cancelButton" onclick="cmdCancel()"><i class="fa fa-close"></i> Cancel</button>
     </div>
     
@@ -267,6 +267,30 @@
         } else { window.location = "/Software/Task"; }
         
     }
+
+    // =======================
+    // Update Task
+    // =======================
+    function cmdUpdate() {
+        var taskObject = new Object();
+        taskObject.TaskDate = document.getElementById("taskDateDiv").value;
+        taskObject.TaskNo = document.getElementById("taskNoDiv").value;
+        taskObject.ClientId = cboClientNameSelectedValue;
+        taskObject.Caller = document.getElementById("CallerDiv").value;
+        taskObject.Concern = document.getElementById("CallerDiv").value;
+        taskObject.AnsweredBy
+        taskObject.StaffId
+        taskObject.ProductId
+        taskObject.Remarks
+        taskObject.Status
+        taskObject.ProblemType
+        taskObject.Severity
+        taskObject.Solution
+        taskObject.DoneDate
+        taskObject.DoneTime
+        taskObject.VerifiedBy
+    }
+
     // =======================
     // Get Tasksub List Data
     // =======================
@@ -423,22 +447,37 @@
                     doneTime = new Date();
 
                     var time = doneTimeSelectedValue.split(" ");
+                    console.log(time);
                     
+                    if (time[3] == "") {
+                        var t = time[4]
+                    } else { var t = time[3]; }
                     
-                    var t = time[4];
-                    var hour = t.split(":");
+                    var hour = t.split(":"); //hh : mm
+                    console.log(hour);
+                    
+
                     var m = hour[1];
                     minute = m.split("");
 
                     var tm = minute[2];
                     console.log(tm);
-                    if (tm == "P") {  //if time is PM, add 12 hours
+                    var hh = parseInt(hour[0], 10);
+                    if (tm == "P") {  //time PM, add 12
+                        if (hh != 12) {
+                            fhour = parseInt(hour[0], 10);
+                            doneTime.setHours(fhour + 12);
+                            console.log(fhour);
+                        } else {
+                            fhour = parseInt(hour[0], 10);
+                            doneTime.setHours(fhour);
+                            console.log(fhour);
+                        }
+                        
+                    } else { //if time is AM
                         fhour = parseInt(hour[0], 10);
-                        doneTime.setHours(fhour + 12);
-                        console.log(fhour);
-                    } else {
                         doneTime.setHours(fhour);
-                        console.log("No plus" + fhour);
+                        console.log(fhour);
                     }
 
                     var minutes = minute[0] + minute[1];
@@ -449,9 +488,10 @@
                     console.log(fminute);
 
                     console.log(doneTime);
+
                     // DONE TIME
-                    inputTime = new wijmo.input.InputTime('#doneTimeDiv', {
-                        min: new Date(2014, 8, 1, 9, 0),
+                        inputTime = new wijmo.input.InputTime('#doneTimeDiv', {
+                        min: new Date(2014, 8, 1, 7, 0),
                         max: new Date(2014, 8, 1, 20, 0),
                         step: 1,
                         format: 'h:mm tt',
@@ -744,6 +784,8 @@
         createStatusCboBox();
 
         $('#saveButton').prop('disabled', true);
+
+        //getTaskSubList();
         
 
     });
