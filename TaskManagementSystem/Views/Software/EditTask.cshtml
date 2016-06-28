@@ -215,6 +215,8 @@
     var cboDate;
     var doneTimeSelectedValue = "";
     var cancel = 0;
+    var doneDate;
+    var doneTime;
     
 
     // =======================
@@ -275,20 +277,43 @@
         var taskObject = new Object();
         taskObject.TaskDate = document.getElementById("taskDateDiv").value;
         taskObject.TaskNo = document.getElementById("taskNoDiv").value;
-        taskObject.ClientId = cboClientNameSelectedValue;
-        taskObject.Caller = document.getElementById("CallerDiv").value;
-        taskObject.Concern = document.getElementById("CallerDiv").value;
-        taskObject.AnsweredBy
-        taskObject.StaffId
-        taskObject.ProductId
-        taskObject.Remarks
-        taskObject.Status
-        taskObject.ProblemType
-        taskObject.Severity
-        taskObject.Solution
-        taskObject.DoneDate
-        taskObject.DoneTime
-        taskObject.VerifiedBy
+        taskObject.ClientId = cboBoxClientName.selectedValue;
+        taskObject.ProductId = cboBoxProductName.selectedValue;
+        taskObject.Caller = document.getElementById("callerDiv").value;
+        taskObject.Concern = document.getElementById("concernDiv").value;
+        taskObject.AnsweredBy = cboStaffName.selectedValue;
+        taskObject.StaffId = cboAssignedStaffName.selectedValue;
+        taskObject.Remarks = document.getElementById("remarksDiv").value;
+        taskObject.ProblemType = cboProblemType.selectedItem;
+        taskObject.Severity = cboSeverity.selectedItem;
+        taskObject.Status = cboStatus.selectedItem;
+        taskObject.Solution = document.getElementById("solutionDiv").value;
+        taskObject.DoneDate = doneDate;
+        taskObject.DoneTime = doneTime;
+        taskObject.VerifiedBy = cboStaffVerified.selectedValue;
+        
+        var data = JSON.stringify(taskObject);
+        var itemdata = data;
+       
+        $.ajax({
+            url: '/api/task/update/' + taskId,
+            type: 'PUT',
+            dataType: 'json',
+            data: itemdata,
+            contentType: "application/json;charset=utf-8",
+            cache: false,
+            statusCode: {
+                200: function () {
+                    toastr.success("Update Sucess");
+                },
+                404: function () {
+                    toastr.error("Edit Failed");
+                },
+                400: function () {
+                    toastr.error("Edit Failed");
+                }
+            }
+        });
     }
 
     // =======================
@@ -443,8 +468,9 @@
                             doneDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
                         }
                     });
+                    doneDate = [cboDate.value.getFullYear(), cboDate.value.getMonth() + 1, cboDate.value.getDate()].join('-');
 
-                    doneTime = new Date();
+                    dTime = new Date();
 
                     var time = doneTimeSelectedValue.split(" ");
                     console.log(time);
@@ -466,17 +492,17 @@
                     if (tm == "P") {  //time PM, add 12
                         if (hh != 12) {
                             fhour = parseInt(hour[0], 10);
-                            doneTime.setHours(fhour + 12);
+                            dTime.setHours(fhour + 12);
                             console.log(fhour);
                         } else {
                             fhour = parseInt(hour[0], 10);
-                            doneTime.setHours(fhour);
+                            dTime.setHours(fhour);
                             console.log(fhour);
                         }
                         
                     } else { //if time is AM
                         fhour = parseInt(hour[0], 10);
-                        doneTime.setHours(fhour);
+                        dTime.setHours(fhour);
                         console.log(fhour);
                     }
 
@@ -484,10 +510,10 @@
                     
                     var fminute = parseInt(minutes, 10);
                     
-                    doneTime.setMinutes(fminute);
+                    dTime.setMinutes(fminute);
                     console.log(fminute);
 
-                    console.log(doneTime);
+                    console.log(dTime);
 
                     // DONE TIME
                         inputTime = new wijmo.input.InputTime('#doneTimeDiv', {
@@ -495,13 +521,14 @@
                         max: new Date(2014, 8, 1, 20, 0),
                         step: 1,
                         format: 'h:mm tt',
-                        value: doneTime,
+                        value: dTime,
                         disabled: true,
                         onValueChanged: function () {
                             doneTime = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
 
                         }
-                    });
+                        });
+                        doneTime = ([inputTime.value.getFullYear(), inputTime.value.getMonth() + 1, inputTime.value.getDate()].join('-') + " " + [inputTime.value.getHours(), inputTime.value.getMinutes(), inputTime.value.getSeconds()].join(':'));
                 }
             }
         });
