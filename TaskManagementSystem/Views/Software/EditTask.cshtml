@@ -217,7 +217,7 @@
     var cancel = 0;
     var doneDate;
     var doneTime;
-    
+    var taskSubList;
 
     // =======================
     // Get URL Parameter Value
@@ -305,6 +305,7 @@
             statusCode: {
                 200: function () {
                     toastr.success("Update Sucess");
+                    location.reload(true);
                 },
                 404: function () {
                     toastr.error("Edit Failed");
@@ -321,7 +322,7 @@
     // =======================
 
     function getTaskSubList() {
-        var result = new wijmo.collections.ObservableArray();
+        var taskSubList = new wijmo.collections.ObservableArray();
         $.ajax({
             url: '/api/tasksub/list/' + taskId,
             cache: false,
@@ -332,50 +333,23 @@
                 var lastUser = 0;
                 if (results.length > 0) {
                     for (i = 0; i < results.length; i++) {
-                        var name = "";
-                        document.getElementById("taskDateDiv").value = results[i]["TaskDate"];
-                        document.getElementById("taskNoDiv").value = results[i]["TaskNo"];
-                        cboClientNameSelectedValue = results[i]["ClientId"];
-                        cboProductNameSelectedValue = results[i]["ProductId"];
-                        document.getElementById("callerDiv").value = results[i]["Caller"];
-                        document.getElementById("concernDiv").value = results[i]["Concern"];
-                        cboStaffNameSelectedValue = results[i]["AnsweredBy"];
-                        cboAssignedStaffNameSelectedValue = results[i]["StaffId"];
-                        document.getElementById("remarksDiv").value = results[i]["Remarks"];
-                        cboProblemType.selectedValue = results[i]["ProblemType"];
-                        cboSeverity.selectedValue = results[i]["Severity"];
-                        cboStatus.selectedValue = results[i]["Status"];
-                        document.getElementById("solutionDiv").value = results[i]["Solution"];
-                        cboStaffVerifiedSelectedValue = results[i]["VerifiedBy"];
-                       
-                        //vDate = results[i]["DoneDate"];
-
-                        result.push({
-                            Id: results[i]["Id"],
-                            TaskNo: results[i]["TaskNo"],
-                            TaskDate: results[i]["TaskDate"],
-                            ClientId: results[i]["ClientId"],
-                            Caller: results[i]["Caller"],
-                            Concern: results[i]["Concern"],
-                            AnsweredBy: results[i]["AnsweredBy"],
-                            StaffId: results[i]["StaffId"],
-                            ProductId: results[i]["ProductId"],
-                            Remarks: results[i]["Remarks"],
-                            Status: results[i]["Status"],
-                            ProblemType: results[i]["ProblemType"],
-                            Severity: results[i]["Severity"],
-                            Solution: results[i]["Solution"],
-                            DoneDate: results[i]["DoneDate"],
-                            DoneTime: results[i]["DoneTime"],
-                            VerifiedBy: results[i]["VerifiedBy"],
-                            IsLocked: results[i]["IsLocked"]
+                        taskSubList.push({
+                            EditId: "<button class='btn btn-primary btn-xs btn-block' id='clientEditButton' onClick='cmdClientEditButton_OnClick()'><i class='fa fa-pencil'></i> Edit</button>",
+                            DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='clientDeleteButton' onclick='cmdClientDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
+                            TaskId: results[i]["TaskId"],
+                            Action: results[i]["Action"],
+                            DateCalled: results[i]["DateCalled"],
+                            TimeCalled: results[i]["TimeCalled"],
+                            FinishedDate: results[i]["FinishedDate"],
+                            FinishedTime: results[i]["FinishedTime"],
+                            Remarks: results[i]["Remarks"]
                         });
                     }
                 }
             }
         });
 
-        return result;
+        return taskSubList;
     }
 
     // =======================
@@ -800,6 +774,8 @@
         });
     }
 
+
+
     $(document).ready(function () {
 
         getTaskList();
@@ -810,9 +786,78 @@
         createSeverityCboBox();
         createStatusCboBox();
 
+        taskSubList = new wijmo.collections.CollectionView(getTaskSubList());
+
+        taskSubList.canFilter = true;
+        taskSubList.pageSize = 15;
+
         $('#saveButton').prop('disabled', true);
 
-        //getTaskSubList();
+        //Flex Grid
+        taskSubGrid = new wijmo.grid.FlexGrid('#actionDiv');
+        taskSubGrid.initialize({
+            columns: [
+
+
+            {
+                "header": "Edit",
+                "binding": "EditId",
+                "width": 70,
+                "align": "center",
+                "isContentHtml": true
+            },
+            {
+                "header": "Delete",
+                "binding": "DeleteId",
+                "width": 90,
+                "align": "center",
+                "isContentHtml": true
+
+            },
+            {
+                "header": "Action",
+                "binding": "Action",
+                "align": "center",
+                "allowSorting": true,
+                "width": "5*"
+            },
+            {
+                "header": "Date Called",
+                "binding": "DateCalled",
+                "align": "center",
+                "allowSorting": true,
+                "width": "5*"
+            },
+            {
+                "header": "Time Called",
+                "binding": "TimeCalled",
+                "align": "center",
+                "allowSorting": true,
+                "width": "5*"
+            },
+            {
+                "header": "Finished Date",
+                "binding": "FinishedDate",
+                "align": "center",
+                "allowSorting": true,
+                "width": "5*"
+            },
+            {
+                "header": "Finished Time",
+                "binding": "FinishedTime",
+                "align": "center",
+                "allowSorting": true,
+                "width": ".5*"
+            }],
+            autoGenerateColumns: false,
+            itemsSource: taskSubList,
+            isReadOnly: true,
+            autoSizeMode: wijmo.grid.AutoSizeMode.Both,
+            allowDragging: wijmo.grid.AllowDragging.None,
+            selectionMode: wijmo.grid.SelectionMode.Row
+        });
+
+        taskSubGrid.trackChanges = true;
         
 
     });
