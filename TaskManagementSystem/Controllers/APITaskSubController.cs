@@ -25,7 +25,7 @@ namespace TaskManagementSystem.Controllers
                           {
                               Id = d.Id,
                               TaskId = d.TaskId,
-                              DateCalled = d.DateCalled.ToString(),
+                              DateCalled = d.DateCalled,
                               Action = d.Action,
                               TimeCalled = d.TimeCalled.ToString(),
                               FinishedDate = d.FinishedDate.ToString(),
