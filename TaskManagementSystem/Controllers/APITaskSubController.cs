@@ -28,7 +28,7 @@ namespace TaskManagementSystem.Controllers
                               DateCalled = d.DateCalled,
                               Action = d.Action,
                               TimeCalled = d.TimeCalled.ToString(),
-                              FinishedDate = d.FinishedDate.ToString(),
+                              FinishedDate = d.FinishedDate,
                               FinishedTime = d.FinishedTime.ToString(),
                               Remarks = d.Remarks
                           };

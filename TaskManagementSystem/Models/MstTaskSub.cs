@@ -14,7 +14,7 @@ namespace TaskManagementSystem.Models
         public DateTime? DateCalled { get; set; }
         public String Action { get; set; }
         public String TimeCalled { get; set; }
-        public String FinishedDate { get; set; }
+        public DateTime? FinishedDate { get; set; }
         public String FinishedTime { get; set; }
         public String Remarks { get; set; }
     }
