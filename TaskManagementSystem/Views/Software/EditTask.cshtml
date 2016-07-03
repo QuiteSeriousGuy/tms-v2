@@ -36,17 +36,67 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal for Task Sub ADD-->
     <div class="modal fade" id="addTaskSub" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
+
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Add Action</h4>
                 </div>
-                <div class="modal-body">
-                    <p>This is a large modal.</p>
+
+                <div class="modal-body" style="height: 390px;">
+                    <div id="home" class="tab-pane fade in active">
+                        <form class="form-horizontal" id="add-form">
+                            <div class="tabstyle">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="barCode" class="col-sm-2 control-label">Action</label>
+                                        <div class="col-sm-9">
+                                            <textarea type="" class="form-control" id="actionbarDiv"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="doneDateDiv" class="col-sm-2 control-label">Date Called</label>
+                                        <div class="col-sm-4">
+                                            <div id="dateCalledDiv"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-2 control-label">Time Called</label>
+                                        <div class="col-sm-4">
+                                            <div id="timeCalledDiv"></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-2 control-label">Finished Date</label>
+                                        <div class="col-sm-6">
+                                            <div id="finishedDateDiv"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-2 control-label">Finished Time</label>
+                                        <div class="col-sm-6">
+                                            <div id="finishedTimeDiv"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="barCode" class="col-sm-2 control-label">Remarks</label>
+                                        <div class="col-sm-9">
+                                            <textarea type="" class="form-control" id="remarksDiv"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
@@ -61,7 +111,7 @@
     </div>
     
     <br/>
-    <hr />
+    <hr/>
     
     
     <div class="row">
@@ -239,6 +289,10 @@
     var doneDate;
     var doneTime;
     var taskSubList;
+    var dateCalled;
+    var timeCalled;
+    var finishedDate;
+    var finishedTime;
 
     // =======================
     // Get URL Parameter Value
@@ -456,6 +510,8 @@
                     dDate = new Date();
                     
                     var p = cboDateSelectedValue.split(" ");
+                    p = p.filter(function (n) { return n != "" });
+                    console.log(p);
                     var month = p[0];
                     var day = parseInt(p[1], 10);
                     var year = parseInt(p[2], 10);
@@ -487,15 +543,14 @@
                     });
                     doneDate = [cboDate.value.getFullYear(), cboDate.value.getMonth() + 1, cboDate.value.getDate()].join('-');
 
-                    dTime = new Date();
+                    var dTime = new Date();
 
                     var time = doneTimeSelectedValue.split(" ");
+                    time = time.filter(function (n) { return n != "" });
                     console.log(time);
-                    
-                    if (time[3] == "") {
-                        var t = time[4]
-                    } else { var t = time[3]; }
-                    
+                  
+                    var t = time[3];
+
                     var hour = t.split(":"); //hh : mm
                     console.log(hour);
                     
@@ -903,6 +958,62 @@
         });
 
         taskSubGrid.trackChanges = true;
+
+        //DATE CALLED
+        dCalled = new Date();
+        inptDateCalled = new wijmo.input.InputDate('#dateCalledDiv', {
+            min: new Date(2014, 01, 01),
+            format: 'MM/dd/yyyy',
+            value: dCalled,
+            onValueChanged: function () {
+                c = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
+                console.log(dateCalled);
+            }
+        });
+
+        dateCalled = [inptDateCalled.value.getFullYear(), inptDateCalled.value.getMonth() + 1, inptDateCalled.value.getDate()].join('-');
+
+        //TIME CALLED
+        var inpDateCalled = new wijmo.input.InputTime('#timeCalledDiv', {
+            min: new Date(2014, 8, 1, 7, 0),
+            max: new Date(2014, 8, 1, 20, 0),
+            step: 15,
+            format: 'h:mm tt',
+            value: dCalled,
+            onValueChanged: function () {
+                timeCalled = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
+                console.log(timeCalled);
+            }
+        });
+
+        //FINISHED DATE
+        fDate = new Date();
+        inptFinishedDate = new wijmo.input.InputDate('#finishedDateDiv', {
+            min: new Date(2014, 01, 01),
+            format: 'MM/dd/yyyy',
+            value: fDate,
+            onValueChanged: function () {
+                finishedDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
+                console.log(finishedDate);
+            }
+        });
+
+        finishedDate = [inptFinishedDate.value.getFullYear(), inptFinishedDate.value.getMonth() + 1, inptFinishedDate.value.getDate()].join('-');
+
+
+        //FINISHED TIME
+        var inpFinishedTime = new wijmo.input.InputTime('#finishedTimeDiv', {
+            min: new Date(2014, 8, 1, 7, 0),
+            max: new Date(2014, 8, 1, 20, 0),
+            step: 15,
+            format: 'h:mm tt',
+            value: dCalled,
+            onValueChanged: function () {
+                finishedTime = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
+                console.log(finishedTime);
+            }
+        });
+
         
         
     });
