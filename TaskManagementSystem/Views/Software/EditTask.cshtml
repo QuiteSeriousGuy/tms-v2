@@ -38,7 +38,7 @@
 
     <!-- Modal for Task Sub ADD-->
     <div class="modal fade" id="addTaskSub" role="dialog">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg" style="width: 80%;">
             <div class="modal-content">
 
                 <div class="modal-header">
@@ -46,10 +46,9 @@
                     <h4 class="modal-title">Add Action</h4>
                 </div>
 
-                <div class="modal-body" style="height: 390px;">
-                    <div id="home" class="tab-pane fade in active">
+                <div class="modal-body">
                         <form class="form-horizontal" id="add-form">
-                            <div class="tabstyle">
+                            <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="barCode" class="col-sm-2 control-label">Action</label>
@@ -94,7 +93,6 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
                 </div>
 
                 <div class="modal-footer">
@@ -125,6 +123,7 @@
     <div class="btn-group-horizontal btn-sm pull-right">
         <button class="btn btn-primary" id="editButton" onclick="cmdEdit()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
         <button type="button" class="btn btn-info" id="saveButton" onclick="cmdUpdate()"><i class="fa fa-floppy-o" aria-hidden="true" disabled></i> Save</button>
+        <button type="button" class="btn btn-info" id="printButton" onclick=""><i class="fa fa-print" aria-hidden="true"></i> Print</button>
         <button type="button" class="btn btn-danger" id="cancelButton" onclick="cmdCancel()"><i class="fa fa-close"></i> Cancel</button>
     </div>
     
@@ -535,9 +534,10 @@
 
         document.getElementById("actionTaskSubDiv").value = taskSubList.currentItem.Action;
 
-        var dateCalled
+        //var dateCalled
         
         document.getElementById("remarksTaskSubDiv").value = taskSubList.currentItem.Remarks;
+        document.getElementById("addTaskSubButton").innerHTML = "Save";
         
     }
     
