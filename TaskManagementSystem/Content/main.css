@@ -24,8 +24,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .prodtitle1 {
   margin-top: 10px;
-  height:40%;
-  width:40%;
+  height:30%;
+  width:30%;
   line-height: 50px;
 }
 
@@ -1027,14 +1027,14 @@ ul.address {
 #footer .social-icons ul li a.twitter:hover {
   background-color: #2ac6f7;
 }
-#footer .social-icons ul li a.dribbble:hover {
-  background-color: #ff5b92;
+#footer .social-icons ul li a.pinterest:hover {
+  background-color: #c91517;
 }
 #footer .social-icons ul li a.linkedin:hover {
   background-color: #036dc0;
 }
-#footer .social-icons ul li a.tumblr:hover {
-  background-color: #ff6b00;
+#footer .social-icons ul li a.instagram:hover {
+  background-color: #2c6193;
 }
 
 /*Presets*/
@@ -1054,7 +1054,7 @@ ul.address {
 
 .social {
   position: fixed;
-  top: 60%;
+  top: 55%;
 }
 .social ul {
   padding: 20px;
@@ -1068,7 +1068,7 @@ ul.address {
   display: block;
   margin: 5px;
   background: rgba(0, 0, 0, 0.36);
-  width: 300px;
+  width: 285px;
   text-align: right;
   padding: 5px;
   -webkit-border-radius: 0 30px 30px 0;
@@ -1109,13 +1109,13 @@ ul.address {
   margin-left: 30px;
   color: #950f10;
   background: #fff;
-  padding: 10px;
+  padding: 7px;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
