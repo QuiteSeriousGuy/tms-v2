@@ -121,7 +121,7 @@ namespace TaskManagementSystem.Controllers
                 newItem.TaskDate = Convert.ToDateTime(item.TaskDate);
                 newItem.ClientId = item.ClientId;
                 newItem.Caller = item.Caller != null ? item.Caller : "00000";
-                newItem.Concern = item.Caller != null ? item.Caller : "00000";
+                newItem.Concern = item.Caller != null ? item.Concern : "00000";
                 newItem.AnsweredBy = item.AnsweredBy;
                 newItem.StaffId = item.StaffId;
                 newItem.ProductId = item.ProductId;

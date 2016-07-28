@@ -47,52 +47,52 @@
                 </div>
 
                 <div class="modal-body">
-                        <form class="form-horizontal" id="add-form">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label for="barCode" class="col-sm-2 control-label">Action</label>
-                                        <div class="col-sm-9">
-                                            <textarea type="" class="form-control requiredField" id="actionTaskSubDiv"></textarea>
-                                        </div>
+                    <form class="form-horizontal" id="add-form">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="barCode" class="col-sm-2 control-label">Action</label>
+                                    <div class="col-sm-9">
+                                        <textarea type="" class="form-control requiredField" id="actionTaskSubDiv"></textarea>
                                     </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="doneDateDiv" class="col-sm-2 control-label">Date Called</label>
-                                        <div class="col-sm-4">
-                                            <div id="dateCalledDiv"></div>
-                                        </div>
+                                <div class="form-group">
+                                    <label for="doneDateDiv" class="col-sm-2 control-label">Date Called</label>
+                                    <div class="col-sm-4">
+                                        <div id="dateCalledDiv"></div>
                                     </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">Time Called</label>
-                                        <div class="col-sm-4">
-                                            <div id="timeCalledDiv"></div>
-                                        </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-2 control-label">Time Called</label>
+                                    <div class="col-sm-4">
+                                        <div id="timeCalledDiv"></div>
                                     </div>
+                                </div>
 
 
-                                    <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">Finished Date</label>
-                                        <div class="col-sm-6">
-                                            <div id="finishedDateDiv"></div>
-                                        </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-2 control-label">Finished Date</label>
+                                    <div class="col-sm-6">
+                                        <div id="finishedDateDiv"></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="" class="col-sm-2 control-label">Finished Time</label>
-                                        <div class="col-sm-6">
-                                            <div id="finishedTimeDiv"></div>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-2 control-label">Finished Time</label>
+                                    <div class="col-sm-6">
+                                        <div id="finishedTimeDiv"></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="barCode" class="col-sm-2 control-label">Remarks</label>
-                                        <div class="col-sm-9">
-                                            <textarea type="" class="form-control" id="remarksTaskSubDiv"></textarea>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="barCode" class="col-sm-2 control-label">Remarks</label>
+                                    <div class="col-sm-9">
+                                        <textarea type="" class="form-control" id="remarksTaskSubDiv"></textarea>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                    </form>
                 </div>
 
                 <div class="modal-footer">
@@ -126,11 +126,11 @@
         <button type="button" class="btn btn-info" id="printButton" onclick=""><i class="fa fa-print" aria-hidden="true"></i> Print</button>
         <button type="button" class="btn btn-danger" id="cancelButton" onclick="cmdCancel()"><i class="fa fa-close"></i> Cancel</button>
     </div>
-    
-    <br/>
-    <hr/>
-    
-    
+
+    <br />
+    <hr />
+
+
     <div class="row">
         <form class="form-horizontal" id="add-form">
             <div class="row">
@@ -151,7 +151,7 @@
                     <div class="form-group">
                         <label for="" class="col-sm-3 control-label">Client</label>
                         <div class="col-sm-5">
-                            <div id="clientDiv" ></div>
+                            <div id="clientDiv"></div>
                         </div>
                     </div>
                     <!--Product-->
@@ -234,7 +234,7 @@
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
                 <div class="btn-group-horizontal btn-sm pull-right">
-                    <button class="btn btn-primary" id="addTaskSubButton"  onclick="cmdShowAddModal()"><i class="fa fa-plus"></i> Add</button>
+                    <button class="btn btn-primary" id="addTaskSubButton" onclick="cmdShowAddModal()"><i class="fa fa-plus"></i> Add</button>
                 </div>
                 <div id="actionDiv"></div>
             </div>
@@ -315,6 +315,14 @@
     var taskSubFinishedDate;
     var taskSubTimeCalled;
     var taskSubFinishedTime;
+    var inptDateCalled;
+    var inptTimeCalled;
+    var inptFinishedDate;
+    var inpFinishedTime;
+    var inptTimeCalledSelected = "";
+    var inpFinishedTimeSelected = "";
+
+
 
     // =======================
     // Get URL Parameter Value
@@ -330,13 +338,13 @@
             return results[1];
         }
     }
-    
+
     // =======================
     // Edit Button
     // =======================
     function cmdEdit() {
         cancel = 1;
-        $('#editButton').prop('disabled', true); 
+        $('#editButton').prop('disabled', true);
         $('#saveButton').prop('disabled', false);
         cboBoxClientName.disabled = false;
         cboBoxProductName.disabled = false;
@@ -364,7 +372,7 @@
                 backdrop: 'static'
             });
         } else { window.location = "/Software/Task"; }
-        
+
     }
 
     // =======================
@@ -388,10 +396,10 @@
         taskObject.DoneDate = doneDate;
         taskObject.DoneTime = doneTime;
         taskObject.VerifiedBy = cboStaffVerified.selectedValue;
-        
+
         var data = JSON.stringify(taskObject);
         var itemdata = data;
-       
+
         $.ajax({
             url: '/api/task/update/' + taskId,
             type: 'PUT',
@@ -434,22 +442,24 @@
                         taskSubId = results[i]["Id"];
                         taskSubDateCalled = new Date(results[i]["DateCalled"]);
                         taskSubFinishedDate = new Date(results[i]["FinishedDate"]);
-                        taskSubTimeCalled = results[i]["TimeCalled"];
-                        taskSubFinishedTime = results[i]["FinishedTime"];
-                        
-                        var timeCalled = taskSubTimeCalled.split(" ");
-                        timeCalled = timeCalled.filter(function (n) { return n != "" });
-                        console.log("Time Called: "+timeCalled);
-                        
-                        var fTimeCalled = timeCalled[3];
+                        taskSubTimeCalled =  new Date(results[i]["TimeCalled"]);
+                        taskSubFinishedTime =  new Date(results[i]["FinishedTime"]);
 
-                        var finishedTime = taskSubFinishedTime.split(" ");
-                        finishedTime = finishedTime.filter(function (n) { return n != "" });
-                       
-                        var fFinishedTime = finishedTime[3]
-                                              
+                        //var timeCalled = taskSubTimeCalled.split(" ");
+                        //timeCalled = timeCalled.filter(function (n) { return n != "" });
+                        //console.log("Time Called: "+timeCalled);
+
+                        //var fTimeCalled = timeCalled[3];
+
+                        //var finishedTime = taskSubFinishedTime.split(" ");
+                        //finishedTime = finishedTime.filter(function (n) { return n != "" });
+
+                        //var fFinishedTime = finishedTime[3]
+
                         var dateCalled = [taskSubDateCalled.getMonth() + 1, taskSubDateCalled.getDate(), taskSubDateCalled.getFullYear()].join('-');
                         var finishedDate = [taskSubFinishedDate.getMonth() + 1, taskSubFinishedDate.getDate(), taskSubFinishedDate.getFullYear()].join('-');
+                        //var timeCalled = ([taskSubTimeCalled.value.getFullYear(), taskSubTimeCalled.value.getMonth() + 1, taskSubTimeCalled.value.getDate()].join('-') + " " + [taskSubTimeCalled.value.getHours(), taskSubTimeCalled.value.getMinutes(), taskSubTimeCalled.value.getSeconds()].join(':'));
+                        var finishedTime = [taskSubFinishedTime.getMonth() + 1, taskSubFinishedTime.getDate(), taskSubFinishedTime.getFullYear()].join('-');
 
                         taskSubList.push({
                             EditId: "<button class='btn btn-primary btn-xs btn-block' id='clientEditButton' onClick='cmdEditTaskSub()'><i class='fa fa-pencil'></i> Edit</button>",
@@ -457,13 +467,13 @@
                             TaskId: results[i]["TaskId"],
                             Action: results[i]["Action"],
                             DateCalled: dateCalled,
-                            TimeCalled: fTimeCalled,
+                            TimeCalled: results[i]["TimeCalled"],
                             FinishedDate: finishedDate,
-                            FinishedTime: fFinishedTime,
+                            FinishedTime: finishedTime,
                             Remarks: results[i]["Remarks"]
                         });
 
-                        console.log(results[i]["Remarks"]);
+                        //console.log(results[i]["Remarks"]);
                     }
                 }
             }
@@ -491,27 +501,54 @@
         if (taskEntryValidation() == false) {
             toastr.error("Fill out form");  }
         else {
-            $.ajax({
-                url: '/api/tasksub/add/',
-                type: 'POST',
-                data: data,
-                contentType: "application/json;charset=utf-8",
-                cache: false,
-                statusCode: {
-                    200: function () {
-                        toastr.success("Saved");
-                    },
-                    400: function () {
-                        alert("Error");
-                    },
-                }
-            });
+            if (userId > 0) { //Add
+                $.ajax({
+                    url: '/api/tasksub/add/',
+                    type: 'POST',
+                    data: data,
+                    contentType: "application/json;charset=utf-8",
+                    cache: false,
+                    statusCode: {
+                        200: function () {
+                            toastr.success("Saved");
+                        },
+                        400: function () {
+                            alert("Add Error");
+                        },
+                    }
+                });
 
-            $('#addTaskSub').modal('hide');
-           
-            setTimeout(function () { location.reload(true); }, 1000); 
+                $('#addTaskSub').modal('hide');
+
+                setTimeout(function () { location.reload(true); }, 1000);
+            } else { //Update
+                var itemdata = data;
+                $.ajax({
+                    url: '/api/taskSub/update/' + userList.currentItem.Id,
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: itemdata,
+                    contentType: "application/json;charset=utf-8",
+                    cache: false,
+                    statusCode: {
+                        200: function () {
+                            toastr.success("Update Sucess");
+                            $('#addUser').modal('hide');
+                            //$('#addUser').remove();
+                            refresh();
+                        },
+                        404: function () {
+                            toastr.error("Edit Failed");
+                        },
+                        400: function () {
+                            toastr.error("Edit Failed");
+                        }
+                    }
+                });
+
+            }
         }
-        
+
     }
 
     // =======================
@@ -523,6 +560,7 @@
 
 
         document.getElementById("remarksTaskSubDiv").value = "";
+        document.getElementById("addTaskSubButton").innerHTML = "Add";
 
     }
 
@@ -534,13 +572,87 @@
 
         document.getElementById("actionTaskSubDiv").value = taskSubList.currentItem.Action;
 
-        //var dateCalled
-        
+        inptDateCalled.value = new Date(taskSubList.currentItem.DateCalled);
+        inptFinishedDate.value = new Date(taskSubList.currentItem.FinishedDate);
+
+
+
+        var newTime = taskSubList.currentItem.TimeCalled.replace("T", " ");
+
+        console.log("TIME: " + newTime);
+        inptTimeCalled.value = new Date(newTime);
+        //inptTimeCalled.time = placeHolder[1];
+
+
+
+        //console.log("TIME: " + taskSubList.currentItem.TimeCalled);
+        //console.log("CONVERTED TIME: " + inptTimeCalled.value);
+
+
         document.getElementById("remarksTaskSubDiv").value = taskSubList.currentItem.Remarks;
         document.getElementById("addTaskSubButton").innerHTML = "Save";
-        
+
     }
-    
+
+    // =============================
+    // Combo Box Date Called, Time Called, Finished Date, Finish Time
+    // =============================
+    function createCboDates() {
+        //console.log(datecall);
+        dCalled = new Date();
+        inptDateCalled = new wijmo.input.InputDate('#dateCalledDiv', {
+            min: new Date(2014, 01, 01),
+            format: 'MM/dd/yyyy',
+            value: dCalled,
+            onValueChanged: function () {
+                dateCalled = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
+                //console.log(dateCalled);
+            }
+        });
+        dateCalled = [inptDateCalled.value.getFullYear(), inptDateCalled.value.getMonth() + 1, inptDateCalled.value.getDate()].join('-');
+
+        //console.log("mia khalifa" + inptTimeCalledSelected);
+
+        //TIME CALLED
+        inptTimeCalled = new wijmo.input.InputTime('#timeCalledDiv', {
+            step: 1,
+            format: 'h:mm tt',
+            value: dCalled,
+            onValueChanged: function () {
+                timeCalled = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
+                //console.log(timeCalled);
+            }
+        });
+
+        //FINISHED DATE
+        fDate = new Date();
+        inptFinishedDate = new wijmo.input.InputDate('#finishedDateDiv', {
+            min: new Date(2014, 01, 01),
+            format: 'MM/dd/yyyy',
+            value: fDate,
+            onValueChanged: function () {
+                finishedDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
+                //console.log(finishedDate);
+            }
+        });
+        finishedDate = [inptFinishedDate.value.getFullYear(), inptFinishedDate.value.getMonth() + 1, inptFinishedDate.value.getDate()].join('-');
+
+
+        //FINISHED TIME
+        inpFinishedTime = new wijmo.input.InputTime('#finishedTimeDiv', {
+            min: new Date(2014, 8, 1, 7, 0),
+            max: new Date(2014, 8, 1, 20, 0),
+            step: 15,
+            format: 'h:mm tt',
+            value: dCalled,
+            onValueChanged: function () {
+                finishedTime = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
+                //console.log(finishedTime);
+            }
+        });
+
+    }
+
     // =======================
     // Get Task List Data
     // =======================
@@ -556,7 +668,7 @@
             success: function (results) {
                 var lastUser = 0;
                 if (results.length > 0) {
-                    console.log("Task");
+                    //console.log("Task");
                     var i = 0;
                         var name = "";
                         document.getElementById("taskDateDiv").value = results[i]["TaskDate"];
@@ -575,8 +687,8 @@
                         cboStaffVerifiedSelectedValue = results[i]["VerifiedBy"];
                         cboDateSelectedValue = results[i]["DoneDate"];
                         doneTimeSelectedValue = results[i]["DoneTime"];
-                        console.log(doneTimeSelectedValue);
-                        
+                        //console.log(doneTimeSelectedValue);
+
                         result.push({
                             Id: results[i]["Id"],
                             TaskNo: results[i]["TaskNo"],
@@ -597,18 +709,18 @@
                             VerifiedBy: results[i]["VerifiedBy"],
                             IsLocked: results[i]["IsLocked"]
                         });
-                    
+
 
                     //DONE DATE
                     dDate = new Date();
-                    
+
                     var p = cboDateSelectedValue.split(" ");
                     p = p.filter(function (n) { return n != "" });
-                    console.log(p);
+                    //console.log(p);
                     var month = p[0];
                     var day = parseInt(p[1], 10);
                     var year = parseInt(p[2], 10);
-                    
+
                     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
                     for (var i = 0; i <= 11; i++) {
                         if (month == months[i]) {
@@ -622,7 +734,7 @@
                     } else {
                         dDate.setMonth(fmonth);
                     }
-                    
+
                     dDate.setFullYear(year);
                     // create InputDate control
                     cboDate = new wijmo.input.InputDate('#doneDateDiv', {
@@ -641,12 +753,12 @@
                     var time = doneTimeSelectedValue.split(" ");
                     time = time.filter(function (n) { return n != "" });
                     console.log(time);
-                  
+
                     var t = time[3];
 
                     var hour = t.split(":"); //hh : mm
                     console.log(hour);
-                    
+
 
                     var m = hour[1];
                     minute = m.split("");
@@ -658,13 +770,13 @@
                         if (hh != 12) {
                             fhour = parseInt(hour[0], 10);
                             dTime.setHours(fhour + 12);
-                            console.log(fhour);
+                           console.log(fhour);
                         } else {
                             fhour = parseInt(hour[0], 10);
                             dTime.setHours(fhour);
                             console.log(fhour);
                         }
-                        
+
                     } else { //if time is AM
                         fhour = parseInt(hour[0], 10);
                         dTime.setHours(fhour);
@@ -672,9 +784,9 @@
                     }
 
                     var minutes = minute[0] + minute[1];
-                    
+
                     var fminute = parseInt(minutes, 10);
-                    
+
                     dTime.setMinutes(fminute);
                     console.log(fminute);
 
@@ -787,7 +899,7 @@
     }
 
     // =============================
-    // Combo Box Wijmo - Product 
+    // Combo Box Wijmo - Product
     // =============================
 
     function cboProductName(productList) {
@@ -799,7 +911,7 @@
             isEditable: false,
             disabled: true,
             selectedValue: cboProductNameSelectedValue.toString()
-        });        
+        });
     }
 
     // ==================
@@ -816,7 +928,7 @@
             data: {},
             success: function (results) {
 
-                console.log("Staff");
+                //console.log("Staff");
                 var lastUser = 0;
                 if (results.length > 0) {
                     for (i = 0; i < results.length; i++) {
@@ -992,7 +1104,7 @@
     // Staff delete Button
     // =====================
     function cmdTaskSubConfirmDeleteButton_OnClick() {
-        
+
         $('#deleteTaskSubConfirm').modal({
             show: true,
             backdrop: 'static'
@@ -1006,7 +1118,7 @@
         $("#cmdConfirmDeleteCloseButton").prop("disabled", true);
 
         //====================
-        console.log(taskSubId);
+        //console.log(taskSubId);
 
         $.ajax({
             url: '/api/tasksub/delete/' + taskSubId,
@@ -1018,7 +1130,7 @@
                     $('#deleteTaskSubConfirm').modal('hide');
                     toastr.success("Successfully Deleted");
                     setTimeout(function () { location.reload(true); }, 1000);
-                   
+
                 },
                 404: function () {
                     toastr.error("Request Not Found");
@@ -1036,66 +1148,7 @@
         });
     }
 
-    // =============================
-    // Combo Box Date Called, Time Called, Finished Date, Finish Time
-    // =============================
-    function cboTaskSub(){
-    dCalled = new Date();
 
-    inptDateCalled = new wijmo.input.InputDate('#dateCalledDiv', {
-        min: new Date(2014, 01, 01),
-        format: 'MM/dd/yyyy',
-        value: dCalled,
-        onValueChanged: function () {
-            dateCalled = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
-            console.log(dateCalled);
-        }
-    });
-
-    dateCalled = [inptDateCalled.value.getFullYear(), inptDateCalled.value.getMonth() + 1, inptDateCalled.value.getDate()].join('-');
-
-        //TIME CALLED
-    var inpDateCalled = new wijmo.input.InputTime('#timeCalledDiv', {
-        min: new Date(2014, 8, 1, 7, 0),
-        max: new Date(2014, 8, 1, 20, 0),
-        step: 15,
-        format: 'h:mm tt',
-        value: dCalled,
-        onValueChanged: function () {
-            timeCalled = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
-            console.log(timeCalled);
-        }
-    });
-
-        //FINISHED DATE
-    fDate = new Date();
-    inptFinishedDate = new wijmo.input.InputDate('#finishedDateDiv', {
-        min: new Date(2014, 01, 01),
-        format: 'MM/dd/yyyy',
-        value: fDate,
-        onValueChanged: function () {
-            finishedDate = [this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-');
-            console.log(finishedDate);
-        }
-    });
-
-    finishedDate = [inptFinishedDate.value.getFullYear(), inptFinishedDate.value.getMonth() + 1, inptFinishedDate.value.getDate()].join('-');
-
-
-        //FINISHED TIME
-    var inpFinishedTime = new wijmo.input.InputTime('#finishedTimeDiv', {
-        min: new Date(2014, 8, 1, 7, 0),
-        max: new Date(2014, 8, 1, 20, 0),
-        step: 15,
-        format: 'h:mm tt',
-        value: dCalled,
-        onValueChanged: function () {
-            finishedTime = ([this.value.getFullYear(), this.value.getMonth() + 1, this.value.getDate()].join('-') + " " + [this.value.getHours(), this.value.getMinutes(), this.value.getSeconds()].join(':'));
-            console.log(finishedTime);
-        }
-    });
-
-    }
 
     $(document).ready(function () {
 
@@ -1105,7 +1158,7 @@
         createProblemTypeCboBox();
         createSeverityCboBox();
         createStatusCboBox();
-        
+
 
         taskSubList = new wijmo.collections.CollectionView(getTaskSubList());
 
@@ -1180,15 +1233,15 @@
 
         taskSubGrid.trackChanges = true;
 
-        cboTaskSub();
-        
-        
 
-        
-        
+
+
+        createCboDates();
+
+
     });
 
-   
+
 </script>
 
 @Html.Partial("Footer")

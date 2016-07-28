@@ -213,6 +213,8 @@
     <Compile Include="Controllers\APIFormController.cs" />
     <Compile Include="Controllers\APIProductController.cs" />
     <Compile Include="Controllers\APIStaffController.cs" />
+    <Compile Include="Controllers\APITaskController.cs" />
+    <Compile Include="Controllers\APITaskSubController.cs" />
     <Compile Include="Controllers\APIUserController.cs" />
     <Compile Include="Controllers\APIUserFormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -233,6 +235,8 @@
     <Compile Include="Models\MstForm.cs" />
     <Compile Include="Models\MstProduct.cs" />
     <Compile Include="Models\MstStaff.cs" />
+    <Compile Include="Models\MstTask.cs" />
+    <Compile Include="Models\MstTaskSub.cs" />
     <Compile Include="Models\MstUser.cs" />
     <Compile Include="Models\MstUserForms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -412,6 +416,10 @@
     <Content Include="Views\Shared\NavBarD.cshtml" />
     <Content Include="Views\Software\Client.cshtml" />
     <Content Include="Views\Software\Users.cshtml" />
+    <Content Include="Views\Software\AddTask.cshtml" />
+    <Content Include="Views\Software\Calls.cshtml" />
+    <Content Include="Views\Software\EditTask.cshtml" />
+    <Content Include="Views\Software\Task.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
