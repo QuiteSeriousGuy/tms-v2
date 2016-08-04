@@ -321,6 +321,7 @@
     var inpFinishedTime;
     var inptTimeCalledSelected = "";
     var inpFinishedTimeSelected = "";
+    var userId = 0;
 
 
 
@@ -459,17 +460,18 @@
                         var dateCalled = [taskSubDateCalled.getMonth() + 1, taskSubDateCalled.getDate(), taskSubDateCalled.getFullYear()].join('-');
                         var finishedDate = [taskSubFinishedDate.getMonth() + 1, taskSubFinishedDate.getDate(), taskSubFinishedDate.getFullYear()].join('-');
                         //var timeCalled = ([taskSubTimeCalled.value.getFullYear(), taskSubTimeCalled.value.getMonth() + 1, taskSubTimeCalled.value.getDate()].join('-') + " " + [taskSubTimeCalled.value.getHours(), taskSubTimeCalled.value.getMinutes(), taskSubTimeCalled.value.getSeconds()].join(':'));
-                        var finishedTime = [taskSubFinishedTime.getMonth() + 1, taskSubFinishedTime.getDate(), taskSubFinishedTime.getFullYear()].join('-');
+                        //var finishedTime = [taskSubFinishedTime.getMonth() + 1, taskSubFinishedTime.getDate(), taskSubFinishedTime.getFullYear()].join('-');
 
                         taskSubList.push({
                             EditId: "<button class='btn btn-primary btn-xs btn-block' id='clientEditButton' onClick='cmdEditTaskSub()'><i class='fa fa-pencil'></i> Edit</button>",
                             DeleteId: "<button class='btn btn-danger btn-xs btn-block' id='clientDeleteButton' onclick='cmdTaskSubConfirmDeleteButton_OnClick()'><i class='fa fa-trash'></i> Delete</button>",
+                            Id: results[i]["Id"],
                             TaskId: results[i]["TaskId"],
                             Action: results[i]["Action"],
                             DateCalled: dateCalled,
                             TimeCalled: results[i]["TimeCalled"],
                             FinishedDate: finishedDate,
-                            FinishedTime: finishedTime,
+                            FinishedTime: results[i]["FinishedTime"],
                             Remarks: results[i]["Remarks"]
                         });
 
@@ -524,7 +526,7 @@
             } else { //Update
                 var itemdata = data;
                 $.ajax({
-                    url: '/api/taskSub/update/' + userList.currentItem.Id,
+                    url: '/api/taskSub/update/' + taskSubList.currentItem.Id,
                     type: 'PUT',
                     dataType: 'json',
                     data: itemdata,
@@ -535,7 +537,7 @@
                             toastr.success("Update Sucess");
                             $('#addUser').modal('hide');
                             //$('#addUser').remove();
-                            refresh();
+                            location.reload();
                         },
                         404: function () {
                             toastr.error("Edit Failed");
@@ -555,6 +557,7 @@
     // Show Modal Add TaskSub
     // =======================
     function cmdShowAddModal() {
+        userId = 1;
         $('#addTaskSub').modal('show');
         document.getElementById("actionTaskSubDiv").value = "";
 
@@ -577,10 +580,14 @@
 
 
 
-        var newTime = taskSubList.currentItem.TimeCalled.replace("T", " ");
+        var newTimeCalled = taskSubList.currentItem.TimeCalled.replace("T", " ");
+        var newFinishedTime = taskSubList.currentItem.FinishedTime.replace("T", " ");
 
-        console.log("TIME: " + newTime);
-        inptTimeCalled.value = new Date(newTime);
+        console.log("TIME CALLED: " + newTimeCalled);
+        inptTimeCalled.value = new Date(newTimeCalled);
+
+        console.log("FINISHED TIME: " + newFinishedTime);
+        inpFinishedTime.value = new Date(newFinishedTime);
         //inptTimeCalled.time = placeHolder[1];
 
 
@@ -640,9 +647,7 @@
 
         //FINISHED TIME
         inpFinishedTime = new wijmo.input.InputTime('#finishedTimeDiv', {
-            min: new Date(2014, 8, 1, 7, 0),
-            max: new Date(2014, 8, 1, 20, 0),
-            step: 15,
+            step: 1,
             format: 'h:mm tt',
             value: dCalled,
             onValueChanged: function () {

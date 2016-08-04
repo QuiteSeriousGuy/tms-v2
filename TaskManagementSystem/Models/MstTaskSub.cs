@@ -13,9 +13,9 @@ namespace TaskManagementSystem.Models
         public Int32 TaskId { get; set; }
         public DateTime? DateCalled { get; set; }
         public String Action { get; set; }
-        public String TimeCalled { get; set; }
+        public DateTime? TimeCalled { get; set; }
         public DateTime? FinishedDate { get; set; }
-        public String FinishedTime { get; set; }
+        public DateTime? FinishedTime { get; set; }
         public String Remarks { get; set; }
     }
 }
