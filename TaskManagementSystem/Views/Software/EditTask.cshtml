@@ -123,7 +123,7 @@
     <div class="btn-group-horizontal btn-sm pull-right">
         <button class="btn btn-primary" id="editButton" onclick="cmdEdit()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button>
         <button type="button" class="btn btn-info" id="saveButton" onclick="cmdUpdate()"><i class="fa fa-floppy-o" aria-hidden="true" disabled></i> Save</button>
-        <button type="button" class="btn btn-info" id="printButton" onclick=""><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+        <button type="button" class="btn btn-info" id="printButton" onclick="cmdPrint()"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
         <button type="button" class="btn btn-danger" id="cancelButton" onclick="cmdCancel()"><i class="fa fa-close"></i> Cancel</button>
     </div>
 
@@ -1153,6 +1153,9 @@
         });
     }
 
+    function cmdPrint() {
+        window.location = "/RepTaskDetail/TaskDetailController";
+    }
 
 
     $(document).ready(function () {

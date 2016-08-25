@@ -1,88 +1,153 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12.25, 11.5" name="TMSdbml">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.75, 12.125" name="TMSdbml">
   <DataContextMoniker Name="/TMSdbmlDataContext" />
   <nestedChildShapes>
-    <classShape Id="df90af61-81bf-49c4-9a30-b8792b5a49c6" absoluteBounds="6.75, 0.75, 2, 1.9631982421875003">
-      <DataClassMoniker Name="/TMSdbmlDataContext/mstClient" />
+    <classShape Id="96d76eea-3c14-4f23-949f-52feb18a9355" absoluteBounds="0.75, 0.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/TMSdbmlDataContext/AspNetRole" />
       <nestedChildShapes>
-        <elementListCompartment Id="63eb4425-e619-4ff0-a8c7-b78d055bfbe0" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3a97c2ca-e8f9-4ab0-a08d-bb8194b4ea14" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d7d8d0c2-fd83-4575-ad35-22c6dfbfe32d" absoluteBounds="3.5, 2, 2, 2.3478011067708335">
+    <classShape Id="14cfbc12-b0ea-444d-a4d3-f659536ca902" absoluteBounds="12.25, 2.375, 2, 2.3478011067708331">
       <DataClassMoniker Name="/TMSdbmlDataContext/trnTaskSub" />
       <nestedChildShapes>
-        <elementListCompartment Id="e2fd7156-5c2e-44c1-a8a7-fe3c711c7f74" absoluteBounds="3.515, 2.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="04837a08-197b-446d-ba45-75c74b53fb20" absoluteBounds="12.265, 2.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="81f8b0d7-eaf6-4303-aa44-d83db87ab5db" absoluteBounds="0.75, 1, 2, 4.2708154296875">
-      <DataClassMoniker Name="/TMSdbmlDataContext/trnTask" />
+    <classShape Id="d13f1c65-f57e-47e2-9fc6-cc12ca37ef2d" absoluteBounds="3.5, 6.625, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/TMSdbmlDataContext/AspNetUserClaim" />
       <nestedChildShapes>
-        <elementListCompartment Id="1552f481-d895-4bcb-b654-b3bdccd308ca" absoluteBounds="0.765, 1.46, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6e5c224e-6833-4074-9001-f5335e18d7c5" absoluteBounds="3.515, 7.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 3.17390055338542); (3.5 : 3.17390055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/TMSdbmlDataContext/trnTask/trnTask_trnTaskSub" />
-      <nodes>
-        <classShapeMoniker Id="81f8b0d7-eaf6-4303-aa44-d83db87ab5db" />
-        <classShapeMoniker Id="d7d8d0c2-fd83-4575-ad35-22c6dfbfe32d" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="e343f75b-48b9-4ef5-990f-4531c59e6aad" absoluteBounds="1.625, 6.5, 2, 1.9631982421875">
-      <DataClassMoniker Name="/TMSdbmlDataContext/mstUser" />
+    <classShape Id="29b04110-b2d7-4b51-a997-eadb512de2e7" absoluteBounds="3.5, 4.375, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/TMSdbmlDataContext/AspNetUserLogin" />
       <nestedChildShapes>
-        <elementListCompartment Id="28d8cb5f-ee35-42fb-84cc-b19393406093" absoluteBounds="1.6399999999999997, 6.9600000000000009, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="33186634-6acb-4d57-a51c-faa602f764e8" absoluteBounds="3.515, 4.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3a1674c7-5eb2-45a7-8ec8-47728d7c15c2" absoluteBounds="3.125, 9.625, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/TMSdbmlDataContext/mstStaff" />
+    <classShape Id="630ee67d-513d-4e0e-936d-9103b7c6b1a8" absoluteBounds="3.5, 1.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/TMSdbmlDataContext/AspNetUserRole" />
       <nestedChildShapes>
-        <elementListCompartment Id="8ee10a85-10fa-44f0-8b79-7c2ab5cd5e20" absoluteBounds="3.1399999999999997, 10.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="453a2549-8264-472b-8f76-f916d852fbb9" absoluteBounds="3.515, 2.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.375 : 9.625); (3.375 : 8.4631982421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/TMSdbmlDataContext/mstStaff/mstStaff_mstUser" />
-      <nodes>
-        <classShapeMoniker Id="3a1674c7-5eb2-45a7-8ec8-47728d7c15c2" />
-        <classShapeMoniker Id="e343f75b-48b9-4ef5-990f-4531c59e6aad" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="75700587-bdcb-4e8e-8e08-2ddc9790bb31" absoluteBounds="6.875, 8.125, 2, 2.9247054036458331">
-      <DataClassMoniker Name="/TMSdbmlDataContext/mstUserForm" />
+    <classShape Id="2759e81f-2810-4068-b126-b08f3d2947f8" absoluteBounds="0.75, 2.75, 2, 3.1170068359375">
+      <DataClassMoniker Name="/TMSdbmlDataContext/AspNetUser" />
       <nestedChildShapes>
-        <elementListCompartment Id="27b6a9f2-5526-43fa-bcda-2de049ead4e0" absoluteBounds="6.89, 8.585, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="11a10c15-6557-4f02-a5d0-1a39ef6e3bac" absoluteBounds="0.765, 3.21, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.125 : 10.3373527018229); (6.875 : 10.3373527018229)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/TMSdbmlDataContext/mstStaff/mstStaff_mstUserForm" />
-      <nodes>
-        <classShapeMoniker Id="3a1674c7-5eb2-45a7-8ec8-47728d7c15c2" />
-        <classShapeMoniker Id="75700587-bdcb-4e8e-8e08-2ddc9790bb31" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="974cfee6-4a70-477f-a160-d81fde95046b" absoluteBounds="7.125, 5.125, 2, 1.3862939453125">
-      <DataClassMoniker Name="/TMSdbmlDataContext/sysForm" />
+    <classShape Id="3f9118c0-f2e8-4929-933e-258d540be18f" absoluteBounds="0.75, 9.125, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/TMSdbmlDataContext/mstClient" />
       <nestedChildShapes>
-        <elementListCompartment Id="143f2d37-ce2d-4578-96c0-4b2806c0d56b" absoluteBounds="7.14, 5.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="28ab8e03-fc90-4636-a4db-b7c20f44e4b9" absoluteBounds="0.765, 9.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(8 : 6.5112939453125); (8 : 8.125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/TMSdbmlDataContext/sysForm/sysForm_mstUserForm" />
-      <nodes>
-        <classShapeMoniker Id="974cfee6-4a70-477f-a160-d81fde95046b" />
-        <classShapeMoniker Id="75700587-bdcb-4e8e-8e08-2ddc9790bb31" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="1204f39f-ed22-4fea-bbed-15c38b99b3d2" absoluteBounds="10, 3, 2, 1.5785953776041666">
+    <classShape Id="9ffea62c-01c3-4b57-947e-8179030deb73" absoluteBounds="6.75, 2.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/TMSdbmlDataContext/mstProduct" />
       <nestedChildShapes>
-        <elementListCompartment Id="b9e397d9-c184-4a75-902f-1f290cb81e51" absoluteBounds="10.015, 3.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="246a11b7-4051-4b84-958d-35b852bd8f8a" absoluteBounds="6.765, 3.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(10 : 4.4944482421875); (2.75 : 4.4944482421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="ae8b78ea-b443-40da-8d48-bbd3d6d0656c" absoluteBounds="6.75, 9.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/TMSdbmlDataContext/mstStaff" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d5e3c23a-33d8-4e05-9d77-d062bad98a62" absoluteBounds="6.765, 9.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cde61a01-06a1-45d8-bf0c-5ce49e4a12ba" absoluteBounds="9.5, 9.375, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/TMSdbmlDataContext/mstUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="06eabfef-2ed1-4a26-8719-91cad39ccb1c" absoluteBounds="9.515, 9.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="aa8ccdaa-0142-40a9-b516-9000413bc72a" absoluteBounds="12.5, 8.875, 2, 2.9247054036458309">
+      <DataClassMoniker Name="/TMSdbmlDataContext/mstUserForm" />
+      <nestedChildShapes>
+        <elementListCompartment Id="12398b30-976b-4c33-8de4-2ce346181039" absoluteBounds="12.515, 9.335, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fff75647-e8f4-48c4-8571-91c8929d33f1" absoluteBounds="9.75, 6.625, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/TMSdbmlDataContext/sysForm" />
+      <nestedChildShapes>
+        <elementListCompartment Id="cedd88c5-23bb-4324-b5c4-bfbb4c570d81" absoluteBounds="9.765, 7.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5f7935dc-039a-4faa-b6f7-a1a7e457f286" absoluteBounds="9.5, 1.5, 2, 4.2708154296875005">
+      <DataClassMoniker Name="/TMSdbmlDataContext/trnTask" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a5fdd2cd-ef10-448b-9c54-d129699e28b6" absoluteBounds="9.515, 1.96, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.75 : 1.94399251302083); (1.75 : 2.34699625651042); (3.5 : 2.34699625651042)]" fixedFrom="Algorithm" fixedTo="NotFixed">
+      <AssociationMoniker Name="/TMSdbmlDataContext/AspNetRole/AspNetRole_AspNetUserRole" />
+      <nodes>
+        <classShapeMoniker Id="96d76eea-3c14-4f23-949f-52feb18a9355" />
+        <classShapeMoniker Id="630ee67d-513d-4e0e-936d-9103b7c6b1a8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 5.8670068359375); (1.75 : 7.41429768880208); (3.5 : 7.41429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TMSdbmlDataContext/AspNetUser/AspNetUser_AspNetUserClaim" />
+      <nodes>
+        <classShapeMoniker Id="2759e81f-2810-4068-b126-b08f3d2947f8" />
+        <classShapeMoniker Id="d13f1c65-f57e-47e2-9fc6-cc12ca37ef2d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.06814697265625); (3.5 : 5.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TMSdbmlDataContext/AspNetUser/AspNetUser_AspNetUserLogin" />
+      <nodes>
+        <classShapeMoniker Id="2759e81f-2810-4068-b126-b08f3d2947f8" />
+        <classShapeMoniker Id="29b04110-b2d7-4b51-a997-eadb512de2e7" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.75); (3.125 : 2.375); (3.125 : 3.31899251302083); (3.5 : 2.94399251302083)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/TMSdbmlDataContext/AspNetUser/AspNetUser_AspNetUserRole" />
+      <nodes>
+        <classShapeMoniker Id="2759e81f-2810-4068-b126-b08f3d2947f8" />
+        <classShapeMoniker Id="630ee67d-513d-4e0e-936d-9103b7c6b1a8" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.45863627929687 : 11.0881982421875); (1.45863627929687 : 11.3381982421875); (2.05523818359375 : 11.3381982421875); (2.05523818359375 : 11.0881982421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/TMSdbmlDataContext/mstClient/mstClient_mstClient" />
+      <nodes>
+        <classShapeMoniker Id="3f9118c0-f2e8-4929-933e-258d540be18f" />
+        <classShapeMoniker Id="3f9118c0-f2e8-4929-933e-258d540be18f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.75 : 10.2892976888021); (9.5 : 10.2892976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TMSdbmlDataContext/mstStaff/mstStaff_mstUser" />
+      <nodes>
+        <classShapeMoniker Id="ae8b78ea-b443-40da-8d48-bbd3d6d0656c" />
+        <classShapeMoniker Id="cde61a01-06a1-45d8-bf0c-5ce49e4a12ba" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(7.75 : 11.0785953776042); (7.75 : 11.6002018229167); (12.5 : 11.6002018229167)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TMSdbmlDataContext/mstStaff/mstStaff_mstUserForm" />
+      <nodes>
+        <classShapeMoniker Id="ae8b78ea-b443-40da-8d48-bbd3d6d0656c" />
+        <classShapeMoniker Id="aa8ccdaa-0142-40a9-b516-9000413bc72a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.65625 : 8.0112939453125); (11.65625 : 9.09375); (12.5 : 9.09375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TMSdbmlDataContext/sysForm/sysForm_mstUserForm" />
+      <nodes>
+        <classShapeMoniker Id="fff75647-e8f4-48c4-8571-91c8929d33f1" />
+        <classShapeMoniker Id="aa8ccdaa-0142-40a9-b516-9000413bc72a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(11.5 : 3.54890055338542); (12.25 : 3.54890055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/TMSdbmlDataContext/trnTask/trnTask_trnTaskSub" />
+      <nodes>
+        <classShapeMoniker Id="5f7935dc-039a-4faa-b6f7-a1a7e457f286" />
+        <classShapeMoniker Id="14cfbc12-b0ea-444d-a4d3-f659536ca902" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.75 : 3.53929768880208); (9.5 : 3.53929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/TMSdbmlDataContext/mstProduct/mstProduct_trnTask" />
       <nodes>
-        <classShapeMoniker Id="1204f39f-ed22-4fea-bbed-15c38b99b3d2" />
-        <classShapeMoniker Id="81f8b0d7-eaf6-4303-aa44-d83db87ab5db" />
+        <classShapeMoniker Id="9ffea62c-01c3-4b57-947e-8179030deb73" />
+        <classShapeMoniker Id="5f7935dc-039a-4faa-b6f7-a1a7e457f286" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
