@@ -13,7 +13,7 @@ namespace TaskManagementSystem.Controllers
         // Easyfis data context
         private Data.TMSdbmlDataContext db = new Data.TMSdbmlDataContext();
 
-        public ActionResult TaskDetailController()
+        public ActionResult TaskDetailController(Int32 taskId)
         {
             // PDF settings
             MemoryStream workStream = new MemoryStream();
@@ -42,6 +42,30 @@ namespace TaskManagementSystem.Controllers
             tableHeaderPage.WidthPercentage = 100;
             tableHeaderPage.AddCell(new PdfPCell(new Phrase("Innosoft Solution Inc.", fontArial17Bold)) { Border = 0, HorizontalAlignment = 2 });
 
+            var tasks = from d in db.trnTasks
+                        where d.Id == taskId
+                        select d;
+
+            var staff = from s in db.mstStaffs
+                        where s.Id == tasks.FirstOrDefault().StaffId
+                        select s;
+
+            var verifiedBy = from v in db.mstStaffs
+                        where v.Id == tasks.FirstOrDefault().VerifiedBy
+                        select v;
+
+            var action = from a in db.trnTaskSubs
+                         where a.TaskId == taskId
+                         select a;
+
+            var product = from p in db.mstProducts
+                          where p.Id == tasks.FirstOrDefault().ProductId
+                          select p;
+
+            var client = from c in db.mstClients
+                         where c.Id == tasks.FirstOrDefault().ClientId
+                         select c;
+
             //tableHeaderPage.AddCell(new PdfPCell(new Phrase("Printed " + DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToString("hh:mm:ss tt"), fontArial11)) { Border = 0, PaddingTop = 5f, HorizontalAlignment = 2 });
             PdfPTable table = new PdfPTable(4);
             PdfPCell cell = new PdfPCell(new Phrase("Call Ticket"));
@@ -49,13 +73,13 @@ namespace TaskManagementSystem.Controllers
             cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
             table.AddCell(cell);
             table.AddCell("Date");
-            table.AddCell(" ");
+            table.AddCell(tasks.FirstOrDefault().TaskDate.ToShortDateString());
             table.AddCell("Call Date");
-            table.AddCell(" ");
+            table.AddCell(tasks.FirstOrDefault().TaskDate.ToShortDateString());
             table.AddCell("Staff");
-            table.AddCell(" ");
+            table.AddCell(staff.FirstOrDefault().StaffName.ToString());
             table.AddCell("Client");
-            table.AddCell(" ");
+            table.AddCell(client.FirstOrDefault().CompanyName.ToString());
 
             //PdfPCell actionCell = new PdfPCell(new Phrase("Action"));
             //actionCell.Rowspan = 5;
@@ -73,21 +97,26 @@ namespace TaskManagementSystem.Controllers
             //issueSpaceCell.Rowspan = 5;
             //table.AddCell(issueSpaceCell);
 
-
+            //var act = action.FirstOrDefault().Action.ToString();
             table.AddCell("Action");
-            table.AddCell(" ");
-            table.AddCell("Issue");
-            table.AddCell(" ");
+            if (action.Any())
+            {
+                table.AddCell(action.FirstOrDefault().Action.ToString()); 
+            }
+            else { table.AddCell("NA"); }
+
+                table.AddCell("Issue");
+            table.AddCell(tasks.FirstOrDefault().Concern.ToString());
             PdfPCell remarksCell = new PdfPCell(new Phrase("Remarks"));
             remarksCell.Rowspan = 2;
             table.AddCell(remarksCell);
 
-            PdfPCell remarksSpaceCell = new PdfPCell(new Phrase(" "));
+            PdfPCell remarksSpaceCell = new PdfPCell(new Phrase(tasks.FirstOrDefault().Remarks.ToString()));
             remarksSpaceCell.Rowspan = 2;
             table.AddCell(remarksSpaceCell);
 
             table.AddCell("Product");
-            table.AddCell(" ");
+            table.AddCell(product.FirstOrDefault().ProductCode.ToString());
             table.AddCell("Cost");
             table.AddCell(" ");
 
@@ -98,7 +127,7 @@ namespace TaskManagementSystem.Controllers
             table.AddCell(" ");
             table.AddCell(" ");
             table.AddCell(" ");
-            table.AddCell(" ");
+            table.AddCell(verifiedBy.FirstOrDefault().StaffName.ToString());
 
             document.Add(tableHeaderPage);
             document.Add(line);
