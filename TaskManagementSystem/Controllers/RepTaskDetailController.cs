@@ -21,6 +21,9 @@ namespace TaskManagementSystem.Controllers
             Document document = new Document(rectangle, 72, 72, 72, 72);
             document.SetMargins(30f, 30f, 30f, 30f);
             PdfWriter.GetInstance(document, workStream).CloseStream = false;
+            Image logo = Image.GetInstance("http://localhost:57369/images/callTicketHeader.png");
+            logo.ScalePercent(70f);
+
 
             // Document Starts
             document.Open();
@@ -35,13 +38,10 @@ namespace TaskManagementSystem.Controllers
             // line
             Paragraph line = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
 
-            // table main header
-            PdfPTable tableHeaderPage = new PdfPTable(2);
-            float[] widthsCellsheaderPage = new float[] { 100f, 75f };
-            tableHeaderPage.SetWidths(widthsCellsheaderPage);
-            tableHeaderPage.WidthPercentage = 100;
-            tableHeaderPage.AddCell(new PdfPCell(new Phrase("Innosoft Solution Inc.", fontArial17Bold)) { Border = 0, HorizontalAlignment = 2 });
-
+            //Header
+            Paragraph header = new Paragraph("Innosoft Solution Inc.");
+            header.Alignment = Element.ALIGN_JUSTIFIED;
+            
             var tasks = from d in db.trnTasks
                         where d.Id == taskId
                         select d;
@@ -66,9 +66,12 @@ namespace TaskManagementSystem.Controllers
                          where c.Id == tasks.FirstOrDefault().ClientId
                          select c;
 
+
             //tableHeaderPage.AddCell(new PdfPCell(new Phrase("Printed " + DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToString("hh:mm:ss tt"), fontArial11)) { Border = 0, PaddingTop = 5f, HorizontalAlignment = 2 });
             PdfPTable table = new PdfPTable(4);
-            PdfPCell cell = new PdfPCell(new Phrase("Call Ticket"));
+            float[] widthsCellsheaderPage2 = new float[] { 35f, 100f, 35f, 100f };
+            table.SetWidths(widthsCellsheaderPage2);
+            PdfPCell cell = new PdfPCell(new Phrase("Call Ticket", fontArial17Bold)) { HorizontalAlignment = 2 };
             cell.Colspan = 4;
             cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right
             table.AddCell(cell);
@@ -81,23 +84,7 @@ namespace TaskManagementSystem.Controllers
             table.AddCell("Client");
             table.AddCell(client.FirstOrDefault().CompanyName.ToString());
 
-            //PdfPCell actionCell = new PdfPCell(new Phrase("Action"));
-            //actionCell.Rowspan = 5;
-            //table.AddCell(actionCell);
-
-            //PdfPCell actionSpaceCell = new PdfPCell(new Phrase(" "));
-            //actionSpaceCell.Rowspan = 5;
-            //table.AddCell(actionSpaceCell);
-
-            //PdfPCell issueCell = new PdfPCell(new Phrase("Issue"));
-            //issueCell.Rowspan = 5;
-            //table.AddCell(issueCell);
-
-            //PdfPCell issueSpaceCell = new PdfPCell(new Phrase(" "));
-            //issueSpaceCell.Rowspan = 5;
-            //table.AddCell(issueSpaceCell);
-
-            //var act = action.FirstOrDefault().Action.ToString();
+            
             table.AddCell("Action");
             if (action.Any())
             {
@@ -128,8 +115,10 @@ namespace TaskManagementSystem.Controllers
             table.AddCell(" ");
             table.AddCell(" ");
             table.AddCell(verifiedBy.FirstOrDefault().StaffName.ToString());
+            remarksCell.Padding = 10f;
 
-            document.Add(tableHeaderPage);
+            document.Add(logo);
+            //document.Add(header);
             document.Add(line);
             document.Add(Chunk.NEWLINE);
             document.Add(table);

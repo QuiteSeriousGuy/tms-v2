@@ -1154,7 +1154,9 @@
     }
 
     function cmdPrint() {
-        window.location = "/RepTaskDetail/TaskDetailController?TaskId=" + taskId;
+        //window.open = "/RepTaskDetail/TaskDetailController?TaskId=" + taskId;
+        var win = window.open("/RepTaskDetail/TaskDetailController?TaskId=" + taskId, '_blank');
+        win.focus();
     }
 
 
